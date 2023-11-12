@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_warehouse_store_mobile/Constants/app_colors.dart';
 
-class CustomeTextField extends StatelessWidget {
+class CustomeTextField extends StatefulWidget {
   const CustomeTextField(
       {super.key,
       required this.obscureText,
@@ -9,30 +9,49 @@ class CustomeTextField extends StatelessWidget {
       required this.onChanged,
       required this.validator,
       required this.keyboardType,
-      required this.prefixIcon,
-      required this.suffixIcon});
+      required this.prefixIcon});
   final bool obscureText;
   final String hintText;
   final void Function(String) onChanged;
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
-  final IconData? prefixIcon, suffixIcon;
+  final IconData? prefixIcon;
+
+  @override
+  State<CustomeTextField> createState() => _CustomeTextFieldState();
+}
+
+class _CustomeTextFieldState extends State<CustomeTextField> {
+  bool _enableObscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextFormField(
-        obscureText: obscureText,
-        keyboardType: keyboardType,
-        validator: validator,
-        onChanged: onChanged,
+        obscureText: _enableObscureText,
+        keyboardType: widget.keyboardType,
+        validator: widget.validator,
+        onChanged: widget.onChanged,
         cursorColor: AppColors.primaryColor,
         decoration: InputDecoration(
-          prefixIcon: Icon(prefixIcon),
-          suffixIcon: Icon(suffixIcon),
-          enabledBorder: const OutlineInputBorder(
+          labelText: widget.hintText,
+          prefixIcon: Icon(widget.prefixIcon),
+          suffixIcon: widget.obscureText
+              ? IconButton(
+                  icon: _enableObscureText
+                      ? const Icon(Icons.visibility_off)
+                      : const Icon(Icons.visibility),
+                  onPressed: () {
+                    setState(() {
+                      _enableObscureText = !_enableObscureText;
+                    });
+                  },
+                )
+              : null,
+          enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.white,
+              color: AppColors.primaryColor.withOpacity(.5),
             ),
           ),
           focusedBorder: const OutlineInputBorder(
@@ -40,10 +59,16 @@ class CustomeTextField extends StatelessWidget {
               color: AppColors.primaryColor,
             ),
           ),
+          errorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red,
+            ),
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 2),
+          ),
           fillColor: Colors.grey.shade200,
           filled: true,
-          hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey.shade600),
         ),
       ),
     );

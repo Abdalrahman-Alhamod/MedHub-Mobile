@@ -19,4 +19,5 @@ class AppIcons {
   static const IconData lock = Icons.lock_person; // Login Page
   static const IconData phone = Icons.phone; // User Number (Phone Number)
   static const IconData password = Icons.password; // Password
+  static const IconData register = Icons.person_add; // Registration
 }
