@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_warehouse_store_mobile/Constants/app_general_constants.dart';
 import 'package:pharmacy_warehouse_store_mobile/pages/login_page.dart';
+import 'package:pharmacy_warehouse_store_mobile/pages/splash_screen.dart';
 
 void main() {
   return runApp(const PhrarmacyWarehouseStoreMobile());
@@ -16,8 +17,9 @@ class PhrarmacyWarehouseStoreMobile extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         LoginPage.id: (context) => const LoginPage(),
+        SplashScreen.id: (context) => const SplashScreen(),
       },
-      initialRoute: LoginPage.id,
+      initialRoute: SplashScreen.id,
     );
   }
 }

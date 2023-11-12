@@ -15,6 +15,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // ignore: unused_field
   static String? userNumber, password;
 
   final formKey = GlobalKey<FormState>();
