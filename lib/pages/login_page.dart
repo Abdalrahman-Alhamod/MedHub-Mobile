@@ -49,7 +49,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     void signInUser() async {
-      showSnackBar(context, 'Loged in Successfully!');
+      if (formKey.currentState!.validate()) {
+        showSnackBar(context, 'Loged in Successfully!');
+      }
     }
 
     void registerUserPage() {

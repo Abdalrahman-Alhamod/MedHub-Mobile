@@ -30,6 +30,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    precacheImage(const AssetImage(AppImages.startWallpaper), context);
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return const Splash();
   }
@@ -40,15 +46,8 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-              AppImages.startWallpaper), // Replace with your image asset
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Center(child: Lottie.asset(AppAnimations.startAnimation)),
+    return Scaffold(
+      body: Center(child: Lottie.asset(AppAnimations.startAnimation)),
     );
   }
 }
