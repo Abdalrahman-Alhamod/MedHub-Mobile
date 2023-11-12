@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="pharmacy_warehouse_store_mobile"
+        android:label="Pharmacy Warehouse Store"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
