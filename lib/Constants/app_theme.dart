@@ -5,7 +5,7 @@ import 'app_text_styles.dart';
 
 final ThemeData appTheme = ThemeData(
   primaryColor: AppColors.primaryColor,
-  hintColor: AppColors.hintColor,
+  hintColor: AppColors.secondaryColor,
   scaffoldBackgroundColor: AppColors.backgroundColor,
   textTheme: const TextTheme(
     displayLarge: AppTextStyles.headline1,

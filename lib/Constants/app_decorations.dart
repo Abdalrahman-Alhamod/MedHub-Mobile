@@ -9,7 +9,7 @@ class AppDecorations {
   );
 
   static const BoxDecoration secondaryButtonDecoration = BoxDecoration(
-    color: AppColors.hintColor,
+    color: AppColors.secondaryColor,
     borderRadius: BorderRadius.all(Radius.circular(8)),
   );
 
