@@ -22,7 +22,12 @@ class CustomeTextField extends StatefulWidget {
 }
 
 class _CustomeTextFieldState extends State<CustomeTextField> {
-  bool _enableObscureText = true;
+  bool _enableObscureText = false;
+  @override
+  void initState() {
+    super.initState();
+    _enableObscureText = widget.obscureText;
+  }
 
   @override
   Widget build(BuildContext context) {
