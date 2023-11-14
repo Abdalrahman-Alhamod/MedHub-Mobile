@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy_warehouse_store_mobile/Constants/app_colors.dart';
 
-void showSnackBar(BuildContext context, String message) {
+enum SnackBarMessageType { error, info, success }
+
+void showSnackBar(
+    BuildContext context, String message, SnackBarMessageType messageType) {
+  Color backgroundColor;
+  IconData icon;
+  switch (messageType) {
+    case SnackBarMessageType.error:
+      backgroundColor = Colors.red;
+      icon = Icons.error_outline;
+      break;
+    case SnackBarMessageType.info:
+      backgroundColor = AppColors.primaryColor;
+      icon = Icons.info_outline;
+      break;
+    case SnackBarMessageType.success:
+      backgroundColor = Colors.green;
+      icon = Icons.check_circle_outline;
+      break;
+  }
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      backgroundColor: Colors.green, // Background color
+      backgroundColor: backgroundColor, // Background color
       elevation: 6.0, // Elevation for a shadow
       behavior: SnackBarBehavior.floating,
       content: Row(
         children: [
-          const Icon(
-            Icons.info_outline,
+          Icon(
+            icon,
             color: Colors.white, // Icon color
           ),
           const SizedBox(width: 8.0),

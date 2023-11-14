@@ -75,7 +75,8 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     void registerUser() async {
       if (formKey.currentState!.validate()) {
-        showSnackBar(context, 'Signed up Successfully!');
+        showSnackBar(
+            context, 'Signed up Successfully!', SnackBarMessageType.success);
       }
     }
 

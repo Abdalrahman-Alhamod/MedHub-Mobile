@@ -50,7 +50,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     void signInUser() async {
       if (formKey.currentState!.validate()) {
-        showSnackBar(context, 'Loged in Successfully!');
+        showSnackBar(
+            context, 'Logged in Successfully!', SnackBarMessageType.success);
       }
     }
 
