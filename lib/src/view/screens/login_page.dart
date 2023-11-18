@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_icons.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_images.dart';
@@ -56,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     void registerUserPage() {
-      Navigator.pushReplacementNamed(context, RegisterPage.route);
+      Get.off(const RegisterPage());
     }
 
     return Scaffold(

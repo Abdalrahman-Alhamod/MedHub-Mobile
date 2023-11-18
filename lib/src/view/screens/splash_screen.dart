@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_animations.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_images.dart';
@@ -26,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   route() {
-    Navigator.pushReplacementNamed(context, LoginPage.route);
+    Get.off(const LoginPage());
   }
 
   @override
