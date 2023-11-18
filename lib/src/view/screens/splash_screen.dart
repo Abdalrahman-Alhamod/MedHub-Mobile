@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_animations.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_images.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/login_page.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   route() {
-    Get.off(() => const LoginPage());
+    Get.off(() => const LoginScreen());
   }
 
   @override
