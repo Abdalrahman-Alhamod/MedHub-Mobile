@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_general_constants.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_theme.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/login_page.dart';
@@ -14,7 +15,7 @@ class PhrarmacyWarehouseStoreMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: kAppTitle,
       debugShowCheckedModeBanner: false,
       theme: appTheme,
