@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pharmacy_warehouse_store_mobile/Constants/app_general_constants.dart';
-import 'package:pharmacy_warehouse_store_mobile/pages/login_page.dart';
-import 'package:pharmacy_warehouse_store_mobile/pages/register_page.dart';
-import 'package:pharmacy_warehouse_store_mobile/pages/splash_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/core/app_general_constants.dart';
+import 'package:pharmacy_warehouse_store_mobile/core/app_theme.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/login_page.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/register_page.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/splash_screen.dart';
 
 void main() {
   return runApp(const PhrarmacyWarehouseStoreMobile());
@@ -16,12 +17,13 @@ class PhrarmacyWarehouseStoreMobile extends StatelessWidget {
     return MaterialApp(
       title: kAppTitle,
       debugShowCheckedModeBanner: false,
+      theme: appTheme,
       routes: {
-        LoginPage.id: (context) => const LoginPage(),
-        RegisterPage.id: (context) => const RegisterPage(),
-        SplashScreen.id: (context) => const SplashScreen(),
+        LoginPage.route: (context) => const LoginPage(),
+        RegisterPage.route: (context) => const RegisterPage(),
+        SplashScreen.route: (context) => const SplashScreen(),
       },
-      initialRoute: SplashScreen.id,
+      initialRoute: SplashScreen.route,
     );
   }
 }
