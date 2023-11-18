@@ -9,7 +9,6 @@ import 'package:pharmacy_warehouse_store_mobile/src/view/screens/login_page.dart
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
-  static const route = '/SplashScreen';
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -27,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   route() {
-    Get.off(const LoginPage());
+    Get.off(() => const LoginPage());
   }
 
   @override

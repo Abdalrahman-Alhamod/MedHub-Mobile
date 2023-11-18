@@ -11,7 +11,6 @@ import '../helpers/show_snack_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
-  static const route = '/LoginPage';
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -57,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     void registerUserPage() {
-      Get.off(const RegisterPage());
+      Get.off(()=>const RegisterPage());
     }
 
     return Scaffold(

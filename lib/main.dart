@@ -19,12 +19,7 @@ class PhrarmacyWarehouseStoreMobile extends StatelessWidget {
       title: kAppTitle,
       debugShowCheckedModeBanner: false,
       theme: appTheme,
-      routes: {
-        LoginPage.route: (context) => const LoginPage(),
-        RegisterPage.route: (context) => const RegisterPage(),
-        SplashScreen.route: (context) => const SplashScreen(),
-      },
-      initialRoute: SplashScreen.route,
+      home: const SplashScreen(),
     );
   }
 }

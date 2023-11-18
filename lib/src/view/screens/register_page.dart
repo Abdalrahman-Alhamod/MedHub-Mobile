@@ -11,7 +11,6 @@ import '../widgets/custome_text_field.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
-  static const route = '/RegisterPage';
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
@@ -82,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     void loginPage() {
-      Get.off(const LoginPage());
+      Get.off(() => const LoginPage());
     }
 
     return Scaffold(
