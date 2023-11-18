@@ -39,6 +39,7 @@ dependencies:
   flutter_spinkit: ^5.2.0
   get: ^4.6.6
   curved_navigation_bar: ^1.0.3
+  animations: ^2.0.8
 
 dev_dependencies:
   flutter_test:
