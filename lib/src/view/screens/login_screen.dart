@@ -25,13 +25,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? Function(String?) userNumberValidator = (value) {
     if (value!.isEmpty) {
-      return 'Field is required';
+      return "fieldIsRequired".tr;
     } else if (value.length >= 2 && value.substring(0, 2) != '09') {
-      return 'Phone number should start with "09"';
+      return "phoneNumberShouldStart".tr;
     } else if (value.length < 10 || value.length > 10) {
-      return 'Phone number should be 10 digits';
+      return "phoneNumberLength".tr;
     } else if (int.tryParse(value) == null) {
-      return 'Please enter a valid number';
+      return "enterValidNumber".tr;
     } else {
       return null;
     }
@@ -39,9 +39,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? Function(String?) passwordValidator = (value) {
     if (value!.isEmpty) {
-      return 'Field is required';
+      return "fieldIsRequired".tr;
     } else if (value.length < 8) {
-      return 'Password should be at least 8 characters';
+      return "passwordShouldBe8".tr;
     } else {
       return null;
     }
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
     void signInUser() async {
       if (formKey.currentState!.validate()) {
         showSnackBar(
-            context, 'Logged in Successfully!', SnackBarMessageType.success);
+            context, "signedInSuccess".tr, SnackBarMessageType.success);
         Get.off(() => const HomeScreen());
       }
     }
@@ -90,9 +90,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 50,
                     ),
-                    const Text(
-                      'Welcome back',
-                      style: TextStyle(
+                    Text(
+                      "welcomeMessage".tr,
+                      style: const TextStyle(
                           fontSize: 24,
                           color: AppColors.textColor,
                           fontWeight: FontWeight.bold),
@@ -100,9 +100,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Text(
-                      'Please enter your credentials to Login',
-                      style: TextStyle(
+                    Text(
+                      "enterCredentials".tr,
+                      style: const TextStyle(
                           fontSize: 18,
                           color: AppColors.secondaryTextColor,
                           fontWeight: FontWeight.bold),
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomeTextField(
                       validator: userNumberValidator,
                       obscureText: false,
-                      hintText: 'User Number',
+                      hintText: "userNumber".tr,
                       onChanged: (text) {
                         userNumber = text;
                         formKey.currentState!.validate();
@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomeTextField(
                       validator: passwordValidator,
                       obscureText: true,
-                      hintText: 'Password',
+                      hintText: "password".tr,
                       onChanged: (text) {
                         password = text;
                         formKey.currentState!.validate();
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 30,
                     ),
-                    CustomeButton(title: 'Sign in', onTap: signInUser),
+                    CustomeButton(title: "signIn".tr, onTap: signInUser),
 
                     // not a member> register now
                     const SizedBox(
@@ -153,18 +153,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Not a member? ',
-                          style: TextStyle(
+                        Text(
+                          "notAMember".tr,
+                          style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: AppColors.textColor),
                         ),
                         GestureDetector(
                           onTap: registerUserPage,
-                          child: const Text(
-                            'Register now',
-                            style: TextStyle(
+                          child: Text(
+                            "register".tr,
+                            style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.secondaryColor),

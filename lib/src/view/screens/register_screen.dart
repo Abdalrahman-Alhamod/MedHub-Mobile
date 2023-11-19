@@ -23,49 +23,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   String? Function(String?) pharmacyNameValidator = (value) {
     if (value!.isEmpty) {
-      return 'Field is required';
+      return "fieldIsRequired".tr;
     } else {
       return null;
     }
   };
   String? Function(String?) userNameValidator = (value) {
     if (value!.isEmpty) {
-      return 'Field is required';
+      return "fieldIsRequired".tr;
     } else {
       return null;
     }
   };
 
   String? Function(String?) userNumberValidator = (value) {
-    if (value!.isEmpty) {
-      return 'Field is required';
+   if (value!.isEmpty) {
+      return "fieldIsRequired".tr;
     } else if (value.length >= 2 && value.substring(0, 2) != '09') {
-      return 'Phone number should start with "09"';
+      return "phoneNumberShouldStart".tr;
     } else if (value.length < 10 || value.length > 10) {
-      return 'Phone number should be 10 digits';
+      return "phoneNumberLength".tr;
     } else if (int.tryParse(value) == null) {
-      return 'Please enter a valid number';
+      return "enterValidNumber".tr;
     } else {
       return null;
     }
   };
 
   String? Function(String?) passwordValidator = (value) {
-    if (value!.isEmpty) {
-      return 'Field is required';
+     if (value!.isEmpty) {
+      return "fieldIsRequired".tr;
     } else if (value.length < 8) {
-      return 'Password should be at least 8 characters';
+      return "passwordShouldBe8".tr;
     } else {
       return null;
     }
   };
   String? Function(String?) confirmPasswordValidator = (value) {
     if (value!.isEmpty) {
-      return 'Field is required';
+      return "fieldIsRequired".tr;
     } else if (value.length < 8) {
-      return 'Password should be at least 8 characters';
-    } else if (password != confirmPassword) {
-      return 'Passwords don\'t match';
+      return "passwordShouldBe8".tr;
+    }  else if (password != confirmPassword) {
+      return "passwordsDontMatch".tr;
     } else {
       return null;
     }
@@ -76,7 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     void registerUser() async {
       if (formKey.currentState!.validate()) {
         showSnackBar(
-            context, 'Signed up Successfully!', SnackBarMessageType.success);
+            context, "registerSuccess".tr, SnackBarMessageType.success);
       }
     }
 
@@ -112,9 +112,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Text(
-                      'Let\'s Create an account for you',
-                      style: TextStyle(
+                     Text(
+                      "letsCreateAnAccount".tr,
+                      style:const TextStyle(
                           fontSize: 18,
                           color: AppColors.secondaryTextColor,
                           fontWeight: FontWeight.bold),
@@ -127,7 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomeTextField(
                       validator: pharmacyNameValidator,
                       obscureText: false,
-                      hintText: 'Pharmacy Name',
+                      hintText: "pharmacyName".tr,
                       onChanged: (text) {
                         pharmacyName = text;
                         formKey.currentState!.validate();
@@ -141,7 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomeTextField(
                       validator: userNameValidator,
                       obscureText: false,
-                      hintText: 'User Name',
+                      hintText: "userName".tr,
                       onChanged: (text) {
                         userName = text;
                         formKey.currentState!.validate();
@@ -155,7 +155,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomeTextField(
                       validator: userNumberValidator,
                       obscureText: false,
-                      hintText: 'User Number',
+                      hintText: "userNumber".tr,
                       onChanged: (text) {
                         userNumber = text;
                         formKey.currentState!.validate();
@@ -171,7 +171,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomeTextField(
                       validator: passwordValidator,
                       obscureText: true,
-                      hintText: 'Password',
+                      hintText: "password".tr,
                       onChanged: (text) {
                         password = text;
                         formKey.currentState!.validate();
@@ -185,7 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomeTextField(
                       validator: confirmPasswordValidator,
                       obscureText: true,
-                      hintText: 'Confirm Password',
+                      hintText: "confirmPassword".tr,
                       onChanged: (text) {
                         confirmPassword = text;
                         formKey.currentState!.validate();
@@ -198,7 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(
                       height: 30,
                     ),
-                    CustomeButton(title: 'Sign up', onTap: registerUser),
+                    CustomeButton(title: "signUp".tr, onTap: registerUser),
 
                     // not a member> register now
                     SizedBox(
@@ -206,18 +206,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            'Already have an account? ',
-                            style: TextStyle(
+                           Text(
+                            "alreadyHaveAnAccount".tr,
+                            style:const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.textColor),
                           ),
                           GestureDetector(
                             onTap: loginPage,
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
+                            child:  Text(
+                              "signIn".tr,
+                              style:const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.secondaryColor),
