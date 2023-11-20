@@ -1,5 +1,18 @@
 import 'package:flutter/foundation.dart';
 
+enum ProductType {
+  painRelief, // مزيل للالم
+  coldAndFlu, //البرد والانفلونزا
+  allergyMedications, //أدوية الحساسية
+  digestiveHealth, //صحة الجهاز الهضمي
+  cardiovascularMedications, //أدوية القلب والأوعية الدموية
+  antibiotics, //مضادات حيوية
+  diabetesManagement, //إدارة مرض السكري
+  dermatologicalProducts, //المنتجات الجلدية
+  vitaminsAndSupplements, //الفيتامينات والمكملات الغذائية
+  womenHealth, //صحة المرأة
+}
+
 class Product {
   int id;
   Category category;
