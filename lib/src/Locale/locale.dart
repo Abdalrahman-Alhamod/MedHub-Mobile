@@ -26,6 +26,11 @@ class AppLocale implements Translations {
           "registerSuccess": "تم تسجيل الحساب بنجاح !",
           "letsCreateAnAccount": "لننشئ حساباً من أجلك",
           "close": "أغلق",
+          "home": "الرئيسية",
+          "search": "البحث",
+          "cart": "سلة المشتريات",
+          "orders": "الطلبات",
+          "favourite": "المفضلة",
         },
         "en": {
           "welcomeMessage": "Welcome back",
@@ -50,6 +55,11 @@ class AppLocale implements Translations {
           "registerSuccess": "Signed up successfully! ",
           "letsCreateAnAccount": "Let's create an account for you",
           "close": "Close",
+          "home": "Home",
+          "search": "Search",
+          "cart": "Cart",
+          "orders": "Orders",
+          "favourite": "Favourite",
         },
       };
 }

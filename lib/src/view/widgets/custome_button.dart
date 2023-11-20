@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pharmacy_warehouse_store_mobile/core/app_colors.dart';
+import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 
 class CustomeButton extends StatelessWidget {
   const CustomeButton({super.key, required this.title, required this.onTap});
