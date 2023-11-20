@@ -4,10 +4,10 @@ import 'package:pharmacy_warehouse_store_mobile/core/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_icons.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/login_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/auth/login_screen.dart';
 
-import '../widgets/custome_button.dart';
-import '../widgets/custome_text_field.dart';
+import '../../widgets/custome_button.dart';
+import '../../widgets/custome_text_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

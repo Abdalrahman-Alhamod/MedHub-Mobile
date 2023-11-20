@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_animations.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_images.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/login_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/auth/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

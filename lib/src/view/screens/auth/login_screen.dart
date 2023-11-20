@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_icons.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_images.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/home_screen.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/register_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/home_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/auth/register_screen.dart';
 
-import '../widgets/custome_button.dart';
-import '../widgets/custome_text_field.dart';
-import '../helpers/show_snack_bar.dart';
+import '../../widgets/custome_button.dart';
+import '../../widgets/custome_text_field.dart';
+import '../../helpers/show_snack_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

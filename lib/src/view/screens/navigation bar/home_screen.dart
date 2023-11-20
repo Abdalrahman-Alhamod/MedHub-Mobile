@@ -2,17 +2,17 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/app_colors.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/cart_screen.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/favourate_screen.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/orders_screen.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/products_list_screen.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/search_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/cart_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/favourite_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/orders_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/products_list_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   static const List<Widget> screen = [
-    FavourateScreen(),
+    FavouriteScreen(),
     SearchScreen(),
     ProductsListScreen(),
     CartScreen(),
