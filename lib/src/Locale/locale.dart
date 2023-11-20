@@ -5,7 +5,7 @@ class AppLocale implements Translations {
   Map<String, Map<String, String>> get keys => {
         "ar": {
           "welcomeMessage": "أهلاً بعودتك",
-          "enterCredentials": "من فضلك ادخل بياناتك الائتمانية",
+          "enterCredentials": "من فضلك أدخل بياناتك الائتمانية",
           "signIn": "تسجيل الدخول",
           "userNumber": "رقم المستخدم",
           "password": "كلمة المرور",
@@ -22,9 +22,10 @@ class AppLocale implements Translations {
           "enterValidNumber": "من فضلك ادخل رقماً صالحاً",
           "passwordShouldBe8": "يجب أن تتألف كلمة المرور من 8 محارف على الأقل",
           "passwordsDontMatch": "كلمتا المرور لا تتطابقان",
-          "signedInSuccess": "تم تسجيل الدخول بنجاح!",
-          "registerSuccess": "تم تسجيل الحساب بنجاح!",
+          "signedInSuccess": "تم تسجيل الدخول بنجاح !",
+          "registerSuccess": "تم تسجيل الحساب بنجاح !",
           "letsCreateAnAccount": "لننشئ حساباً من أجلك",
+          "close": "أغلق",
         },
         "en": {
           "welcomeMessage": "Welcome back",
@@ -45,9 +46,10 @@ class AppLocale implements Translations {
           "enterValidNumber": "Please enter a valid number",
           "passwordShouldBe8": "Password should be at least 8 characters",
           "passwordsDontMatch": "Passwords don't match",
-          "signedInSuccess": "Signed in successfully!",
-          "registerSuccess": "Signed up successfully!",
+          "signedInSuccess": "Signed in successfully !",
+          "registerSuccess": "Signed up successfully! ",
           "letsCreateAnAccount": "Let's create an account for you",
+          "close": "Close",
         },
       };
 }

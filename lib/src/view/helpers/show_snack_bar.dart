@@ -64,9 +64,9 @@ void showSnackBar(
     ],
     mainButton: TextButton(
       onPressed: () => Get.back(),
-      child: const Text(
-        'Close',
-        style: TextStyle(color: Colors.white),
+      child:  Text(
+        "close".tr,
+        style:const TextStyle(color: Colors.white),
       ),
     ),
     onTap: (snack) {
