@@ -35,7 +35,7 @@ class AppLocale implements Translations {
           // botton nav bar
           "home": "الرئيسية",
           "search": "البحث",
-          "cart": "سلة المشتريات",
+          "cart": "المشتريات",
           "orders": "الطلبات",
           "favourite": "المفضلة",
         },

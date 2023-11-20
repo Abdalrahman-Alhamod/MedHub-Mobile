@@ -24,7 +24,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  int _index = 2;
+  int _index = 0;
   final PageController _pageController = PageController();
 
   @override
@@ -70,6 +70,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: _index,
+        containerHeight: 70,
         onItemSelected: (index) {
           setState(() {
             _index = index;
@@ -83,27 +84,44 @@ class HomeScreenState extends State<HomeScreen> {
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
             title: Text("favourite".tr),
-            icon: const Icon(Icons.favorite),
+            icon: const Icon(
+              Icons.favorite,
+              size: 32,
+            ),
             activeColor: Colors.red,
           ),
           BottomNavyBarItem(
             title: Text("search".tr),
-            icon: const Icon(Icons.search),
+            icon: const Icon(
+              Icons.search,
+              size: 32,
+            ),
             activeColor: Colors.green,
           ),
           BottomNavyBarItem(
             title: Text("home".tr),
-            icon: const Icon(Icons.home),
+            icon: const Icon(
+              Icons.home,
+              size: 32,
+            ),
             activeColor: AppColors.primaryColor,
           ),
           BottomNavyBarItem(
-            title: Text("cart".tr),
-            icon: const Icon(Icons.shopping_cart),
+            title: Text(
+              "cart".tr,
+            ),
+            icon: const Icon(
+              Icons.shopping_cart,
+              size: 32,
+            ),
             activeColor: Colors.pink,
           ),
           BottomNavyBarItem(
             title: Text("orders".tr),
-            icon: const Icon(Icons.receipt),
+            icon: const Icon(
+              Icons.receipt,
+              size: 32,
+            ),
             activeColor: Colors.purple,
           ),
         ],
