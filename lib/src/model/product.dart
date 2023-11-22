@@ -26,6 +26,7 @@ class Product {
   String image;
   int inStock;
   bool isFavourate;
+  double discount;
   // ignore: unused_field
   int _quantity;
   Product({
@@ -41,22 +42,23 @@ class Product {
     required this.image,
     required this.inStock,
     required this.isFavourate,
+    required this.discount,
   }) : _quantity = 0;
   factory Product.fromJson(jsonData) {
     return Product(
-      id: jsonData['id'],
-      category: jsonData['category'],
-      name: jsonData['name'],
-      scientificName: jsonData['scientificName'],
-      brand: jsonData['brand'],
-      description: jsonData['description'],
-      expirationDate: jsonData['expirationDate'],
-      price: jsonData['price'],
-      popularity: jsonData['popularity'],
-      image: jsonData['image'],
-      inStock: jsonData['inStock'],
-      isFavourate: jsonData['isFavourate'],
-    );
+        id: jsonData['id'],
+        category: jsonData['category'],
+        name: jsonData['name'],
+        scientificName: jsonData['scientificName'],
+        brand: jsonData['brand'],
+        description: jsonData['description'],
+        expirationDate: jsonData['expirationDate'],
+        price: jsonData['price'],
+        popularity: jsonData['popularity'],
+        image: jsonData['image'],
+        inStock: jsonData['inStock'],
+        isFavourate: jsonData['isFavourate'],
+        discount: jsonData['discount']);
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -72,6 +74,7 @@ class Product {
     data['image'] = image;
     data['inStock'] = inStock;
     data['isFavourate'] = isFavourate;
+    data['discount'] = discount;
     return data;
   }
 }
