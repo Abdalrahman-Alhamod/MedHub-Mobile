@@ -1,3 +1,4 @@
 class AppProductsImages {
-  static const amoxil = 'asstes/products/Amoxil';
+  const AppProductsImages._();
+  static const amoxil = 'assets/products/Amoxil.png';
 }

@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 
 class CustomeButton extends StatelessWidget {
-  const CustomeButton({super.key, required this.title, required this.onTap});
+  const CustomeButton(
+      {super.key,
+      required this.title,
+      required this.onTap,
+      this.width,
+      this.height});
   final String title;
+  final double? width, height;
   final void Function() onTap;
   @override
   Widget build(BuildContext context) {
@@ -12,6 +18,8 @@ class CustomeButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 24),
         margin: const EdgeInsets.symmetric(horizontal: 25),
+        width: width,
+        height: height,
         decoration: const BoxDecoration(
             color: AppColors.primaryColor,
             borderRadius: BorderRadius.all(Radius.circular(8))),

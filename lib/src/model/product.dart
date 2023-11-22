@@ -1,4 +1,3 @@
-
 enum ProductType {
   painRelief, // مزيل للالم
   coldAndFlu, //البرد والانفلونزا
@@ -19,7 +18,7 @@ class Product {
   String scientificName;
   String brand;
   String description;
-  DateTime expirationDate;
+  String expirationDate;
   double price;
   int popularity;
   String image;

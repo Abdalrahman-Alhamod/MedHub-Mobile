@@ -41,6 +41,8 @@ dependencies:
   http: ^1.1.0
   bottom_navy_bar: ^6.0.0
   flutter_svg: ^2.0.9
+  flutter_screenutil: ^5.9.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +78,7 @@ flutter:
     - assets/images/
     - assets/animations/
     - assets/SVGs/
+    - assets/products/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
