@@ -6,6 +6,7 @@ import 'package:pharmacy_warehouse_store_mobile/src/Locale/local_controller.dart
 import 'package:pharmacy_warehouse_store_mobile/src/Locale/locale.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/start/splash_screen.dart';
 
+
 void main() {
   return runApp(const PhrarmacyWarehouseStoreMobile());
 }
