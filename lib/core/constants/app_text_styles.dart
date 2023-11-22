@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 class AppTextStyles {
+   const AppTextStyles._();
   static const TextStyle headline1 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,

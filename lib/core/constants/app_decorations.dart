@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 class AppDecorations {
+
+  const AppDecorations._();
   static const BoxDecoration primaryButtonDecoration = BoxDecoration(
     color: AppColors.primaryColor,
     borderRadius: BorderRadius.all(Radius.circular(8)),

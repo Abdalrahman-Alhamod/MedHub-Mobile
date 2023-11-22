@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppIcons {
+  const AppIcons._();
   static const IconData home = Icons.home; // Home/General
   static const IconData medicine = Icons.healing; // Medicines/Inventory
   static const IconData order = Icons.shopping_cart; // Orders/Cart
