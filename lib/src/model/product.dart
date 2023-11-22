@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 
 enum ProductType {
   painRelief, // مزيل للالم
@@ -15,14 +14,14 @@ enum ProductType {
 
 class Product {
   int id;
-  Category category;
+  ProductType type;
   String name;
   String scientificName;
   String brand;
   String description;
   DateTime expirationDate;
   double price;
-  String popularity;
+  int popularity;
   String image;
   int inStock;
   bool isFavourate;
@@ -31,7 +30,7 @@ class Product {
   int _quantity;
   Product({
     required this.id,
-    required this.category,
+    required this.type,
     required this.name,
     required this.scientificName,
     required this.brand,
@@ -47,7 +46,7 @@ class Product {
   factory Product.fromJson(jsonData) {
     return Product(
         id: jsonData['id'],
-        category: jsonData['category'],
+        type: jsonData['category'],
         name: jsonData['name'],
         scientificName: jsonData['scientificName'],
         brand: jsonData['brand'],
@@ -63,7 +62,7 @@ class Product {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['category'] = category;
+    data['category'] = type;
     data['name'] = name;
     data['scientificName'] = scientificName;
     data['brand'] = brand;
