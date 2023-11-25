@@ -38,6 +38,26 @@ class AppLocale implements Translations {
           "cart": "المشتريات",
           "orders": "الطلبات",
           "favourite": "المفضلة",
+
+          // product type
+          "PainAndRelief": "مزيل الألم",
+          "ColdAndFlu": "البرد و الأنفلونزا",
+          "AllergyMedications": "أدوية الحساسية",
+          "DigestiveHealth": "صحة الجهاز الهضمي",
+          "CardiovascularMedications": "أدوية القلب و الأوعية",
+          "Antibiotics": "مضادات حيوية",
+          "DiabetesManagement": "إدارة مرض السكري",
+          "DermatologicalProducts": "المنتجات الجلدية",
+          "VitaminsAndSupplements": "الفيتامينات و المكملات الغذائية",
+          "WomenHealth": "صحة المرأة",
+
+          // product details cards
+          "SP": "ل.س",
+          "brand": "الشركة المصنعة",
+          "expiration": "تاريخ الانتهاء",
+          "inStock": "في المخزن",
+          "category": "التصنيف",
+          "addToCart": "أضف إلى السلة",
         },
         "en": {
           //start
@@ -74,6 +94,26 @@ class AppLocale implements Translations {
           "cart": "Cart",
           "orders": "Orders",
           "favourite": "Favourite",
+
+          // product type
+          "PainAndRelief": "Pain And Relief",
+          "ColdAndFlu": "Cold And Flu",
+          "AllergyMedications": "Allergy Medications",
+          "DigestiveHealth": "Digestive  Health",
+          "CardiovascularMedications": "Cardiovascular Medications",
+          "Antibiotics": "Antibiotics",
+          "DiabetesManagement": "Diabetes Management",
+          "DermatologicalProducts": "Dermatological Products",
+          "VitaminsAndSupplements": "Vitamins And Supplements",
+          "WomenHealth": "Women Health",
+
+          // product details cards
+          "SP": "SP",
+          "brand": "Brand",
+          "Expiration": "expiration",
+          "inStock": "In Stock",
+          "category": "Category",
+          "addToCart": "Add To Cart",
         },
       };
 }

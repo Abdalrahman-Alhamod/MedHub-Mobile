@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_icons.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/services/api.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/home_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/auth/register_screen.dart';
 

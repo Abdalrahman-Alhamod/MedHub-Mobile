@@ -1,19 +1,44 @@
-enum ProductType {
-  painRelief, // مزيل للالم
-  coldAndFlu, //البرد والانفلونزا
-  allergyMedications, //أدوية الحساسية
-  digestiveHealth, //صحة الجهاز الهضمي
-  cardiovascularMedications, //أدوية القلب والأوعية الدموية
-  antibiotics, //مضادات حيوية
-  diabetesManagement, //إدارة مرض السكري
-  dermatologicalProducts, //المنتجات الجلدية
-  vitaminsAndSupplements, //الفيتامينات والمكملات الغذائية
-  womenHealth, //صحة المرأة
+import 'package:get/get.dart';
+
+abstract class ProductType {
+  const ProductType._();
+  // ignore: non_constant_identifier_names
+  static String PainAndRelief = "PainAndRelief".tr; // مزيل للالم
+  
+  // ignore: non_constant_identifier_names
+  static String ColdAndFlu = "ColdAndFlu".tr; //البرد والانفلونزا
+
+  // ignore: non_constant_identifier_names
+  static String AllergyMedications = "AllergyMedications".tr; //أدوية الحساسية
+
+  // ignore: non_constant_identifier_names
+  static String DigestiveHealth = "DigestiveHealth".tr; //صحة الجهاز الهضمي
+
+  // ignore: non_constant_identifier_names
+  static String CardiovascularMedications =
+      "CardiovascularMedications".tr; //أدوية القلب والأوعية الدموية
+
+  // ignore: non_constant_identifier_names
+  static String Antibiotics = "Antibiotics".tr; //مضادات حيوية
+
+  // ignore: non_constant_identifier_names
+  static String DiabetesManagement = "DiabetesManagement".tr; //إدارة مرض السكري
+
+  // ignore: non_constant_identifier_names
+  static String DermatologicalProducts =
+      "DermatologicalProducts".tr; //المنتجات الجلدية
+
+  // ignore: non_constant_identifier_names
+  static String VitaminsAndSupplements =
+      "VitaminsAndSupplements".tr; //الفيتامينات والمكملات الغذائية
+
+  // ignore: non_constant_identifier_names
+  static String WomenHealth = "WomenHealth".tr; //صحة المرأة
 }
 
 class Product {
   int id;
-  ProductType type;
+  String type;
   String name;
   String scientificName;
   String brand;

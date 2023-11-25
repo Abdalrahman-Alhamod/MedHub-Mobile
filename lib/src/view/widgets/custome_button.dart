@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 
 class CustomeButton extends StatelessWidget {

@@ -95,9 +95,9 @@ class ProductDetailsScreen extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(right: 60.w, left: 60.w, top: 20.h),
+                  padding: EdgeInsets.only(right: 30.w, left: 30.w, top: 20.h),
                   child: Text(
-                    r"$" + product.price.toString(),
+                    "${product.price} ${"SP".tr}",
                     style: theme.textTheme.displaySmall!.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.primaryColor),
@@ -128,25 +128,25 @@ class ProductDetailsScreen extends StatelessWidget {
                 children: [
                   CustomeCard(
                     title: product.brand,
-                    subtitle: "Brand",
+                    subtitle: "brand".tr,
                     icon: const Icon(Icons.business,
                         color: Colors.teal, size: 30), // Example color
                   ),
                   CustomeCard(
                     title: product.expirationDate.toString(),
-                    subtitle: "Expiration",
+                    subtitle: "expiration".tr,
                     icon: const Icon(Icons.date_range,
                         color: Colors.red, size: 30), // Example color
                   ),
                   CustomeCard(
                     title: product.inStock.toString(),
-                    subtitle: "In Stock",
+                    subtitle: "inStock".tr,
                     icon: const Icon(Icons.warehouse,
                         color: Colors.green, size: 30), // Example color
                   ),
                   CustomeCard(
-                    title: product.type.name.toUpperCase(),
-                    subtitle: "Category",
+                    title: product.type.toString(),
+                    subtitle: "category".tr,
                     icon: Icon(
                       Icons.category,
                       color: Colors.orange,
@@ -163,7 +163,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomeButton(
-                    title: "Add to Cart",
+                    title: "addToCart".tr,
                     onTap: () {},
                     width: 260.w,
                     height: 70.h,
