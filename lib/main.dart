@@ -3,10 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_general_constants.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_theme.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Locale/local_controller.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Locale/locale.dart';
-
-import 'src/view/screens/product_details_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/locale/local_controller.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/locale/locale.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/routes/app_pages.dart';
 
 void main() {
   Get.put(AppLocalController());
@@ -24,7 +23,8 @@ void main() {
         defaultTransition: Transition.fadeIn,
         translations: AppLocale(),
         locale: const Locale('en'),
-        home: const ProductDetailsScreen(),
+        getPages: AppPages.routes,
+        initialRoute: AppPages.INITIAL,
       );
     },
   ));
