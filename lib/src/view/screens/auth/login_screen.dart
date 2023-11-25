@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_icons.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/services/api.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/home_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/auth/register_screen.dart';
 
@@ -51,9 +55,13 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     void signInUser() async {
       if (formKey.currentState!.validate()) {
-        showSnackBar(
-            context, "signedInSuccess".tr, SnackBarMessageType.success);
-        Get.off(() => const HomeScreen());
+        try {
+          showSnackBar(
+              context, "signedInSuccess".tr, SnackBarMessageType.success);
+          Get.off(() => const HomeScreen());
+        } catch (e) {
+          log(e.toString());
+        }
       }
     }
 
@@ -142,9 +150,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     // sign in button
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
-                    CustomeButton(title: "signIn".tr, onTap: signInUser),
+                    CustomeButton(
+                      title: "signIn".tr,
+                      onTap: signInUser,
+                      height: 80.h,
+                      width: 340.w,
+                    ),
 
                     // not a member> register now
                     const SizedBox(

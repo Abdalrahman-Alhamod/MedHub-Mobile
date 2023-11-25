@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_products_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_vectors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
@@ -25,7 +24,7 @@ class ProductDetailsScreen extends StatelessWidget {
         child: ListView(
           children: [
             SizedBox(
-              height: 300.h,
+              height: 280.h,
               child: Stack(
                 children: [
                   // Container - product background
@@ -59,7 +58,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                      top: 30.h,
+                      top: 20.h,
                       left: 0,
                       right: 0,
                       child: Image.asset(
@@ -74,7 +73,8 @@ class ProductDetailsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     20.verticalSpace,
                     Padding(
@@ -95,7 +95,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50.w),
+                  padding: EdgeInsets.only(right: 60.w, left: 60.w, top: 20.h),
                   child: Text(
                     r"$" + product.price.toString(),
                     style: theme.textTheme.displaySmall!.copyWith(
@@ -130,54 +130,62 @@ class ProductDetailsScreen extends StatelessWidget {
                     title: product.brand,
                     subtitle: "Brand",
                     icon: const Icon(Icons.business,
-                        color: Colors.teal), // Example color
+                        color: Colors.teal, size: 30), // Example color
                   ),
                   CustomeCard(
                     title: product.expirationDate.toString(),
                     subtitle: "Expiration",
                     icon: const Icon(Icons.date_range,
-                        color: Colors.red), // Example color
+                        color: Colors.red, size: 30), // Example color
                   ),
                   CustomeCard(
                     title: product.inStock.toString(),
                     subtitle: "In Stock",
                     icon: const Icon(Icons.warehouse,
-                        color: Colors.green), // Example color
+                        color: Colors.green, size: 30), // Example color
                   ),
                   CustomeCard(
                     title: product.type.name.toUpperCase(),
                     subtitle: "Category",
-                    icon: const Icon(Icons.category,
-                        color: Colors.orange), // Example color
+                    icon: Icon(
+                      Icons.category,
+                      color: Colors.orange,
+                      size: 30.h,
+                    ), // Example color
                   ),
                 ],
               ),
             ),
             10.verticalSpace,
-            Row(
-              children: [
-                CustomeButton(
-                  title: "Add to Cart",
-                  onTap: () {},
-                  width: 260.w,
-                ),
-                Container(
-                  // padding: EdgeInsets.fromLTRB(16.w, 12.h, 10.w, 12.h),
-                  decoration: BoxDecoration(
-                    color: theme.scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(16.r),
-                    border: Border.all(color: theme.dividerColor),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomeButton(
+                    title: "Add to Cart",
+                    onTap: () {},
+                    width: 260.w,
+                    height: 70.h,
                   ),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                      size: 55,
+                  Container(
+                    // padding: EdgeInsets.fromLTRB(16.w, 12.h, 10.w, 12.h),
+                    decoration: BoxDecoration(
+                      color: theme.scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(16.r),
+                      border: Border.all(color: theme.dividerColor),
+                    ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                        size: 70.h - 15,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ),

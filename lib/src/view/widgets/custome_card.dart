@@ -26,7 +26,7 @@ class CustomeCard extends StatelessWidget {
       child: Row(
         children: [
           icon,
-          16.horizontalSpace,
+          8.horizontalSpace,
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,

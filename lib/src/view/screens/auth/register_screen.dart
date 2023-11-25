@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_icons.dart';
@@ -37,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   };
 
   String? Function(String?) userNumberValidator = (value) {
-   if (value!.isEmpty) {
+    if (value!.isEmpty) {
       return "fieldIsRequired".tr;
     } else if (value.length >= 2 && value.substring(0, 2) != '09') {
       return "phoneNumberShouldStart".tr;
@@ -51,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   };
 
   String? Function(String?) passwordValidator = (value) {
-     if (value!.isEmpty) {
+    if (value!.isEmpty) {
       return "fieldIsRequired".tr;
     } else if (value.length < 8) {
       return "passwordShouldBe8".tr;
@@ -112,9 +113,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                     Text(
+                    Text(
                       "letsCreateAnAccount".tr,
-                      style:const TextStyle(
+                      style: const TextStyle(
                           fontSize: 18,
                           color: AppColors.secondaryTextColor,
                           fontWeight: FontWeight.bold),
@@ -196,9 +197,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     // sign in button
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
-                    CustomeButton(title: "signUp".tr, onTap: registerUser),
+                    CustomeButton(
+                      title: "signUp".tr,
+                      onTap: registerUser,
+                      height: 80.h,
+                      width: 340.w,
+                    ),
 
                     // not a member> register now
                     SizedBox(
@@ -206,18 +212,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                           Text(
+                          Text(
                             "alreadyHaveAnAccount".tr,
-                            style:const TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.textColor),
                           ),
                           GestureDetector(
                             onTap: loginPage,
-                            child:  Text(
+                            child: Text(
                               "signIn".tr,
-                              style:const TextStyle(
+                              style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.secondaryColor),

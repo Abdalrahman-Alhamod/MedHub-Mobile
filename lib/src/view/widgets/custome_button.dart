@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 
 class CustomeButton extends StatelessWidget {
@@ -16,8 +17,6 @@ class CustomeButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 24),
-        margin: const EdgeInsets.symmetric(horizontal: 25),
         width: width,
         height: height,
         decoration: const BoxDecoration(
