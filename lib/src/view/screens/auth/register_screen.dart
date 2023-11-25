@@ -76,8 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     void registerUser() async {
       if (formKey.currentState!.validate()) {
-        showSnackBar(
-            context, "registerSuccess".tr, SnackBarMessageType.success);
+        showSnackBar( "registerSuccess".tr, SnackBarMessageType.success);
       }
     }
 

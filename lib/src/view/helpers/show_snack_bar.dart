@@ -5,7 +5,6 @@ import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 enum SnackBarMessageType { error, info, success }
 
 void showSnackBar(
-  BuildContext context,
   String message,
   SnackBarMessageType messageType,
 ) {

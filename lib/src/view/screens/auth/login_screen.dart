@@ -55,8 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
     void signInUser() async {
       if (formKey.currentState!.validate()) {
         try {
-          showSnackBar(
-              context, "signedInSuccess".tr, SnackBarMessageType.success);
+          showSnackBar( "signedInSuccess".tr, SnackBarMessageType.success);
           Get.off(() => const HomeScreen());
         } catch (e) {
           log(e.toString());

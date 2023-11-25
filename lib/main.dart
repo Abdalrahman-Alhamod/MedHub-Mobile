@@ -22,7 +22,7 @@ void main() {
         theme: appTheme,
         defaultTransition: Transition.fadeIn,
         translations: AppLocale(),
-        locale: const Locale('ar'),
+        locale: const Locale('en'),
         getPages: AppPages.routes,
         initialRoute: AppPages.INITIAL,
       );

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_products_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
@@ -20,13 +21,12 @@ class AppData {
     Product(
       id: 0,
       type: ProductType.Antibiotics.toString(),
-      name: "Amoxil",
-      scientificName: "Amoxicillin",
-      brand: "GlaxoSmithKline",
-      description:
-          "Amoxil is a penicillin antibiotic, which is given to treat the infections caused by bacteria",
+      name: "Amoxil".tr,
+      scientificName: "Amoxicillin".tr,
+      brand: "GlaxoSmithKline".tr,
+      description: "desc".tr,
       expirationDate: date,
-      price: 15.99,
+      price: 17500,
       popularity: 520,
       image: AppProductsImages.amoxil,
       inStock: 52,

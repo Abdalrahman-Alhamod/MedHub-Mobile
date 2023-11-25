@@ -58,6 +58,18 @@ class AppLocale implements Translations {
           "inStock": "في المخزن",
           "category": "التصنيف",
           "addToCart": "أضف إلى السلة",
+          "quantity": "الكمية :",
+          "enterQuantity": "أدخل الكمية :",
+          "add": "أضف",
+          "cancel": "ألغِ",
+          "confirm": "أكّد",
+          "addedSuccessfully": "تمت الإضافة بنجاح !",
+
+          // test products
+          "Amoxil": "اموكسيل",
+          "Amoxicillin": "أموكسيسيلين",
+          "GlaxoSmithKline": "جلاكسو سميث كلاين",
+          "desc": "أموكسيل هو مضاد حيوي من البنسلين، يعطى لعلاج الالتهابات التي تسببها البكتيريا",
         },
         "en": {
           //start
@@ -114,6 +126,19 @@ class AppLocale implements Translations {
           "inStock": "In Stock",
           "category": "Category",
           "addToCart": "Add To Cart",
+          "quantity": "Quantity :",
+          "enterQuantity": "Enter Quantity :",
+          "add": "Add",
+          "cancel": "Cancel",
+          "confirm": "Confirm",
+          "addedSuccessfully": "Added Successfully !",
+
+          // test products
+          "Amoxil": "Amoxil",
+          "Amoxicillin": "Amoxicillin",
+          "GlaxoSmithKline": "GlaxoSmithKline",
+          "desc":
+              "Amoxil is a penicillin antibiotic, which is given to treat the infections caused by bacteria",
         },
       };
 }
