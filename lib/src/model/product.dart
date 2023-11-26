@@ -4,7 +4,7 @@ abstract class ProductType {
   const ProductType._();
   // ignore: non_constant_identifier_names
   static String PainAndRelief = "PainAndRelief".tr; // مزيل للالم
-  
+
   // ignore: non_constant_identifier_names
   static String ColdAndFlu = "ColdAndFlu".tr; //البرد والانفلونزا
 
@@ -44,7 +44,7 @@ class Product {
   String brand;
   String description;
   String expirationDate;
-  double price;
+  int price;
   int popularity;
   String image;
   int inStock;
