@@ -1,7 +1,14 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/services/api.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_loading_dialog.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/auth/login_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/cart_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/favourite_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/orders_screen.dart';
@@ -24,9 +31,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  int _index = 0;
-  final PageController _pageController = PageController();
-
+  int _index = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +46,27 @@ class HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
         leading: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.menu,
+          onPressed: () async {
+            try {
+              showLoadingDialog();
+              //await Api().post(url: '/logout', body: {}, token: Api.userToken);
+              Get.back();
+              showSnackBar("logedOutSuccess".tr, SnackBarMessageType.success);
+              Get.off(() => const LoginScreen());
+            } on DioException catch (e) {
+              Get.back();
+              showSnackBar(e.message.toString(), SnackBarMessageType.error);
+              log(e.error.toString());
+            } catch (e) {
+              Get.back();
+              showSnackBar(e.toString(), SnackBarMessageType.error);
+              log(e.toString());
+            }
+          },
+          icon: const Icon(
+            Icons.logout,
             size: 32,
-            color: Colors.lime.shade700,
+            color: AppColors.secondaryColor,
           ),
         ),
         actions: [
@@ -60,13 +81,7 @@ class HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: SizedBox.expand(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() => _index = index);
-          },
-          children: HomeScreen.screen,
-        ),
+        child: HomeScreen.screen[_index],
       ),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: _index,
@@ -74,11 +89,6 @@ class HomeScreenState extends State<HomeScreen> {
         onItemSelected: (index) {
           setState(() {
             _index = index;
-            _pageController.animateToPage(
-              index,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.ease,
-            );
           });
         },
         items: <BottomNavyBarItem>[
@@ -88,7 +98,8 @@ class HomeScreenState extends State<HomeScreen> {
               Icons.favorite,
               size: 32,
             ),
-            activeColor: Colors.red,
+            activeColor: AppColors.primaryColor,
+            inactiveColor: Colors.grey,
           ),
           BottomNavyBarItem(
             title: Text("search".tr),
@@ -96,7 +107,8 @@ class HomeScreenState extends State<HomeScreen> {
               Icons.search,
               size: 32,
             ),
-            activeColor: Colors.green,
+            activeColor: AppColors.primaryColor,
+            inactiveColor: Colors.grey,
           ),
           BottomNavyBarItem(
             title: Text("home".tr),
@@ -105,6 +117,7 @@ class HomeScreenState extends State<HomeScreen> {
               size: 32,
             ),
             activeColor: AppColors.primaryColor,
+            inactiveColor: Colors.grey,
           ),
           BottomNavyBarItem(
             title: Text(
@@ -114,7 +127,8 @@ class HomeScreenState extends State<HomeScreen> {
               Icons.shopping_cart,
               size: 32,
             ),
-            activeColor: Colors.pink,
+            activeColor: AppColors.primaryColor,
+            inactiveColor: Colors.grey,
           ),
           BottomNavyBarItem(
             title: Text("orders".tr),
@@ -122,7 +136,8 @@ class HomeScreenState extends State<HomeScreen> {
               Icons.receipt,
               size: 32,
             ),
-            activeColor: Colors.purple,
+            activeColor: AppColors.primaryColor,
+            inactiveColor: Colors.grey,
           ),
         ],
       ),
