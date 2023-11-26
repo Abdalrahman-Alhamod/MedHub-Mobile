@@ -4,6 +4,7 @@ import 'app_colors.dart';
 import 'app_text_styles.dart';
 
 final ThemeData appTheme = ThemeData(
+  primarySwatch: Colors.blue,
   primaryColor: AppColors.primaryColor,
   hintColor: AppColors.secondaryColor,
   scaffoldBackgroundColor: AppColors.backgroundColor,
@@ -12,5 +13,10 @@ final ThemeData appTheme = ThemeData(
     displayMedium: AppTextStyles.headline2,
     bodyLarge: AppTextStyles.bodyText,
     bodyMedium: AppTextStyles.secondaryText,
+  ),
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: AppColors.primaryColor,
+    selectionColor: AppColors.primaryColor,
+    selectionHandleColor: AppColors.primaryColor,
   ),
 );
