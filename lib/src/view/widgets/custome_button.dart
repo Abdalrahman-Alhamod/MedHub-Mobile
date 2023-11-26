@@ -20,7 +20,7 @@ class CustomeButton extends StatelessWidget {
         height: height,
         decoration: const BoxDecoration(
             color: AppColors.primaryColor,
-            borderRadius: BorderRadius.all(Radius.circular(8))),
+            borderRadius: BorderRadius.all(Radius.circular(16))),
         child: Center(
           child: Text(
             title,
