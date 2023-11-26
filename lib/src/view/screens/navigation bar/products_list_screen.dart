@@ -12,76 +12,62 @@ class ProductsListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     return Scaffold(
-      body: Stack(
-        children: [
-          GestureDetector(
-            onTap: () {
-              // This will unfocus the keyboard
-              FocusScope.of(context).unfocus();
-            },
-            child: Container(
-              color: Colors
-                  .transparent, // Use a transparent container to capture taps
-            ),
-          ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8, right: 16, left: 16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomeTextField(
-                    obscureText: false,
-                    hintText: "searchFor".tr,
-                    onChanged: (value) {},
-                    validator: null,
-                    keyboardType: TextInputType.text,
-                    prefixIcon: Icons.search,
-                    onTap: () {},
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const _AdsView(),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "categories".tr,
-                    style: theme.textTheme.titleLarge,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  _CategoriesCardsView(theme: theme),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "mostPopular".tr,
-                    style: theme.textTheme.titleLarge,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  _ProductCardsView(theme: theme),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "recentlyAdd".tr,
-                    style: theme.textTheme.titleLarge,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  _ProductCardsView(theme: theme),
-                ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8, right: 16, left: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomeTextField(
+                obscureText: false,
+                hintText: "searchFor".tr,
+                onChanged: (value) {},
+                validator: null,
+                keyboardType: TextInputType.text,
+                prefixIcon: Icons.search,
+                onTap: () {},
               ),
-            ),
+              const SizedBox(
+                height: 20,
+              ),
+              const _AdsView(),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "categories".tr,
+                style: theme.textTheme.titleLarge,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              _CategoriesCardsView(theme: theme),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "mostPopular".tr,
+                style: theme.textTheme.titleLarge,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              _ProductCardsView(theme: theme),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "recentlyAdd".tr,
+                style: theme.textTheme.titleLarge,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              _ProductCardsView(theme: theme),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
