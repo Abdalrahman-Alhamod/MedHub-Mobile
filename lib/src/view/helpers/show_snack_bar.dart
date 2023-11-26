@@ -51,7 +51,7 @@ void showSnackBar(
     snackPosition: SnackPosition.BOTTOM,
     borderRadius: 6.0,
     margin: const EdgeInsets.all(10.0),
-    duration: const Duration(seconds: 3),
+    duration: const Duration(seconds: 4),
     isDismissible: true,
     dismissDirection: DismissDirection.horizontal,
     forwardAnimationCurve: Curves.easeOutBack,
@@ -63,9 +63,9 @@ void showSnackBar(
     ],
     mainButton: TextButton(
       onPressed: () => Get.back(),
-      child:  Text(
+      child: Text(
         "close".tr,
-        style:const TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
     ),
     onTap: (snack) {
