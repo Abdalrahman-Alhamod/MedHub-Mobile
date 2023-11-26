@@ -30,6 +30,7 @@ class AppLocale implements Translations {
           // snack bar messages
           "signedInSuccess": "تم تسجيل الدخول بنجاح !",
           "registerSuccess": "تم تسجيل الحساب بنجاح !",
+          "logedOutSuccess": "تم تسجيل الخروج بنجاح !",
           "close": "أغلق",
 
           // botton nav bar
@@ -65,11 +66,24 @@ class AppLocale implements Translations {
           "confirm": "أكّد",
           "addedSuccessfully": "تمت الإضافة بنجاح !",
 
+          // Product List View
+          "searchFor": "ابحث عن",
+          "categories": "التصنيفات :",
+          "mostPopular": "الأكثر شهرة :",
+          "recentlyAdd": "المضاف حديثاً :",
+
+          // Api
+          "networkError": "خطأ في الاتصال !",
+          "connectionTimeOut": "انتهت مهلة الاتصال !",
+          "somthingWrongHappend": "حدث خطأ ما! ",
+          "loading": "جارِ التحميل...",
+
           // test products
           "Amoxil": "اموكسيل",
           "Amoxicillin": "أموكسيسيلين",
           "GlaxoSmithKline": "جلاكسو سميث كلاين",
-          "desc": "أموكسيل هو مضاد حيوي من البنسلين، يعطى لعلاج الالتهابات التي تسببها البكتيريا",
+          "desc":
+              "أموكسيل هو مضاد حيوي من البنسلين، يعطى لعلاج الالتهابات التي تسببها البكتيريا",
         },
         "en": {
           //start
@@ -97,7 +111,8 @@ class AppLocale implements Translations {
 
           // snack bar messages
           "signedInSuccess": "Signed in successfully !",
-          "registerSuccess": "Signed up successfully! ",
+          "registerSuccess": "Signed up successfully !",
+          "logedOutSuccess": "Loged out successfully !",
           "close": "Close",
 
           // botton nav bar
@@ -132,6 +147,18 @@ class AppLocale implements Translations {
           "cancel": "Cancel",
           "confirm": "Confirm",
           "addedSuccessfully": "Added Successfully !",
+
+          // Product List View
+          "searchFor": "Search for",
+          "categories": "Categories :",
+          "mostPopular": "Most popular :",
+          "recentlyAdd": "Recently added :",
+
+          // Api
+          "networkError": "Network Error!",
+          "connectionTimeOut": "Connection time out!",
+          "somthingWrongHappend": "Something wrong happend!",
+          "loading": "Loading...",
 
           // test products
           "Amoxil": "Amoxil",
