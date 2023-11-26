@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_products_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_vectors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
-import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_button.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_card.dart';
@@ -14,11 +13,10 @@ import '../../model/product.dart';
 import '../widgets/custome_icon_button.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  const ProductDetailsScreen({super.key});
-
+  ProductDetailsScreen({super.key});
+  final Product product = Get.arguments;
   @override
   Widget build(BuildContext context) {
-    Product product = AppData.products[0];
     final theme = context.theme;
     return Scaffold(
       body: SafeArea(
@@ -33,6 +31,11 @@ class ProductDetailsScreen extends StatelessWidget {
                     child: _ProductImageBackground(),
                   ),
 
+                  Positioned(
+                      top: 20.h,
+                      left: 0,
+                      right: 0,
+                      child: const _ProductImage()),
                   // Back button
                   Positioned(
                     top: 24.h,
@@ -40,11 +43,6 @@ class ProductDetailsScreen extends StatelessWidget {
                     right: 24.w,
                     child: const _AppBar(),
                   ),
-                  Positioned(
-                      top: 20.h,
-                      left: 0,
-                      right: 0,
-                      child: const _ProductImage())
                 ],
               ),
             ),
@@ -149,7 +147,7 @@ class _Buttons extends StatelessWidget {
             // padding: EdgeInsets.fromLTRB(16.w, 12.h, 10.w, 12.h),
             decoration: BoxDecoration(
               color: theme.scaffoldBackgroundColor,
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(16),
               border: Border.all(color: theme.dividerColor),
             ),
             child: IconButton(
@@ -431,7 +429,9 @@ class _AppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CustomIconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.back();
+          },
           icon: SvgPicture.asset(
             AppVector.backArrowIcon,
             fit: BoxFit.none,
