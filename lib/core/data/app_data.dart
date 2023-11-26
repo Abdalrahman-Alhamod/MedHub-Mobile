@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_products_images.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 
 class AppData {
@@ -33,5 +34,17 @@ class AppData {
       isFavourate: false,
       discount: 50,
     )
+  ];
+  static List<Category> categories = [
+    Category(id: 0, name: ProductType.AllergyMedications, image: ""),
+    Category(id: 0, name: ProductType.Antibiotics, image: ""),
+    Category(id: 0, name: ProductType.CardiovascularMedications, image: ""),
+    Category(id: 0, name: ProductType.ColdAndFlu, image: ""),
+    Category(id: 0, name: ProductType.DermatologicalProducts, image: ""),
+    Category(id: 0, name: ProductType.DiabetesManagement, image: ""),
+    Category(id: 0, name: ProductType.DigestiveHealth, image: ""),
+    Category(id: 0, name: ProductType.PainAndRelief, image: ""),
+    Category(id: 0, name: ProductType.VitaminsAndSupplements, image: ""),
+    Category(id: 0, name: ProductType.WomenHealth, image: ""),
   ];
 }
