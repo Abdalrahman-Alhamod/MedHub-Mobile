@@ -50,6 +50,7 @@ class HomeScreenState extends State<HomeScreen> {
             try {
               showLoadingDialog();
               //await Api().post(url: '/logout', body: {}, token: Api.userToken);
+              await Future.delayed(const Duration(seconds: 2));
               Get.back();
               showSnackBar("logedOutSuccess".tr, SnackBarMessageType.success);
               Get.off(() => const LoginScreen());

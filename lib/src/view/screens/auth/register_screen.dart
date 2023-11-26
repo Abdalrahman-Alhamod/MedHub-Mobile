@@ -95,6 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             
           //   token: Api.userToken
           // );
+           await Future.delayed(const Duration(seconds: 2));
           Get.back();
           showSnackBar("registerSuccess".tr, SnackBarMessageType.success);
           Get.off(() => const HomeScreen());

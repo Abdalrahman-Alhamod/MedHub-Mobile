@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -66,6 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
           //       'password': password,
           //     },
           //     token: Api.userToken);
+          await Future.delayed(const Duration(seconds: 2));
           Get.back();
           showSnackBar("signedInSuccess".tr, SnackBarMessageType.success);
           Get.off(() => const HomeScreen());
