@@ -59,7 +59,7 @@ void showSnackBar(
         ],
       ),
     ),
-    snackPosition: SnackPosition.BOTTOM,
+    snackPosition: SnackPosition.TOP,
     borderRadius: 6.0,
     margin: const EdgeInsets.all(10.0),
     duration: const Duration(seconds: 4),
