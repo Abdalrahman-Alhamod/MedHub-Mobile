@@ -1,17 +1,12 @@
-import 'dart:developer';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_icons.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/services/api.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_loading_dialog.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/controller/user_controller.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/auth/login_screen.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/home_screen.dart';
 
 import '../../widgets/custome_button.dart';
 import '../../widgets/custome_text_field.dart';
@@ -24,7 +19,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   // ignore: unused_field
-  static String? pharmacyName, userName, userNumber, password, confirmPassword;
+  static String? pharmacyName, userName, phoneNumber, password, confirmPassword;
 
   final formKey = GlobalKey<FormState>();
 
@@ -82,32 +77,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     void registerUser() async {
       if (formKey.currentState!.validate()) {
-        try {
-          showLoadingDialog();
-          // await Api().post(
-          //   url: '/register',
-          //   body: {
-          //     'userName': userNumber,
-          //     'pharmacyName': pharmacyName,
-          //     'phone': userNumber,
-          //     'password': password,
-          //   },
-            
-          //   token: Api.userToken
-          // );
-           await Future.delayed(const Duration(seconds: 2));
-          Get.back();
-          showSnackBar("registerSuccess".tr, SnackBarMessageType.success);
-          Get.off(() => const HomeScreen());
-        } on DioException catch (e) {
-          Get.back();
-          showSnackBar(e.message.toString(), SnackBarMessageType.error);
-          log(e.error.toString());
-        } catch (e) {
-          Get.back();
-          showSnackBar(e.toString(), SnackBarMessageType.error);
-          log(e.toString());
-        }
+        UserController().registerWithPhoneNumber(
+            userName: userName!,
+            pharmacyName: pharmacyName!,
+            phoneNumber: phoneNumber!,
+            password: password!);
       }
     }
 
@@ -190,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         obscureText: false,
                         hintText: "userNumber".tr,
                         onChanged: (text) {
-                          userNumber = text;
+                          phoneNumber = text;
                           formKey.currentState!.validate();
                         },
                         keyboardType: TextInputType.phone,
