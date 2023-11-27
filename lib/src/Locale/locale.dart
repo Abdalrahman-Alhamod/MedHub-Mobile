@@ -112,7 +112,7 @@ class AppLocale implements Translations {
           // snack bar messages
           "signedInSuccess": "Signed in successfully !",
           "registerSuccess": "Signed up successfully !",
-          "logedOutSuccess": "Loged out successfully !",
+          "logedOutSuccess": "Logged out successfully !",
           "close": "Close",
 
           // botton nav bar
@@ -137,7 +137,7 @@ class AppLocale implements Translations {
           // product details cards
           "SP": "SP",
           "brand": "Brand",
-          "Expiration": "expiration",
+          "expiration": "Expiration",
           "inStock": "In Stock",
           "category": "Category",
           "addToCart": "Add To Cart",
