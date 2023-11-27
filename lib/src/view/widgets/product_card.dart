@@ -64,8 +64,8 @@ class ProductCard extends StatelessWidget {
                 ),
                 Text(
                   "${product.price.toString()} ${"SP".tr}",
-                  style: theme.textTheme.bodyMedium!
-                      .copyWith(color: Colors.blueGrey.shade900),
+                  style: theme.textTheme.bodyMedium!.copyWith(
+                      color: const Color.fromARGB(255, 181, 255, 183)),
                 ),
               ],
             ),
