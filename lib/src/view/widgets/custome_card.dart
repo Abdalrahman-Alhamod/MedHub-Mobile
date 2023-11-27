@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -31,14 +32,26 @@ class CustomeCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.primaryColor,
+              SizedBox(
+                width: 100,
+                child: AutoSizeText(
+                  title,
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: theme.primaryColor,
+                  ),
+                  minFontSize: 6,
+                  maxLines: 1,
                 ),
               ),
               4.verticalSpace,
-              Text(subtitle, style: theme.textTheme.bodySmall),
+              SizedBox(
+                  width: 100,
+                  child: AutoSizeText(
+                    subtitle,
+                    style: theme.textTheme.bodyMedium,
+                    minFontSize: 6,
+                    maxLines: 1,
+                  )),
             ],
           )
         ],
