@@ -7,6 +7,7 @@ class User {
   String password;
   bool isAdmin;
   String image;
+  static String? token;
   User({
     required this.id,
     required this.name,
