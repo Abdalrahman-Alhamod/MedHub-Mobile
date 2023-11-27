@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -54,16 +55,23 @@ class ProductDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     20.verticalSpace,
-                    _ProductName(product: product, theme: theme),
+                    SizedBox(
+                        width: 230,
+                        child: _ProductName(product: product, theme: theme)),
                     5.verticalSpace,
-                    _ProductScientificName(product: product, theme: theme),
+                    SizedBox(
+                        width: 230,
+                        child: _ProductScientificName(
+                            product: product, theme: theme)),
                   ],
                 ),
-                _ProductPrice(product: product, theme: theme),
+                Expanded(child: _ProductPrice(product: product, theme: theme)),
               ],
             ),
             10.verticalSpace,
-            _ProductDescription(product: product, theme: theme),
+            SizedBox(
+                height: 100,
+                child: _ProductDescription(product: product, theme: theme)),
             10.verticalSpace,
             //// Product Details Cards
             Padding(
@@ -346,9 +354,10 @@ class _ProductDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
-      child: Text(
+      child: AutoSizeText(
         product.description,
         style: theme.textTheme.bodyLarge,
+        maxLines: 4,
       ),
     );
   }
@@ -366,11 +375,12 @@ class _ProductPrice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 30.w, left: 30.w, top: 20.h),
-      child: Text(
+      padding: EdgeInsets.only(right: 25.w, left: 25.w, top: 20.h),
+      child: AutoSizeText(
         "${product.price} ${"SP".tr}",
         style: theme.textTheme.displayLarge!.copyWith(
             fontWeight: FontWeight.bold, color: AppColors.primaryColor),
+        maxLines: 1,
       ),
     );
   }
@@ -389,9 +399,10 @@ class _ProductScientificName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
-      child: Text(
+      child: AutoSizeText(
         product.scientificName,
         style: theme.textTheme.displayMedium,
+        maxLines: 1,
       ),
     );
   }
@@ -410,9 +421,10 @@ class _ProductName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
-      child: Text(
+      child: AutoSizeText(
         product.name,
         style: theme.textTheme.displaySmall,
+        maxLines: 1,
       ),
     );
   }

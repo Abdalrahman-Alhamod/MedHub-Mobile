@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_products_images.dart';
@@ -46,26 +47,51 @@ class ProductCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      product.name,
-                      style: theme.textTheme.bodyMedium!
-                          .copyWith(color: Colors.white),
-                    ),
-                    Text(
-                      product.scientificName,
-                      style: theme.textTheme.bodySmall!
-                          .copyWith(color: Colors.white),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        width: 90,
+                        child: AutoSizeText(
+                          product.name,
+                          style: theme.textTheme.bodyLarge!.copyWith(
+                            color: Colors.white,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          maxLines: 1,
+                          minFontSize: 8,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 90,
+                        child: AutoSizeText(
+                          product.scientificName,
+                          style: theme.textTheme.bodyMedium!.copyWith(
+                            color: Colors.white,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          maxLines: 1,
+                          minFontSize: 8,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  "${product.price.toString()} ${"SP".tr}",
-                  style: theme.textTheme.bodyMedium!.copyWith(
-                      color: const Color.fromARGB(255, 181, 255, 183)),
+                Padding(
+                  padding: const EdgeInsets.only(right: 4.0),
+                  child: SizedBox(
+                    width: 70,
+                    child: AutoSizeText(
+                      "${product.price.toString()} ${"SP".tr}",
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                          color: const Color.fromARGB(255, 181, 255, 183)),
+                      minFontSize: 8,
+                      maxLines: 1,
+                    ),
+                  ),
                 ),
               ],
             ),
