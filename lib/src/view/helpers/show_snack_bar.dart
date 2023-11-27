@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 enum SnackBarMessageType { error, info, success }
 
@@ -34,20 +35,30 @@ void showSnackBar(
       icon,
       color: Colors.white,
     ),
-    titleText: Row(
-      children: [
-        const SizedBox(width: 8.0),
-        Text(
-          message,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-      ],
+    titleText: const SizedBox(
+      width: 0,
+      height: 0,
     ),
-    messageText: Container(),
+    messageText: Padding(
+      padding: const EdgeInsets.only(bottom: 6.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(width: 8.0),
+          Expanded(
+            child: AutoSizeText(
+              message,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                overflow: TextOverflow.ellipsis,
+              ),
+              maxLines: 1,
+            ),
+          ),
+        ],
+      ),
+    ),
     snackPosition: SnackPosition.BOTTOM,
     borderRadius: 6.0,
     margin: const EdgeInsets.all(10.0),
