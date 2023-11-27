@@ -38,7 +38,6 @@ dependencies:
   lottie: ^2.6.0
   get: ^4.6.6
   animations: ^2.0.8
-  http: ^1.1.0
   bottom_navy_bar: ^6.0.0
   flutter_svg: ^2.0.9
   flutter_screenutil: ^5.9.0
