@@ -117,12 +117,19 @@ class ProductDetailsScreen extends StatelessWidget {
   }
 }
 
-class _Buttons extends StatelessWidget {
+class _Buttons extends StatefulWidget {
   const _Buttons({
     required this.theme,
   });
 
   final ThemeData theme;
+
+  @override
+  State<_Buttons> createState() => _ButtonsState();
+}
+
+class _ButtonsState extends State<_Buttons> {
+  bool isFav = false;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +142,7 @@ class _Buttons extends StatelessWidget {
             title: "addToCart".tr,
             onTap: () {
               Get.bottomSheet(
-                _QuantityCounter(theme: theme),
+                _QuantityCounter(theme: widget.theme),
                 backgroundColor: Colors.transparent,
                 isScrollControlled: true,
               );
@@ -146,15 +153,19 @@ class _Buttons extends StatelessWidget {
           Container(
             // padding: EdgeInsets.fromLTRB(16.w, 12.h, 10.w, 12.h),
             decoration: BoxDecoration(
-              color: theme.scaffoldBackgroundColor,
+              color: widget.theme.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: theme.dividerColor),
+              border: Border.all(color: widget.theme.dividerColor),
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  isFav = !isFav;
+                });
+              },
               icon: Icon(
                 Icons.favorite,
-                color: Colors.red,
+                color: isFav ? Colors.red : Colors.grey,
                 size: 70.h - 15,
               ),
             ),
