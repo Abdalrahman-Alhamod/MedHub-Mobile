@@ -1,14 +1,8 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/services/api.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_loading_dialog.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/view/screens/auth/login_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/controller/user_controller.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/cart_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/favourite_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/orders_screen.dart';
@@ -47,22 +41,7 @@ class HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () async {
-            try {
-              showLoadingDialog();
-              //await Api().post(url: '/logout', body: {}, token: Api.userToken);
-              await Future.delayed(const Duration(seconds: 2));
-              Get.back();
-              showSnackBar("logedOutSuccess".tr, SnackBarMessageType.success);
-              Get.off(() => const LoginScreen());
-            } on DioException catch (e) {
-              Get.back();
-              showSnackBar(e.message.toString(), SnackBarMessageType.error);
-              log(e.error.toString());
-            } catch (e) {
-              Get.back();
-              showSnackBar(e.toString(), SnackBarMessageType.error);
-              log(e.toString());
-            }
+            UserController().logout();
           },
           icon: const Icon(
             Icons.logout,
