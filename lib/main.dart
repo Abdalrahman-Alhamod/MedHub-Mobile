@@ -23,7 +23,7 @@ void main() {
         defaultTransition: Transition.native,
         transitionDuration: const Duration(seconds: 1),
         translations: AppLocale(),
-        locale: const Locale('en'),
+        locale: const Locale('ar'),
         getPages: AppPages.routes,
         initialRoute: AppPages.INITIAL,
       );
