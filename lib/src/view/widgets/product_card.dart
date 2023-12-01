@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy_warehouse_store_mobile/core/assets/app_products_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/product_details_screen.dart';
 
@@ -27,9 +26,9 @@ class ProductCard extends StatelessWidget {
               borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(8), topLeft: Radius.circular(8)),
               color: Colors.grey.shade300,
-              image: const DecorationImage(
+              image: DecorationImage(
                 image: AssetImage(
-                  AppProductsImages.amoxil,
+                  product.image,
                 ),
                 fit: BoxFit.fill,
               ),
