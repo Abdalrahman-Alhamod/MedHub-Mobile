@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
 
 class CustomeTextField extends StatefulWidget {
   const CustomeTextField({
@@ -13,6 +15,7 @@ class CustomeTextField extends StatefulWidget {
     required this.prefixIcon,
     this.onTap,
     this.onSubmit,
+    this.isClearable = false,
   });
   final bool obscureText;
   final String hintText;
@@ -22,6 +25,7 @@ class CustomeTextField extends StatefulWidget {
   final IconData? prefixIcon;
   final void Function()? onTap;
   final void Function(String)? onSubmit;
+  final bool isClearable;
 
   @override
   State<CustomeTextField> createState() => _CustomeTextFieldState();
@@ -29,6 +33,7 @@ class CustomeTextField extends StatefulWidget {
 
 class _CustomeTextFieldState extends State<CustomeTextField> {
   bool _enableObscureText = false;
+  final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -42,6 +47,7 @@ class _CustomeTextFieldState extends State<CustomeTextField> {
       keyboardType: widget.keyboardType,
       validator: widget.validator,
       onChanged: widget.onChanged,
+      controller: _controller,
       onFieldSubmitted: widget.onSubmit,
       onTapOutside: _handleOnTapOutside,
       cursorColor: AppColors.primaryColor,
@@ -64,7 +70,18 @@ class _CustomeTextFieldState extends State<CustomeTextField> {
                   });
                 },
               )
-            : null,
+            : widget.isClearable
+                ? IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: () {
+                      setState(() {
+                        _controller.clear();
+                        BlocProvider.of<ProductsCubit>(context)
+                            .searchBarContent = "";
+                      });
+                    },
+                  )
+                : null,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(
