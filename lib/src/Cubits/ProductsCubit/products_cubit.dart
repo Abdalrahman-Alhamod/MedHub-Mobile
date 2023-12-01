@@ -10,7 +10,7 @@ part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
   ProductsCubit() : super(ProductsInitial());
-  String? searchBarContent;
+  String searchBarContent="";
   Category? choosenCategory;
 
   Future<void> search() async {
