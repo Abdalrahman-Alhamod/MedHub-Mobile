@@ -169,8 +169,15 @@ class _CategoriesCardsViewState extends State<_CategoriesCardsView> {
   int selectedIndex = 0;
   @override
   void initState() {
-    BlocProvider.of<ProductsCubit>(context).choosenCategory =
-        AppData.categories[selectedIndex];
+    if (BlocProvider.of<ProductsCubit>(context).choosenCategory == null) {
+      // Make the choosen category the first one if there is none
+      BlocProvider.of<ProductsCubit>(context).choosenCategory =
+          AppData.categories[selectedIndex];
+    } else {
+      // if choosen category is set, make it selected to paint it
+      selectedIndex =
+          BlocProvider.of<ProductsCubit>(context).choosenCategory!.id;
+    }
     BlocProvider.of<ProductsCubit>(context).search();
     super.initState();
   }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_text_field.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/product_card.dart';
 
@@ -22,11 +24,19 @@ class ProductsListScreen extends StatelessWidget {
               CustomeTextField(
                 obscureText: false,
                 hintText: "searchFor".tr,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  BlocProvider.of<ProductsCubit>(context).searchBarContent =
+                      value;
+                },
+                onSubmit: (value) {
+                  BlocProvider.of<ProductsCubit>(context).search();
+                },
                 validator: null,
                 keyboardType: TextInputType.text,
                 prefixIcon: Icons.search,
-                onTap: () {},
+                onTap: () {
+                  BlocProvider.of<ProductsCubit>(context).search();
+                },
                 isClearable: true,
               ),
               const SizedBox(
@@ -111,21 +121,27 @@ class _CategoriesCardsView extends StatelessWidget {
         itemCount: AppData.categories.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Container(
-            margin: const EdgeInsets.only(right: 8),
-            decoration: BoxDecoration(
-              color: Colors.blueGrey,
-              borderRadius: BorderRadius.circular(8),
-              image: const DecorationImage(
-                  image: AssetImage(AppImages.categoryWallpaper),
-                  fit: BoxFit.cover),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Center(
-                  child: Text(AppData.categories[index].name,
-                      style: theme.textTheme.titleMedium!.copyWith(
-                          color: const Color.fromARGB(255, 34, 77, 112)))),
+          return GestureDetector(
+            onTap: () {
+              BlocProvider.of<ProductsCubit>(context).choosenCategory =
+                  AppData.categories[index];
+            },
+            child: Container(
+              margin: const EdgeInsets.only(right: 8),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey,
+                borderRadius: BorderRadius.circular(8),
+                image: const DecorationImage(
+                    image: AssetImage(AppImages.categoryWallpaper),
+                    fit: BoxFit.cover),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Center(
+                    child: Text(AppData.categories[index].name,
+                        style: theme.textTheme.titleMedium!.copyWith(
+                            color: const Color.fromARGB(255, 34, 77, 112)))),
+              ),
             ),
           );
         },
