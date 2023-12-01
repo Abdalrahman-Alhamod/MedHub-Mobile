@@ -44,4 +44,21 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsFetchFailure(errorMessage: e.toString()));
     }
   }
+
+  Future<void> getFavourates() async {
+    try {
+      emit(ProductsFetchLoading());
+      await Future.delayed(const Duration(seconds: 2));
+      List<Product> products = AppData.products;
+      if (products.isEmpty) {
+        emit(ProductsNotFound());
+      } else {
+        emit(ProductsFetchSuccess(products: products));
+      }
+    } on DioException catch (exception) {
+      emit(NetworkFailure(errorMessage: exception.message.toString()));
+    } catch (e) {
+      emit(ProductsFetchFailure(errorMessage: e.toString()));
+    }
+  }
 }
