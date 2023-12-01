@@ -9,4 +9,7 @@ class AppImages {
     'assets/images/ads4.jpeg',
     'assets/images/ads5.jpg',
   ];
+  static const noData = 'assets/images/noData.jpg';
+  static const error = 'assets/images/error.jpg';
+  static const error404 = 'assets/images/error404.jpg';
 }
