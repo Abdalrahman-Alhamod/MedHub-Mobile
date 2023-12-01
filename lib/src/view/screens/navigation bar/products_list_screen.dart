@@ -1,12 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
+import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBarCubit/bottom_nav_bar_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_text_field.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/product_card.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/show_image.dart';
 
 class ProductsListScreen extends StatelessWidget {
   const ProductsListScreen({Key? key}) : super(key: key);
@@ -14,6 +19,7 @@ class ProductsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
+    BlocProvider.of<ProductsCubit>(context).getMostPopular();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -97,14 +103,47 @@ class _ProductCardsView extends StatelessWidget {
     return SizedBox(
       height: 230,
       width: double.infinity,
-      child: ListView.builder(
-        itemCount: 10,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: ProductCard(
-              product: AppData.products[0],
+      child: BlocConsumer<ProductsCubit, ProductsState>(
+        listener: (context, state) {
+          // if (state is ProductsFetchFailure) {
+          //   showSnackBar(state.errorMessage, SnackBarMessageType.error);
+          // } else
+          log(state.toString());
+          if (state is NetworkFailure) {
+            showSnackBar(state.errorMessage, SnackBarMessageType.error);
+          }
+        },
+        builder: (context, state) {
+          if (state is ProductsFetchSuccess) {
+            final products = state.products;
+            return ListView.builder(
+              itemCount: products.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: ProductCard(
+                    product: products[index],
+                  ),
+                );
+              },
+            );
+          } else if (state is ProductsFetchFailure) {
+            return const ShowImage(
+              imagePath: AppImages.error,
+              height: 200,
+              width: 200,
+            );
+          } else if (state is NetworkFailure) {
+            return const ShowImage(
+              imagePath: AppImages.error404,
+              height: 200,
+              width: 200,
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primaryColor,
             ),
           );
         },

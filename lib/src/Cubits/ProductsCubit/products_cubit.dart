@@ -10,7 +10,7 @@ part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
   ProductsCubit() : super(ProductsInitial());
-  String searchBarContent="";
+  String searchBarContent = "";
   Category? choosenCategory;
 
   Future<void> search() async {
@@ -25,6 +25,19 @@ class ProductsCubit extends Cubit<ProductsState> {
       } else {
         emit(ProductsFetchSuccess(products: products));
       }
+    } on DioException catch (exception) {
+      emit(NetworkFailure(errorMessage: exception.message.toString()));
+    } catch (e) {
+      emit(ProductsFetchFailure(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> getMostPopular() async {
+    try {
+      emit(ProductsFetchLoading());
+      await Future.delayed(const Duration(seconds: 2));
+      List<Product> products = AppData.products;
+      emit(ProductsFetchSuccess(products: products));
     } on DioException catch (exception) {
       emit(NetworkFailure(errorMessage: exception.message.toString()));
     } catch (e) {
