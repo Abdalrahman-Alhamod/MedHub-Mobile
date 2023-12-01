@@ -15,16 +15,16 @@ class UserController {
       {required String phoneNumber, required String password}) async {
     try {
       showLoadingDialog();
-      await Api().request(
-        url: '/login',
-        body: {
-          'phoneNumber': phoneNumber,
-          'password': password,
-        },
-        token: User.token,
-        methodType: MethodType.post,
-      );
-      //await Future.delayed(const Duration(seconds: 2));
+      // await Api().request(
+      //   url: '/login',
+      //   body: {
+      //     'phoneNumber': phoneNumber,
+      //     'password': password,
+      //   },
+      //   token: User.token,
+      //   methodType: MethodType.post,
+      // );
+      await Future.delayed(const Duration(seconds: 2));
       Get.back();
       showSnackBar("signedInSuccess".tr, SnackBarMessageType.success);
       Get.off(() => const HomeScreen());
@@ -44,18 +44,18 @@ class UserController {
       required String password}) async {
     try {
       showLoadingDialog();
-      await Api().request(
-        url: '/register',
-        body: {
-          'name': userName,
-          'pharmacyName': pharmacyName,
-          'phoneNumber': phoneNumber,
-          'password': password,
-        },
-        token: User.token,
-        methodType: MethodType.post,
-      );
-      //await Future.delayed(const Duration(seconds: 2));
+      // await Api().request(
+      //   url: '/register',
+      //   body: {
+      //     'name': userName,
+      //     'pharmacyName': pharmacyName,
+      //     'phoneNumber': phoneNumber,
+      //     'password': password,
+      //   },
+      //   token: User.token,
+      //   methodType: MethodType.post,
+      // );
+      await Future.delayed(const Duration(seconds: 2));
       Get.back();
       showSnackBar("registerSuccess".tr, SnackBarMessageType.success);
       //Get.off(() => const HomeScreen());
@@ -72,14 +72,14 @@ class UserController {
     try {
       log(Get.locale.toString());
       showLoadingDialog();
-      await Api().request(
-        url: '/logout',
-        // TODO remove from body when implement header
-        body: {'token': User.token},
-        token: User.token,
-        methodType: MethodType.post,
-      );
-      //await Future.delayed(const Duration(seconds: 2));
+      // await Api().request(
+      //   url: '/logout',
+      //   // TODO remove from body when implement header
+      //   body: {'token': User.token},
+      //   token: User.token,
+      //   methodType: MethodType.post,
+      // );
+      await Future.delayed(const Duration(seconds: 2));
       Get.back();
       showSnackBar("logedOutSuccess".tr, SnackBarMessageType.success);
       Get.off(() => const LoginScreen());
