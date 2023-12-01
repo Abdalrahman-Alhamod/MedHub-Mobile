@@ -1,10 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_vectors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/FavourateCubit/favourite_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_loading_dialog.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_button.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_card.dart';
@@ -112,7 +116,9 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
             ),
             10.verticalSpace,
-            const _Buttons()
+            _Buttons(
+              product: product,
+            )
           ],
         ),
       ),
@@ -120,19 +126,13 @@ class ProductDetailsScreen extends StatelessWidget {
   }
 }
 
-class _Buttons extends StatefulWidget {
-  const _Buttons();
-
-  @override
-  State<_Buttons> createState() => _ButtonsState();
-}
-
-class _ButtonsState extends State<_Buttons> {
-  bool isFav = false;
-
+class _Buttons extends StatelessWidget {
+  const _Buttons({required this.product});
+  final Product product;
   @override
   Widget build(BuildContext context) {
     var theme = context.theme;
+    bool isFav = product.isFavourate;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Row(
@@ -157,16 +157,28 @@ class _ButtonsState extends State<_Buttons> {
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: theme.dividerColor),
             ),
-            child: IconButton(
-              onPressed: () {
-                setState(() {
+            child: BlocConsumer<FavouriteCubit, FavouriteState>(
+              listener: (context, state) {
+                if (state is FavourateToggleLoading) {
+                  showLoadingDialog();
+                } else if (state is FavoureteToggleFailure) {
+                  if (Get.isDialogOpen!) Get.back();
+                  showSnackBar(state.errorMessage, SnackBarMessageType.error);
+                } else if (state is FavourateToggleSuccess) {
+                  if (Get.isDialogOpen!) Get.back();
                   isFav = !isFav;
-                });
+                }
               },
-              icon: Icon(
-                Icons.favorite,
-                color: isFav ? Colors.red : Colors.grey,
-                size: 70.h - 15,
+              builder: (context, state) => IconButton(
+                onPressed: () {
+                  BlocProvider.of<FavouriteCubit>(context)
+                      .toggleFavourate(product: product);
+                },
+                icon: Icon(
+                  Icons.favorite,
+                  color: isFav ? Colors.red : Colors.grey,
+                  size: 70.h - 15,
+                ),
               ),
             ),
           ),

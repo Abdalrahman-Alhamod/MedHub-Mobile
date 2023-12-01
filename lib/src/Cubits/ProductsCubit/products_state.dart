@@ -22,3 +22,4 @@ final class NetworkFailure extends ProductsState {
   String errorMessage;
   NetworkFailure({required this.errorMessage});
 }
+

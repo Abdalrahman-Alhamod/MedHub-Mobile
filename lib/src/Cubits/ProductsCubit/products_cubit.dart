@@ -61,4 +61,5 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsFetchFailure(errorMessage: e.toString()));
     }
   }
+
 }
