@@ -36,11 +36,12 @@ class CustomeCard extends StatelessWidget {
                 width: 100,
                 child: AutoSizeText(
                   title,
-                  style: theme.textTheme.bodyLarge?.copyWith(
+                  style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.primaryColor,
                   ),
                   minFontSize: 6,
-                  maxLines: 1,
+                  wrapWords: false,
+                  maxLines: 2,
                 ),
               ),
               4.verticalSpace,
