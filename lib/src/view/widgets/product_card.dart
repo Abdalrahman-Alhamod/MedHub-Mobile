@@ -6,13 +6,13 @@ import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/product_details_screen.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key, required this.theme, required this.product});
+  const ProductCard({super.key, required this.product});
 
-  final ThemeData theme;
   final Product product;
 
   @override
   Widget build(BuildContext context) {
+    var theme = context.theme;
     return GestureDetector(
       onTap: () {
         Get.to(() => ProductDetailsScreen(), arguments: product);

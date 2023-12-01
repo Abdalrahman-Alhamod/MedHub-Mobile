@@ -27,6 +27,7 @@ class ProductsListScreen extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 prefixIcon: Icons.search,
                 onTap: () {},
+                isClearable: true,
               ),
               const SizedBox(
                 height: 20,
@@ -42,7 +43,7 @@ class ProductsListScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              _CategoriesCardsView(theme: theme),
+              const _CategoriesCardsView(),
               const SizedBox(
                 height: 10,
               ),
@@ -53,7 +54,7 @@ class ProductsListScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              _ProductCardsView(theme: theme),
+              const _ProductCardsView(),
               const SizedBox(
                 height: 10,
               ),
@@ -64,7 +65,7 @@ class ProductsListScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              _ProductCardsView(theme: theme),
+              const _ProductCardsView(),
             ],
           ),
         ),
@@ -74,11 +75,7 @@ class ProductsListScreen extends StatelessWidget {
 }
 
 class _ProductCardsView extends StatelessWidget {
-  const _ProductCardsView({
-    required this.theme,
-  });
-
-  final ThemeData theme;
+  const _ProductCardsView();
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +89,6 @@ class _ProductCardsView extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: ProductCard(
-              theme: theme,
               product: AppData.products[0],
             ),
           );
@@ -103,14 +99,11 @@ class _ProductCardsView extends StatelessWidget {
 }
 
 class _CategoriesCardsView extends StatelessWidget {
-  const _CategoriesCardsView({
-    required this.theme,
-  });
-
-  final ThemeData theme;
+  const _CategoriesCardsView();
 
   @override
   Widget build(BuildContext context) {
+    var theme = context.theme;
     return SizedBox(
       height: 60,
       width: double.infinity,

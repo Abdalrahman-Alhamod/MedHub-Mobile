@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy_warehouse_store_mobile/core/assets/app_products_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_vectors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
@@ -18,7 +17,6 @@ class ProductDetailsScreen extends StatelessWidget {
   final Product product = Get.arguments;
   @override
   Widget build(BuildContext context) {
-    final theme = context.theme;
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -33,10 +31,12 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
 
                   Positioned(
-                      top: 20.h,
+                      top: 15.h,
                       left: 0,
                       right: 0,
-                      child: const _ProductImage()),
+                      child: _ProductImage(
+                        product: product,
+                      )),
                   // Back button
                   Positioned(
                     top: 24.h,
@@ -55,23 +55,18 @@ class ProductDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     20.verticalSpace,
-                    SizedBox(
-                        width: 230,
-                        child: _ProductName(product: product, theme: theme)),
+                    SizedBox(width: 230, child: _ProductName(product: product)),
                     5.verticalSpace,
                     SizedBox(
                         width: 230,
-                        child: _ProductScientificName(
-                            product: product, theme: theme)),
+                        child: _ProductScientificName(product: product)),
                   ],
                 ),
-                Expanded(child: _ProductPrice(product: product, theme: theme)),
+                Expanded(child: _ProductPrice(product: product)),
               ],
             ),
             10.verticalSpace,
-            SizedBox(
-                height: 100,
-                child: _ProductDescription(product: product, theme: theme)),
+            SizedBox(height: 100, child: _ProductDescription(product: product)),
             10.verticalSpace,
             //// Product Details Cards
             Padding(
@@ -117,7 +112,7 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
             ),
             10.verticalSpace,
-            _Buttons(theme: theme)
+            const _Buttons()
           ],
         ),
       ),
@@ -126,11 +121,7 @@ class ProductDetailsScreen extends StatelessWidget {
 }
 
 class _Buttons extends StatefulWidget {
-  const _Buttons({
-    required this.theme,
-  });
-
-  final ThemeData theme;
+  const _Buttons();
 
   @override
   State<_Buttons> createState() => _ButtonsState();
@@ -141,6 +132,7 @@ class _ButtonsState extends State<_Buttons> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = context.theme;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Row(
@@ -150,7 +142,7 @@ class _ButtonsState extends State<_Buttons> {
             title: "addToCart".tr,
             onTap: () {
               Get.bottomSheet(
-                _QuantityCounter(theme: widget.theme),
+                const _QuantityCounter(),
                 backgroundColor: Colors.transparent,
                 isScrollControlled: true,
               );
@@ -161,9 +153,9 @@ class _ButtonsState extends State<_Buttons> {
           Container(
             // padding: EdgeInsets.fromLTRB(16.w, 12.h, 10.w, 12.h),
             decoration: BoxDecoration(
-              color: widget.theme.scaffoldBackgroundColor,
+              color: theme.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: widget.theme.dividerColor),
+              border: Border.all(color: theme.dividerColor),
             ),
             child: IconButton(
               onPressed: () {
@@ -185,11 +177,7 @@ class _ButtonsState extends State<_Buttons> {
 }
 
 class _QuantityCounter extends StatefulWidget {
-  const _QuantityCounter({
-    required this.theme,
-  });
-
-  final ThemeData theme;
+  const _QuantityCounter();
 
   @override
   State<_QuantityCounter> createState() => _QuantityCounterState();
@@ -268,6 +256,7 @@ class _QuantityCounterState extends State<_QuantityCounter> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = context.theme;
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: const BoxDecoration(
@@ -283,7 +272,7 @@ class _QuantityCounterState extends State<_QuantityCounter> {
         children: [
           Text(
             "quantity".tr,
-            style: widget.theme.textTheme.titleLarge,
+            style: theme.textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 30),
@@ -299,14 +288,14 @@ class _QuantityCounterState extends State<_QuantityCounter> {
                     });
                   },
                   icon: const Icon(Icons.remove),
-                  color: widget.theme.primaryColor,
+                  color: theme.primaryColor,
                 ),
                 const SizedBox(width: 20),
                 Text(
                   quantity.toString(),
-                  style: widget.theme.textTheme.titleLarge!.copyWith(
+                  style: theme.textTheme.titleLarge!.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: widget.theme.primaryColor,
+                    color: theme.primaryColor,
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -317,7 +306,7 @@ class _QuantityCounterState extends State<_QuantityCounter> {
                     });
                   },
                   icon: const Icon(Icons.add),
-                  color: widget.theme.primaryColor,
+                  color: theme.primaryColor,
                 ),
               ],
             ),
@@ -344,14 +333,13 @@ class _QuantityCounterState extends State<_QuantityCounter> {
 class _ProductDescription extends StatelessWidget {
   const _ProductDescription({
     required this.product,
-    required this.theme,
   });
 
   final Product product;
-  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
+    var theme = context.theme;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: AutoSizeText(
@@ -366,14 +354,13 @@ class _ProductDescription extends StatelessWidget {
 class _ProductPrice extends StatelessWidget {
   const _ProductPrice({
     required this.product,
-    required this.theme,
   });
 
   final Product product;
-  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
+    var theme = context.theme;
     return Padding(
       padding: EdgeInsets.only(right: 25.w, left: 25.w, top: 20.h),
       child: AutoSizeText(
@@ -389,14 +376,13 @@ class _ProductPrice extends StatelessWidget {
 class _ProductScientificName extends StatelessWidget {
   const _ProductScientificName({
     required this.product,
-    required this.theme,
   });
 
   final Product product;
-  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
+    var theme = context.theme;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: AutoSizeText(
@@ -411,14 +397,13 @@ class _ProductScientificName extends StatelessWidget {
 class _ProductName extends StatelessWidget {
   const _ProductName({
     required this.product,
-    required this.theme,
   });
 
   final Product product;
-  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
+    var theme = context.theme;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: AutoSizeText(
@@ -431,14 +416,16 @@ class _ProductName extends StatelessWidget {
 }
 
 class _ProductImage extends StatelessWidget {
-  const _ProductImage();
+  const _ProductImage({required this.product});
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      AppProductsImages.amoxil,
-      width: 300.w,
-      height: 275.h,
+      product.image,
+      width: 250.w,
+      height: 250.h,
     );
   }
 }
