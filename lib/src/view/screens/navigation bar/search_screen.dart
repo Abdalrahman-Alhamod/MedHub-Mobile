@@ -42,7 +42,7 @@ class SearchScreen extends StatelessWidget {
                       onTap: () {
                         BlocProvider.of<ProductsCubit>(context).search();
                       },
-                      isClearable: true,
+                      isSearchBar: true,
                     ),
                   ),
                   // TODO filter button

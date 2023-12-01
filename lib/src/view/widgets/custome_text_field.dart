@@ -15,7 +15,7 @@ class CustomeTextField extends StatefulWidget {
     required this.prefixIcon,
     this.onTap,
     this.onSubmit,
-    this.isClearable = false,
+    this.isSearchBar = false,
   });
   final bool obscureText;
   final String hintText;
@@ -25,7 +25,7 @@ class CustomeTextField extends StatefulWidget {
   final IconData? prefixIcon;
   final void Function()? onTap;
   final void Function(String)? onSubmit;
-  final bool isClearable;
+  final bool isSearchBar;
 
   @override
   State<CustomeTextField> createState() => _CustomeTextFieldState();
@@ -36,8 +36,12 @@ class _CustomeTextFieldState extends State<CustomeTextField> {
   final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
-    super.initState();
     _enableObscureText = widget.obscureText;
+    if (widget.isSearchBar) {
+      _controller.text =
+          BlocProvider.of<ProductsCubit>(context).searchBarContent;
+    }
+    super.initState();
   }
 
   @override
@@ -70,7 +74,7 @@ class _CustomeTextFieldState extends State<CustomeTextField> {
                   });
                 },
               )
-            : widget.isClearable
+            : widget.isSearchBar
                 ? IconButton(
                     icon: const Icon(Icons.clear),
                     onPressed: () {
