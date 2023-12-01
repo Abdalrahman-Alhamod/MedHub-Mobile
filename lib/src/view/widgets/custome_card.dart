@@ -2,16 +2,19 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 
 class CustomeCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final Widget icon;
+  final Color titleColor;
   const CustomeCard({
     Key? key,
     required this.title,
     required this.subtitle,
     required this.icon,
+    this.titleColor = AppColors.primaryColor,
   }) : super(key: key);
 
   @override
@@ -37,7 +40,7 @@ class CustomeCard extends StatelessWidget {
                 child: AutoSizeText(
                   title,
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.primaryColor,
+                    color: titleColor,
                   ),
                   minFontSize: 6,
                   wrapWords: false,

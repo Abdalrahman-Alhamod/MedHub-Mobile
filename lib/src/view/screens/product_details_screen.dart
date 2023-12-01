@@ -97,10 +97,15 @@ class ProductDetailsScreen extends StatelessWidget {
                         color: Colors.red, size: 30), // Example color
                   ),
                   CustomeCard(
-                    title: product.inStock.toString(),
+                    title: product.inStock == 0
+                        ? "Unavailable"
+                        : product.inStock.toString(),
                     subtitle: "inStock".tr,
                     icon: const Icon(Icons.warehouse,
-                        color: Colors.green, size: 30), // Example color
+                        color: Colors.green, size: 30),
+                    titleColor: product.inStock == 0
+                        ? Colors.red
+                        : AppColors.primaryColor, // Example color
                   ),
                   CustomeCard(
                     title: product.type.toString(),
@@ -148,6 +153,7 @@ class _Buttons extends StatelessWidget {
             },
             width: 260.w,
             height: 70.h,
+            isEnabled: product.inStock != 0,
           ),
           Container(
             // padding: EdgeInsets.fromLTRB(16.w, 12.h, 10.w, 12.h),

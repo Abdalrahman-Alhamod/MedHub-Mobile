@@ -7,20 +7,22 @@ class CustomeButton extends StatelessWidget {
       required this.title,
       required this.onTap,
       this.width,
-      this.height});
+      this.height,
+      this.isEnabled = true});
   final String title;
   final double? width, height;
   final void Function() onTap;
+  final bool isEnabled;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: isEnabled ? onTap : null,
       child: Container(
         width: width,
         height: height,
-        decoration: const BoxDecoration(
-            color: AppColors.primaryColor,
-            borderRadius: BorderRadius.all(Radius.circular(16))),
+        decoration: BoxDecoration(
+            color: isEnabled ? AppColors.primaryColor : Colors.grey,
+            borderRadius: const BorderRadius.all(Radius.circular(16))),
         child: Center(
           child: Text(
             title,

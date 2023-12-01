@@ -18,7 +18,7 @@ class Products {
     price: 17500,
     popularity: 520,
     image: AppProductsImages.amoxil,
-    inStock: 52,
+    inStock: 0,
     isFavourate: false,
     discount: 50,
   );
