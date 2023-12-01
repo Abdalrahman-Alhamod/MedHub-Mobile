@@ -44,6 +44,7 @@ class ProductListTile extends StatelessWidget {
                 ),
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
