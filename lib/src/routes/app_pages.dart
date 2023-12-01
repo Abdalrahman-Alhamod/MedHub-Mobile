@@ -12,7 +12,7 @@ import 'package:pharmacy_warehouse_store_mobile/src/view/screens/start/welcome_s
 class AppPages {
   const AppPages._();
   // ignore: constant_identifier_names
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.HOME;
   static final routes = [
     GetPage(name: Routes.SPLASH, page: () => const SplashScreen()),
     GetPage(name: Routes.WELCOME, page: () => const WelcomeScreen()),
