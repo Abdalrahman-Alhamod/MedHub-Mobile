@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
@@ -10,6 +11,7 @@ import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_text_field.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/product_list_tile.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/show_image.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -99,18 +101,25 @@ class _ProductCardsView extends StatelessWidget {
           );
         } else if (state is ProductsNotFound) {
           return const ShowImage(
-            imagePath: AppImages.noData,
+            imagePath: AppImages.noData,height: 500,width: 500,
           );
         } else if (state is ProductsFetchFailure) {
           return const ShowImage(
-            imagePath: AppImages.error,
+            imagePath: AppImages.error,height: 500,width: 500,
           );
         } else if (state is NetworkFailure) {
           return const ShowImage(
-            imagePath: AppImages.error404,
+            imagePath: AppImages.error404,height: 500,width: 500,
           );
         }
-        return const Center();
+        return SizedBox(
+          height: Get.size.height - 350,
+          child: const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primaryColor,
+            ),
+          ),
+        );
       },
     );
   }
@@ -138,22 +147,6 @@ class _ProductsSuccessView extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class ShowImage extends StatelessWidget {
-  const ShowImage({super.key, required this.imagePath});
-  final String imagePath;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 500,
-      width: 500,
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(imagePath), fit: BoxFit.cover),
-      ),
     );
   }
 }
