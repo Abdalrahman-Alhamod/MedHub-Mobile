@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBarCubit/bottom_nav_bar_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_text_field.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/product_card.dart';
@@ -29,15 +30,19 @@ class ProductsListScreen extends StatelessWidget {
                       value;
                 },
                 onSubmit: (value) {
+                  BlocProvider.of<BottomNavBarCubit>(context)
+                      .navigate(index: 1);
                   BlocProvider.of<ProductsCubit>(context).search();
                 },
                 validator: null,
                 keyboardType: TextInputType.text,
                 prefixIcon: Icons.search,
                 onTap: () {
+                  BlocProvider.of<BottomNavBarCubit>(context)
+                      .navigate(index: 1);
                   BlocProvider.of<ProductsCubit>(context).search();
                 },
-                isClearable: true,
+                isSearchBar: true,
               ),
               const SizedBox(
                 height: 20,
@@ -123,6 +128,7 @@ class _CategoriesCardsView extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
+              BlocProvider.of<BottomNavBarCubit>(context).navigate(index: 1);
               BlocProvider.of<ProductsCubit>(context).choosenCategory =
                   AppData.categories[index];
             },
