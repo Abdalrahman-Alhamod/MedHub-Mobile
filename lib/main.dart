@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart' as get_lib;
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_general_constants.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_theme.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBarCubit/bottom_nav_bar_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/local_controller.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/locale.dart';
@@ -20,8 +21,15 @@ void main() {
     useInheritedMediaQuery: true,
     rebuildFactor: (old, data) => true,
     builder: (context, widget) {
-      return BlocProvider(
-        create: (context) => ProductsCubit(),
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => ProductsCubit(),
+          ),
+          BlocProvider(
+            create: (context) => BottomNavBarCubit(),
+          ),
+        ],
         child: get_lib.GetMaterialApp(
           title: kAppTitle,
           debugShowCheckedModeBanner: false,
