@@ -12,4 +12,15 @@ class AppImages {
   static const noData = 'assets/images/noData.jpg';
   static const error = 'assets/images/error.jpg';
   static const error404 = 'assets/images/error404.jpg';
+  static const emptyCart = 'assets/images/emptyCart.png';
+  static const emptyOrders = 'assets/images/emptyOrders.jpg';
+  static const allImages = [
+    startWallpaper,
+    categoryWallpaper,
+    noData,
+    error,
+    error404,
+    emptyCart,
+    emptyOrders
+  ];
 }
