@@ -4,19 +4,24 @@ import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/product_details_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/cart_quantity_counter.dart';
 
 class ProductListTile extends StatelessWidget {
   const ProductListTile({
     super.key,
     required this.product,
+    this.isCartProduct = false,
   });
   final Product product;
+  final bool isCartProduct;
   @override
   Widget build(BuildContext context) {
     var theme = context.theme;
     return GestureDetector(
       onTap: () {
-        Get.to(() => ProductDetailsScreen(), arguments: product);
+        if (!isCartProduct) {
+          Get.to(() => ProductDetailsScreen(), arguments: product);
+        }
       },
       child: Container(
           decoration: BoxDecoration(
@@ -90,9 +95,20 @@ class ProductListTile extends StatelessWidget {
                 flex: 1,
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  isCartProduct? Column(
+                    children: [
+                      SizedBox(
+                        width: 130,
+                        child: CartQuantityCounter(product: product),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  ):Container(),
                   SizedBox(
                     width: 130,
                     child: AutoSizeText(
