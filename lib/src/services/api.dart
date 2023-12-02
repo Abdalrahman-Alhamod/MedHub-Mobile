@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/user.dart';
 
 class MethodType {
+  const MethodType._();
   static const String get = 'GET';
   static const String post = 'POST';
   static const String put = 'PUT';
@@ -13,9 +14,10 @@ class MethodType {
 }
 
 class Api {
-  final String baseUrl = 'https://8927-5-155-4-181.ngrok-free.app';
+  const Api._();
+  static const String baseUrl = 'https://8927-5-155-4-181.ngrok-free.app';
 
-  Future<dynamic> request(
+  static Future<dynamic> request(
       {required String url,
       @required dynamic body,
       @required String? token,
@@ -23,7 +25,7 @@ class Api {
     Map<String, String> headers = {};
 
     headers.addAll(
-      {'userToken': token ?? ""},
+      {'token': token ?? "", 'lang': get_lib.Get.locale.toString()},
     );
 
     final dio = Dio();
