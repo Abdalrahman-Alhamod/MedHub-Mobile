@@ -1,12 +1,12 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CategoryCubit/category_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_text_field.dart';
@@ -17,6 +17,8 @@ class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<CategoryCubit>(context).getCategories();
+    BlocProvider.of<ProductsCubit>(context).search();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -27,6 +29,15 @@ class SearchScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
+                  // IconButton(
+                  //   padding: const EdgeInsets.all(0.0),
+                  //   onPressed: () {},
+                  //   icon: const Icon(
+                  //     Icons.filter_alt,
+                  //     size: 45,
+                  //     color: AppColors.primaryColor,
+                  //   ),
+                  // ),
                   Expanded(
                     child: CustomeTextField(
                       obscureText: false,
@@ -47,14 +58,6 @@ class SearchScreen extends StatelessWidget {
                       isSearchBar: true,
                     ),
                   ),
-                  // TODO filter button
-                  // IconButton(
-                  //   onPressed: () {},
-                  //   icon: const Icon(
-                  //     Icons.filter_list_outlined,
-                  //     size: 35,
-                  //   ),
-                  // )
                 ],
               ),
               const SizedBox(
@@ -82,7 +85,7 @@ class _ProductCardsView extends StatelessWidget {
       listener: (context, state) {
         if (state is ProductsFetchFailure) {
           showSnackBar(state.errorMessage, SnackBarMessageType.error);
-        } else if (state is NetworkFailure) {
+        } else if (state is ProductNetworkFailure) {
           showSnackBar(state.errorMessage, SnackBarMessageType.error);
         }
       },
@@ -101,15 +104,21 @@ class _ProductCardsView extends StatelessWidget {
           );
         } else if (state is ProductsNotFound) {
           return const ShowImage(
-            imagePath: AppImages.noData,height: 500,width: 500,
+            imagePath: AppImages.noData,
+            height: 500,
+            width: 500,
           );
         } else if (state is ProductsFetchFailure) {
           return const ShowImage(
-            imagePath: AppImages.error,height: 500,width: 500,
+            imagePath: AppImages.error,
+            height: 500,
+            width: 500,
           );
-        } else if (state is NetworkFailure) {
+        } else if (state is ProductNetworkFailure) {
           return const ShowImage(
-            imagePath: AppImages.error404,height: 500,width: 500,
+            imagePath: AppImages.error404,
+            height: 500,
+            width: 500,
           );
         }
         return SizedBox(
@@ -160,12 +169,12 @@ class _CategoriesCardsView extends StatefulWidget {
 
 class _CategoriesCardsViewState extends State<_CategoriesCardsView> {
   int selectedIndex = 0;
+  List<Category> categories = [Category(id: 0, name: "all".tr)];
   @override
   void initState() {
     if (BlocProvider.of<ProductsCubit>(context).choosenCategory == null) {
       // Make the choosen category the first one if there is none
-      BlocProvider.of<ProductsCubit>(context).choosenCategory =
-          AppData.categories[selectedIndex];
+      BlocProvider.of<ProductsCubit>(context).choosenCategory = categories[0];
     } else {
       // if choosen category is set, make it selected to paint it
       selectedIndex =
@@ -181,43 +190,74 @@ class _CategoriesCardsViewState extends State<_CategoriesCardsView> {
     return SizedBox(
       height: 60,
       width: double.infinity,
-      child: ListView.builder(
-        itemCount: AppData.categories.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              setState(
-                () {
-                  selectedIndex = index;
-                  BlocProvider.of<ProductsCubit>(context).choosenCategory =
-                      AppData.categories[selectedIndex];
-                  BlocProvider.of<ProductsCubit>(context).search();
-                },
-              );
-            },
-            child: Container(
-              margin: const EdgeInsets.only(right: 8),
-              decoration: BoxDecoration(
-                color: index == selectedIndex
-                    ? AppColors.primaryColor
-                    : Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.primaryColor),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Center(
-                  child: Text(
-                    AppData.categories[index].name,
-                    style: theme.textTheme.titleMedium!.copyWith(
+      child: BlocConsumer<CategoryCubit, CategoryState>(
+        listener: (context, state) {
+          if (state is CategoryFetchFailure) {
+            showSnackBar(state.errorMessage, SnackBarMessageType.error);
+          } else if (state is CategoryNetworkFailure) {
+            showSnackBar(state.errorMessage, SnackBarMessageType.error);
+          }
+        },
+        builder: (context, state) {
+          if (state is CategoryFetchSuccess) {
+            categories = state.categories;
+            return ListView.builder(
+              itemCount: categories.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(
+                      () {
+                        selectedIndex = index;
+                        BlocProvider.of<ProductsCubit>(context)
+                            .choosenCategory = categories[selectedIndex];
+                        BlocProvider.of<ProductsCubit>(context).search();
+                      },
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 8),
+                    decoration: BoxDecoration(
                       color: index == selectedIndex
-                          ? Colors.white
-                          : AppColors.primaryColor,
+                          ? AppColors.primaryColor
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: AppColors.primaryColor),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Center(
+                        child: Text(
+                          categories[index].name,
+                          style: theme.textTheme.titleMedium!.copyWith(
+                            color: index == selectedIndex
+                                ? Colors.white
+                                : AppColors.primaryColor,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
+            );
+          } else if (state is CategoryFetchFailure) {
+            return const ShowImage(
+              imagePath: AppImages.error,
+              height: 200,
+              width: 200,
+            );
+          } else if (state is CategoryNetworkFailure) {
+            return const ShowImage(
+              imagePath: AppImages.error404,
+              height: 200,
+              width: 200,
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primaryColor,
             ),
           );
         },
