@@ -7,7 +7,9 @@ import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBarCubit/bottom_nav_bar_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CategoryCubit/category_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_text_field.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/product_card.dart';
@@ -20,6 +22,7 @@ class ProductsListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     BlocProvider.of<ProductsCubit>(context).getMostPopular();
+    BlocProvider.of<CategoryCubit>(context).getCategories();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -105,11 +108,9 @@ class _ProductCardsView extends StatelessWidget {
       width: double.infinity,
       child: BlocConsumer<ProductsCubit, ProductsState>(
         listener: (context, state) {
-          // if (state is ProductsFetchFailure) {
-          //   showSnackBar(state.errorMessage, SnackBarMessageType.error);
-          // } else
-          log(state.toString());
-          if (state is NetworkFailure) {
+          if (state is ProductsFetchFailure) {
+            showSnackBar(state.errorMessage, SnackBarMessageType.error);
+          } else if (state is ProductNetworkFailure) {
             showSnackBar(state.errorMessage, SnackBarMessageType.error);
           }
         },
@@ -134,7 +135,7 @@ class _ProductCardsView extends StatelessWidget {
               height: 200,
               width: 200,
             );
-          } else if (state is NetworkFailure) {
+          } else if (state is ProductNetworkFailure) {
             return const ShowImage(
               imagePath: AppImages.error404,
               height: 200,
@@ -157,40 +158,79 @@ class _CategoriesCardsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = context.theme;
     return SizedBox(
       height: 60,
       width: double.infinity,
-      child: ListView.builder(
-        itemCount: AppData.categories.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              BlocProvider.of<BottomNavBarCubit>(context).navigate(index: 1);
-              BlocProvider.of<ProductsCubit>(context).choosenCategory =
-                  AppData.categories[index];
-            },
-            child: Container(
-              margin: const EdgeInsets.only(right: 8),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                borderRadius: BorderRadius.circular(8),
-                image: const DecorationImage(
-                    image: AssetImage(AppImages.categoryWallpaper),
-                    fit: BoxFit.cover),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Center(
-                    child: Text(AppData.categories[index].name,
-                        style: theme.textTheme.titleMedium!.copyWith(
-                            color: const Color.fromARGB(255, 34, 77, 112)))),
-              ),
+      child: BlocConsumer<CategoryCubit, CategoryState>(
+        listener: (context, state) {
+          if (state is CategoryFetchFailure) {
+            showSnackBar(state.errorMessage, SnackBarMessageType.error);
+          } else if (state is CategoryNetworkFailure) {
+            showSnackBar(state.errorMessage, SnackBarMessageType.error);
+          }
+        },
+        builder: (context, state) {
+          if (state is CategoryFetchSuccess) {
+            return _CategoriesCardsViewSuccess(categories: state.categories);
+          } else if (state is CategoryFetchFailure) {
+            return const ShowImage(
+              imagePath: AppImages.error,
+              height: 200,
+              width: 200,
+            );
+          } else if (state is CategoryNetworkFailure) {
+            return const ShowImage(
+              imagePath: AppImages.error404,
+              height: 200,
+              width: 200,
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primaryColor,
             ),
           );
         },
       ),
+    );
+  }
+}
+
+class _CategoriesCardsViewSuccess extends StatelessWidget {
+  const _CategoriesCardsViewSuccess({required this.categories});
+  final List<Category> categories;
+  @override
+  Widget build(BuildContext context) {
+    var theme = context.theme;
+    return ListView.builder(
+      itemCount: categories.length,
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            BlocProvider.of<BottomNavBarCubit>(context).navigate(index: 1);
+            BlocProvider.of<ProductsCubit>(context).choosenCategory =
+                categories[index];
+          },
+          child: Container(
+            margin: const EdgeInsets.only(right: 8),
+            decoration: BoxDecoration(
+              color: Colors.blueGrey,
+              borderRadius: BorderRadius.circular(8),
+              image: const DecorationImage(
+                  image: AssetImage(AppImages.categoryWallpaper),
+                  fit: BoxFit.cover),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Center(
+                  child: Text(categories[index].name,
+                      style: theme.textTheme.titleMedium!.copyWith(
+                          color: const Color.fromARGB(255, 34, 77, 112)))),
+            ),
+          ),
+        );
+      },
     );
   }
 }
