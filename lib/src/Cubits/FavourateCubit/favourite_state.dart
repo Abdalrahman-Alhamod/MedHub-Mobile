@@ -13,7 +13,7 @@ final class FavoureteToggleFailure extends FavouriteState {
   FavoureteToggleFailure({required this.errorMessage});
 }
 
-final class NetworkFailure extends FavouriteState {
+final class FavourateNetworkFailure extends FavouriteState {
   String errorMessage;
-  NetworkFailure({required this.errorMessage});
+  FavourateNetworkFailure({required this.errorMessage});
 }
