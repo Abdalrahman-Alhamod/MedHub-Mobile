@@ -18,8 +18,7 @@ final class ProductsFetchFailure extends ProductsState {
 
 final class ProductsNotFound extends ProductsState {}
 
-final class NetworkFailure extends ProductsState {
+final class ProductNetworkFailure extends ProductsState {
   String errorMessage;
-  NetworkFailure({required this.errorMessage});
+  ProductNetworkFailure({required this.errorMessage});
 }
-
