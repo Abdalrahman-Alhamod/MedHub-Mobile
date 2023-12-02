@@ -6,7 +6,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_vectors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CartCubit/cart_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/FavourateCubit/favourite_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/routes/app_routes.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_loading_dialog.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_button.dart';
@@ -22,108 +24,125 @@ class ProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          children: [
-            SizedBox(
-              height: 280.h,
-              child: Stack(
-                children: [
-                  // Container - product background
-                  const Positioned.fill(
-                    child: _ProductImageBackground(),
-                  ),
-
-                  Positioned(
-                      top: 15.h,
-                      left: 0,
-                      right: 0,
-                      child: _ProductImage(
-                        product: product,
-                      )),
-                  // Back button
-                  Positioned(
-                    top: 24.h,
-                    left: 24.w,
-                    right: 24.w,
-                    child: const _AppBar(),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        child: BlocListener<CartCubit, CartState>(
+          listener: (context, state) {
+            if (state is CartAddLoading) {
+              Get.until((route) => !Get.isBottomSheetOpen!);
+              showLoadingDialog();
+            } else if (state is CartAddSuccess) {
+              Get.until((route) => !Get.isDialogOpen!);
+              showSnackBar("addedSuccessfully".tr, SnackBarMessageType.success);
+            } else if (state is CartAddFailure) {
+              Get.until((route) => !Get.isDialogOpen!);
+              showSnackBar(
+                  "Failed to add to the cart !", SnackBarMessageType.error);
+            }
+          },
+          child: ListView(
+            children: [
+              SizedBox(
+                height: 280.h,
+                child: Stack(
                   children: [
-                    20.verticalSpace,
-                    SizedBox(width: 230, child: _ProductName(product: product)),
-                    5.verticalSpace,
-                    SizedBox(
-                        width: 230,
-                        child: _ProductScientificName(product: product)),
+                    // Container - product background
+                    const Positioned.fill(
+                      child: _ProductImageBackground(),
+                    ),
+
+                    Positioned(
+                        top: 15.h,
+                        left: 0,
+                        right: 0,
+                        child: _ProductImage(
+                          product: product,
+                        )),
+                    // Back button
+                    Positioned(
+                      top: 24.h,
+                      left: 24.w,
+                      right: 24.w,
+                      child: const _AppBar(),
+                    ),
                   ],
                 ),
-                Expanded(child: _ProductPrice(product: product)),
-              ],
-            ),
-            10.verticalSpace,
-            SizedBox(height: 100, child: _ProductDescription(product: product)),
-            10.verticalSpace,
-            //// Product Details Cards
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: GridView(
-                shrinkWrap: true,
-                primary: false,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8.w,
-                  mainAxisSpacing: 8.h,
-                  mainAxisExtent: 100.h,
-                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomeCard(
-                    title: product.brand,
-                    subtitle: "brand".tr,
-                    icon: const Icon(Icons.business,
-                        color: Colors.teal, size: 30), // Example color
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      20.verticalSpace,
+                      SizedBox(
+                          width: 230, child: _ProductName(product: product)),
+                      5.verticalSpace,
+                      SizedBox(
+                          width: 230,
+                          child: _ProductScientificName(product: product)),
+                    ],
                   ),
-                  CustomeCard(
-                    title: product.expirationDate.toString(),
-                    subtitle: "expiration".tr,
-                    icon: const Icon(Icons.date_range,
-                        color: Colors.red, size: 30), // Example color
-                  ),
-                  CustomeCard(
-                    title: product.inStock == 0
-                        ? "Unavailable"
-                        : product.inStock.toString(),
-                    subtitle: "inStock".tr,
-                    icon: const Icon(Icons.warehouse,
-                        color: Colors.green, size: 30),
-                    titleColor: product.inStock == 0
-                        ? Colors.red
-                        : AppColors.primaryColor, // Example color
-                  ),
-                  CustomeCard(
-                    title: product.type.toString(),
-                    subtitle: "category".tr,
-                    icon: Icon(
-                      Icons.category,
-                      color: Colors.orange,
-                      size: 30.h,
-                    ), // Example color
-                  ),
+                  Expanded(child: _ProductPrice(product: product)),
                 ],
               ),
-            ),
-            10.verticalSpace,
-            _Buttons(
-              product: product,
-            )
-          ],
+              10.verticalSpace,
+              SizedBox(
+                  height: 100, child: _ProductDescription(product: product)),
+              10.verticalSpace,
+              //// Product Details Cards
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: GridView(
+                  shrinkWrap: true,
+                  primary: false,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 8.w,
+                    mainAxisSpacing: 8.h,
+                    mainAxisExtent: 100.h,
+                  ),
+                  children: [
+                    CustomeCard(
+                      title: product.brand,
+                      subtitle: "brand".tr,
+                      icon: const Icon(Icons.business,
+                          color: Colors.teal, size: 30), // Example color
+                    ),
+                    CustomeCard(
+                      title: product.expirationDate.toString(),
+                      subtitle: "expiration".tr,
+                      icon: const Icon(Icons.date_range,
+                          color: Colors.red, size: 30), // Example color
+                    ),
+                    CustomeCard(
+                      title: product.inStock == 0
+                          ? "Unavailable"
+                          : product.inStock.toString(),
+                      subtitle: "inStock".tr,
+                      icon: const Icon(Icons.warehouse,
+                          color: Colors.green, size: 30),
+                      titleColor: product.inStock == 0
+                          ? Colors.red
+                          : AppColors.primaryColor, // Example color
+                    ),
+                    CustomeCard(
+                      title: product.category.name,
+                      subtitle: "category".tr,
+                      icon: Icon(
+                        Icons.category,
+                        color: Colors.orange,
+                        size: 30.h,
+                      ), // Example color
+                    ),
+                  ],
+                ),
+              ),
+              10.verticalSpace,
+              _Buttons(
+                product: product,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -146,7 +165,9 @@ class _Buttons extends StatelessWidget {
             title: "addToCart".tr,
             onTap: () {
               Get.bottomSheet(
-                const _QuantityCounter(),
+                _QuantityCounter(
+                  product: product,
+                ),
                 backgroundColor: Colors.transparent,
                 isScrollControlled: true,
               );
@@ -194,7 +215,8 @@ class _Buttons extends StatelessWidget {
 }
 
 class _QuantityCounter extends StatefulWidget {
-  const _QuantityCounter();
+  const _QuantityCounter({required this.product});
+  final Product product;
 
   @override
   State<_QuantityCounter> createState() => _QuantityCounterState();
@@ -238,6 +260,35 @@ class _QuantityCounterState extends State<_QuantityCounter> {
               newQuantity = int.parse(value);
             }
           },
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(
+                color: AppColors.primaryColor.withOpacity(.5),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(
+                color: AppColors.primaryColor,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(
+                color: Colors.red,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: Colors.red, width: 2),
+            ),
+            fillColor: Colors.grey.shade200,
+            filled: true,
+            floatingLabelStyle: const TextStyle(color: AppColors.primaryColor),
+            errorStyle: const TextStyle(color: Colors.red),
+          ),
         ),
         actions: [
           TextButton(
@@ -247,7 +298,7 @@ class _QuantityCounterState extends State<_QuantityCounter> {
             child: Text(
               "cancel".tr,
               style: Get.theme.textTheme.labelLarge!.copyWith(
-                color: Get.theme.primaryColor, // Match with primary color
+                color: Colors.red, // Match with primary color
               ),
             ),
           ),
@@ -258,7 +309,7 @@ class _QuantityCounterState extends State<_QuantityCounter> {
             child: Text(
               "confirm".tr,
               style: Get.theme.textTheme.labelLarge!.copyWith(
-                color: Get.theme.primaryColor, // Match with primary color
+                color: AppColors.primaryColor, // Match with primary color
               ),
             ),
           ),
@@ -287,55 +338,74 @@ class _QuantityCounterState extends State<_QuantityCounter> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            "quantity".tr,
-            style: theme.textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 30),
-          GestureDetector(
-            onTap: _showQuantityDialog,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      quantity--;
-                    });
-                  },
-                  icon: const Icon(Icons.remove),
-                  color: theme.primaryColor,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                "quantity".tr,
+                style: theme.textTheme.titleLarge,
+                textAlign: TextAlign.center,
+              ),
+              GestureDetector(
+                onTap: _showQuantityDialog,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          quantity--;
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.remove,
+                        color: Colors.red,
+                      ),
+                      color: theme.primaryColor,
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shadowColor: Colors.grey,
+                        elevation: 5,
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    Text(
+                      quantity.toString(),
+                      style: theme.textTheme.titleLarge!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: theme.primaryColor,
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          quantity++;
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.add,
+                        color: Colors.green,
+                      ),
+                      color: theme.primaryColor,
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shadowColor: Colors.grey,
+                        elevation: 5,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 20),
-                Text(
-                  quantity.toString(),
-                  style: theme.textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: theme.primaryColor,
-                  ),
-                ),
-                const SizedBox(width: 20),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      quantity++;
-                    });
-                  },
-                  icon: const Icon(Icons.add),
-                  color: theme.primaryColor,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           const SizedBox(height: 20),
           CustomeButton(
             title: "add".tr,
             onTap: () {
-              Get.back();
               if (_quantity > 0) {
-                showSnackBar(
-                    "addedSuccessfully".tr, SnackBarMessageType.success);
+                BlocProvider.of<CartCubit>(context)
+                    .addToCart(product: widget.product, quantity: _quantity);
               }
             },
             width: double.infinity,
