@@ -10,4 +10,16 @@ class AppProductsImages {
   static const centrum = 'assets/products/Centrum.png';
   static const orthoTriCyclen = 'assets/products/Ortho_Tri_Cyclen.png';
   static const lantus = 'assets/products/Lantus.png';
+  static const allProductsImages = [
+    amoxil,
+    excedrin,
+    robitussin,
+    benadryl,
+    peptoBismol,
+    lipitor,
+    cortizone,
+    centrum,
+    orthoTriCyclen,
+    lantus,
+  ];
 }
