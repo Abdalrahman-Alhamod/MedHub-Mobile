@@ -19,7 +19,7 @@ class FavouriteScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is ProductsFetchFailure) {
             showSnackBar(state.errorMessage, SnackBarMessageType.error);
-          } else if (state is NetworkFailure) {
+          } else if (state is ProductNetworkFailure) {
             showSnackBar(state.errorMessage, SnackBarMessageType.error);
           }
         },
@@ -45,7 +45,7 @@ class FavouriteScreen extends StatelessWidget {
               height: 500,
               width: 500,
             );
-          } else if (state is NetworkFailure) {
+          } else if (state is ProductNetworkFailure) {
             return const ShowImage(
               imagePath: AppImages.error404,
               height: 500,
