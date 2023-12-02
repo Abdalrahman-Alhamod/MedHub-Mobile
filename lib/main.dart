@@ -5,6 +5,8 @@ import 'package:get/get.dart' as get_lib;
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_general_constants.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_theme.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBarCubit/bottom_nav_bar_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CartCubit/cart_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CategoryCubit/category_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/FavourateCubit/favourite_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/local_controller.dart';
@@ -32,6 +34,12 @@ void main() {
           ),
           BlocProvider(
             create: (context) => FavouriteCubit(),
+          ),
+          BlocProvider(
+            create: (context) => CartCubit(),
+          ),
+          BlocProvider(
+            create: (context) => CategoryCubit(),
           ),
         ],
         child: get_lib.GetMaterialApp(
