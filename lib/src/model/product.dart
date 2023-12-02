@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
 
 abstract class ProductType {
   const ProductType._();
@@ -38,66 +39,96 @@ abstract class ProductType {
 
 class Product {
   int id;
-  String type;
+  Category category;
   String name;
   String scientificName;
   String brand;
   String description;
   String expirationDate;
   int price;
-  int popularity;
   String image;
   int inStock;
   bool isFavourate;
-  double discount;
-  // ignore: unused_field
-  int _quantity;
+  int quantity;
   Product({
     required this.id,
-    required this.type,
+    required this.category,
     required this.name,
     required this.scientificName,
     required this.brand,
     required this.description,
     required this.expirationDate,
     required this.price,
-    required this.popularity,
     required this.image,
     required this.inStock,
     required this.isFavourate,
-    required this.discount,
-  }) : _quantity = 0;
-  factory Product.fromJson(jsonData) {
-    return Product(
-        id: jsonData['id'],
-        type: jsonData['category'],
-        name: jsonData['name'],
-        scientificName: jsonData['scientificName'],
-        brand: jsonData['brand'],
-        description: jsonData['description'],
-        expirationDate: jsonData['expirationDate'],
-        price: jsonData['price'],
-        popularity: jsonData['popularity'],
-        image: jsonData['image'],
-        inStock: jsonData['inStock'],
-        isFavourate: jsonData['isFavourate'],
-        discount: jsonData['discount']);
-  }
+  }) : quantity = 0;
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['category'] = type;
-    data['name'] = name;
-    data['scientificName'] = scientificName;
-    data['brand'] = brand;
-    data['description'] = description;
-    data['expirationDate'] = expirationDate;
-    data['price'] = price;
-    data['popularity'] = popularity;
-    data['image'] = image;
-    data['inStock'] = inStock;
-    data['isFavourate'] = isFavourate;
-    data['discount'] = discount;
-    return data;
+    return {
+      'id': id,
+      'category': [category.toJson()],
+      'name': name,
+      'scientificName': scientificName,
+      'brand': brand,
+      'description': description,
+      'expirationDate': expirationDate,
+      'price': price,
+      'image': image,
+      'inStock': inStock,
+      'isFavourate': isFavourate,
+    };
+  }
+
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'] as int,
+      category: Category.fromJson(json['category'][0]),
+      name: json['name'] as String,
+      scientificName: json['scientificName'] as String,
+      brand: json['brand'] as String,
+      description: json['description'] as String,
+      expirationDate: json['expirationDate'] as String,
+      price: json['price'] as int,
+      image: json['image'] as String,
+      inStock: json['inStock'] as int,
+      isFavourate: json['isFavourate'] as bool,
+    );
+  }
+
+  static Map<String, dynamic> toListJson(List<Product> products) {
+    return {'data': products.map((product) => product.toJson()).toList()};
+  }
+
+  static List<Product> fromListJson(Map<String, dynamic> jsonData) {
+    List<dynamic> jsonList = jsonData['data'];
+    return jsonList.map((json) => Product.fromJson(json)).toList();
+  }
+
+  static Map<String, dynamic> toJsonCart(List<Product> products) {
+    return {
+      'data': products
+          .map((product) => {'id': product.id, 'quantity': product.quantity})
+          .toList()
+    };
+  }
+
+  @override
+  String toString() {
+    return '''
+    Product {
+      id: $id,
+      category: $category,
+      name: $name,
+      scientificName: $scientificName,
+      brand: $brand,
+      description: $description,
+      expirationDate: $expirationDate,
+      price: $price,
+      image: $image,
+      inStock: $inStock,
+      isFavourate: $isFavourate,
+      quantity: $quantity
+    }
+  ''';
   }
 }
