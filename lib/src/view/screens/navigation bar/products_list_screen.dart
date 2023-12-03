@@ -1,15 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
-import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBarCubit/bottom_nav_bar_cubit.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CategoryCubit/category_cubit.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBar/bottom_nav_bar_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Category/category_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Home/home_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Products/products_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_text_field.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/product_card.dart';
@@ -21,8 +20,8 @@ class ProductsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    BlocProvider.of<ProductsCubit>(context).getMostPopular();
     BlocProvider.of<CategoryCubit>(context).getCategories();
+    BlocProvider.of<HomeCubit>(context).getHomeProducts();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -31,28 +30,7 @@ class ProductsListScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomeTextField(
-                obscureText: false,
-                hintText: "searchFor".tr,
-                onChanged: (value) {
-                  BlocProvider.of<ProductsCubit>(context).searchBarContent =
-                      value;
-                },
-                onSubmit: (value) {
-                  BlocProvider.of<BottomNavBarCubit>(context)
-                      .navigate(index: 1);
-                  BlocProvider.of<ProductsCubit>(context).search();
-                },
-                validator: null,
-                keyboardType: TextInputType.text,
-                prefixIcon: Icons.search,
-                onTap: () {
-                  BlocProvider.of<BottomNavBarCubit>(context)
-                      .navigate(index: 1);
-                  BlocProvider.of<ProductsCubit>(context).search();
-                },
-                isSearchBar: true,
-              ),
+              const _SearchBar(),
               const SizedBox(
                 height: 20,
               ),
@@ -78,7 +56,8 @@ class ProductsListScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const _ProductCardsView(),
+              const _ProductsCardsView(
+                  homeProductsType: HomeProductsType.mostPopular),
               const SizedBox(
                 height: 10,
               ),
@@ -89,7 +68,8 @@ class ProductsListScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const _ProductCardsView(),
+              const _ProductsCardsView(
+                  homeProductsType: HomeProductsType.recentlyAdded),
             ],
           ),
         ),
@@ -98,44 +78,66 @@ class ProductsListScreen extends StatelessWidget {
   }
 }
 
-class _ProductCardsView extends StatelessWidget {
-  const _ProductCardsView();
+class _SearchBar extends StatelessWidget {
+  const _SearchBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomeTextField(
+      obscureText: false,
+      hintText: "searchFor".tr,
+      onChanged: (value) {
+        BlocProvider.of<ProductsCubit>(context).searchBarContent = value;
+      },
+      onSubmit: (value) {
+        BlocProvider.of<BottomNavBarCubit>(context).navigate(index: 1);
+        BlocProvider.of<ProductsCubit>(context).search();
+      },
+      validator: null,
+      keyboardType: TextInputType.text,
+      prefixIcon: Icons.search,
+      onTap: () {
+        BlocProvider.of<BottomNavBarCubit>(context).navigate(index: 1);
+        BlocProvider.of<ProductsCubit>(context).search();
+      },
+      isSearchBar: true,
+    );
+  }
+}
+
+class _ProductsCardsView extends StatelessWidget {
+  const _ProductsCardsView({required this.homeProductsType});
+  final String homeProductsType;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 230,
       width: double.infinity,
-      child: BlocConsumer<ProductsCubit, ProductsState>(
+      child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {
-          if (state is ProductsFetchFailure) {
+          if (state is HomeProductsFetchFailure) {
             showSnackBar(state.errorMessage, SnackBarMessageType.error);
-          } else if (state is ProductNetworkFailure) {
+          } else if (state is HomeNetworkFailure) {
             showSnackBar(state.errorMessage, SnackBarMessageType.error);
           }
         },
         builder: (context, state) {
-          if (state is ProductsFetchSuccess) {
-            final products = state.products;
-            return ListView.builder(
-              itemCount: products.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ProductCard(
-                    product: products[index],
-                  ),
-                );
-              },
-            );
-          } else if (state is ProductsFetchFailure) {
+          if (state is HomeProductsFetchSucess) {
+            List<Product> products = [];
+            if (homeProductsType == HomeProductsType.mostPopular) {
+              products = state.mostPopular;
+            } else if (homeProductsType == HomeProductsType.recentlyAdded) {
+              products = state.recentlyAdded;
+            }
+            return _ProductsCardsViewSuccess(products: products);
+          } else if (state is HomeProductsFetchFailure) {
             return const ShowImage(
               imagePath: AppImages.error,
               height: 200,
               width: 200,
             );
-          } else if (state is ProductNetworkFailure) {
+          } else if (state is HomeNetworkFailure) {
             return const ShowImage(
               imagePath: AppImages.error404,
               height: 200,
@@ -149,6 +151,30 @@ class _ProductCardsView extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class _ProductsCardsViewSuccess extends StatelessWidget {
+  const _ProductsCardsViewSuccess({
+    required this.products,
+  });
+
+  final List<Product> products;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: products.length,
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: ProductCard(
+            product: products[index],
+          ),
+        );
+      },
     );
   }
 }
