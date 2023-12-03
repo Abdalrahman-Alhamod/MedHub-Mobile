@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharmacy_warehouse_store_mobile/main.dart';
 
 class SimpleBlocObserver implements BlocObserver {
   @override
@@ -10,7 +10,7 @@ class SimpleBlocObserver implements BlocObserver {
 
   @override
   void onChange(BlocBase bloc, Change change) {
-    debugPrint('change = $change');
+    logger.w('change = $change');
   }
 
   @override
@@ -18,11 +18,11 @@ class SimpleBlocObserver implements BlocObserver {
 
   @override
   void onClose(BlocBase bloc) {
-    debugPrint('close = $bloc');
+    logger.w('close = $bloc');
   }
 
   @override
   void onCreate(BlocBase bloc) {
-    debugPrint('create = $bloc');
+    logger.w('create = $bloc');
   }
 }
