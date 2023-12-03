@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CartCubit/cart_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Cart/cart_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 
 class CartQuantityCounter extends StatelessWidget {
-  const CartQuantityCounter({required this.product});
+  const CartQuantityCounter({super.key, required this.product});
   final Product product;
 
   @override

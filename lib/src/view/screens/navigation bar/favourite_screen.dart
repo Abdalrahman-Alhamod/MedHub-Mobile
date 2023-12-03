@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Products/products_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/product_card.dart';
@@ -13,7 +13,7 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ProductsCubit>(context).getFavourates();
+    BlocProvider.of<ProductsCubit>(context).getFavourites();
     return Scaffold(
       body: BlocConsumer<ProductsCubit, ProductsState>(
         listener: (context, state) {
@@ -34,22 +34,28 @@ class FavouriteScreen extends StatelessWidget {
               ),
             );
           } else if (state is ProductsNotFound) {
-            return const ShowImage(
-              imagePath: AppImages.noData,
-              height: 500,
-              width: 500,
+            return const Center(
+              child: ShowImage(
+                imagePath: AppImages.noData,
+                height: 500,
+                width: 500,
+              ),
             );
           } else if (state is ProductsFetchFailure) {
-            return const ShowImage(
-              imagePath: AppImages.error,
-              height: 500,
-              width: 500,
+            return const Center(
+              child: ShowImage(
+                imagePath: AppImages.error,
+                height: 500,
+                width: 500,
+              ),
             );
           } else if (state is ProductNetworkFailure) {
-            return const ShowImage(
-              imagePath: AppImages.error404,
-              height: 500,
-              width: 500,
+            return const Center(
+              child: ShowImage(
+                imagePath: AppImages.error404,
+                height: 500,
+                width: 500,
+              ),
             );
           }
           return const Center(

@@ -3,7 +3,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBarCubit/bottom_nav_bar_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBar/bottom_nav_bar_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/controller/user_controller.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/cart_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/favourite_screen.dart';

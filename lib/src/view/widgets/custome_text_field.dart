@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Products/products_cubit.dart';
 
 class CustomeTextField extends StatefulWidget {
   const CustomeTextField({

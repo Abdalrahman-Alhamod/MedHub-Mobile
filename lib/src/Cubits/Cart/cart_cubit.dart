@@ -1,14 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
-import 'package:logger/logger.dart';
+import 'package:pharmacy_warehouse_store_mobile/main.dart';
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartInitial());
   List<Product> cartProducts = [];
   int totalPrice = 0;
-  Logger logger = Logger(printer: PrettyPrinter(printEmojis: false));
 
   void addToCart({required Product product, required int quantity}) {
     try {
