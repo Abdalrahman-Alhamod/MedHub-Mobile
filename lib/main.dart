@@ -20,48 +20,50 @@ Logger logger = Logger(printer: PrettyPrinter(printEmojis: false));
 void main() {
   get_lib.Get.put(AppLocalController());
   Bloc.observer = SimpleBlocObserver();
-  return runApp(ScreenUtilInit(
-    designSize: const Size(390, 844),
-    minTextAdapt: true,
-    splitScreenMode: true,
-    useInheritedMediaQuery: true,
-    rebuildFactor: (old, data) => true,
-    builder: (context, widget) {
-      return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => ProductsCubit(),
+  return runApp(
+    ScreenUtilInit(
+      designSize: const Size(390, 844),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      useInheritedMediaQuery: true,
+      rebuildFactor: (old, data) => false,
+      builder: (context, widget) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => ProductsCubit(),
+            ),
+            BlocProvider(
+              create: (context) => BottomNavBarCubit(),
+            ),
+            BlocProvider(
+              create: (context) => FavouriteCubit(),
+            ),
+            BlocProvider(
+              create: (context) => CartCubit(),
+            ),
+            BlocProvider(
+              create: (context) => CategoryCubit(),
+            ),
+            BlocProvider(
+              create: (context) => HomeCubit(),
+            ),
+          ],
+          child: get_lib.GetMaterialApp(
+            title: kAppTitle,
+            debugShowCheckedModeBanner: false,
+            theme: appTheme,
+            defaultTransition: get_lib.Transition.native,
+            transitionDuration: const Duration(seconds: 1),
+            translations: AppLocale(),
+            locale: const Locale('ar'),
+            getPages: AppPages.routes,
+            initialRoute: AppPages.INITIAL,
           ),
-          BlocProvider(
-            create: (context) => BottomNavBarCubit(),
-          ),
-          BlocProvider(
-            create: (context) => FavouriteCubit(),
-          ),
-          BlocProvider(
-            create: (context) => CartCubit(),
-          ),
-          BlocProvider(
-            create: (context) => CategoryCubit(),
-          ),
-          BlocProvider(
-            create: (context) => HomeCubit(),
-          ),
-        ],
-        child: get_lib.GetMaterialApp(
-          title: kAppTitle,
-          debugShowCheckedModeBanner: false,
-          theme: appTheme,
-          defaultTransition: get_lib.Transition.native,
-          transitionDuration: const Duration(seconds: 1),
-          translations: AppLocale(),
-          locale: const Locale('ar'),
-          getPages: AppPages.routes,
-          initialRoute: AppPages.INITIAL,
-        ),
-      );
-    },
-  ));
+        );
+      },
+    ),
+  );
 }
 
 // class PhrarmacyWarehouseStoreMobile extends StatelessWidget {
