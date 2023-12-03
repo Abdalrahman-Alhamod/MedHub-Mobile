@@ -173,7 +173,7 @@ class AppData {
     Products.OrthoTriCyclen
   ];
   static List<Category> categories = [
-    Category(id: 0, name: "All"),
+    Category(id: 0, name: "All".tr),
     Category(id: 1, name: ProductType.Antibiotics),
     Category(id: 2, name: ProductType.AllergyMedications),
     Category(id: 3, name: ProductType.CardiovascularMedications),
