@@ -33,12 +33,13 @@ class CustomeTextField extends StatefulWidget {
 
 class _CustomeTextFieldState extends State<CustomeTextField> {
   bool _enableObscureText = false;
-  final TextEditingController _controller = TextEditingController();
+  TextEditingController? _controller;
   @override
   void initState() {
+    _controller = TextEditingController();
     _enableObscureText = widget.obscureText;
     if (widget.isSearchBar) {
-      _controller.text =
+      _controller!.text =
           BlocProvider.of<ProductsCubit>(context).searchBarContent;
     }
     super.initState();
@@ -79,7 +80,7 @@ class _CustomeTextFieldState extends State<CustomeTextField> {
                     icon: const Icon(Icons.clear),
                     onPressed: () {
                       setState(() {
-                        _controller.clear();
+                        _controller!.clear();
                         BlocProvider.of<ProductsCubit>(context)
                             .searchBarContent = "";
                       });
