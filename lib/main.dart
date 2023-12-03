@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart' as get_lib;
+import 'package:logger/logger.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_general_constants.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_theme.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBarCubit/bottom_nav_bar_cubit.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CartCubit/cart_cubit.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CategoryCubit/category_cubit.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/FavourateCubit/favourite_cubit.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/ProductsCubit/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBar/bottom_nav_bar_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Cart/cart_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Category/category_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Favourite/favourite_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Home/home_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Products/products_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/local_controller.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/locale.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/routes/app_pages.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/services/simple_bloc_observer.dart';
 
+Logger logger = Logger(printer: PrettyPrinter(printEmojis: false));
 void main() {
   get_lib.Get.put(AppLocalController());
   Bloc.observer = SimpleBlocObserver();
@@ -41,6 +44,9 @@ void main() {
           BlocProvider(
             create: (context) => CategoryCubit(),
           ),
+          BlocProvider(
+            create: (context) => HomeCubit(),
+          ),
         ],
         child: get_lib.GetMaterialApp(
           title: kAppTitle,
@@ -49,7 +55,7 @@ void main() {
           defaultTransition: get_lib.Transition.native,
           transitionDuration: const Duration(seconds: 1),
           translations: AppLocale(),
-          locale: const Locale('en'),
+          locale: const Locale('ar'),
           getPages: AppPages.routes,
           initialRoute: AppPages.INITIAL,
         ),
