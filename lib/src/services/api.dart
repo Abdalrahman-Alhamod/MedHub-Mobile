@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' as get_lib;
 import 'package:dio/dio.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/model/user.dart';
+import 'package:pharmacy_warehouse_store_mobile/main.dart';
 
 class MethodType {
   const MethodType._();
@@ -41,10 +40,9 @@ class Api {
       var jsonData = jsonDecode(
         response.toString(),
       );
-      // TODO remove from body when implement header
-      User.token = jsonData['token'];
       return jsonData;
     } on DioException catch (exception) {
+      logger.e("API Dio Exception : $exception");
       if (exception.toString().contains('SocketException')) {
         throw DioException(
             message: "networkError".tr, requestOptions: RequestOptions());
@@ -58,7 +56,6 @@ class Api {
           jsonData = jsonDecode(exception.response.toString());
           erroMessage = jsonData['message'];
         } catch (e) {
-          log(e.toString());
           throw DioException(
               message: "somthingWrongHappend".tr,
               requestOptions: RequestOptions());
@@ -67,6 +64,7 @@ class Api {
             message: erroMessage, requestOptions: RequestOptions());
       }
     } catch (e) {
+      logger.e("API General Exception : $e");
       throw Exception(e.toString());
     }
   }
