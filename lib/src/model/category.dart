@@ -23,11 +23,12 @@ class Category {
     };
   }
 
-  static List<Map<String, dynamic>> toJsonList(List<Category> categories) {
-    return categories.map((category) => category.toJson()).toList();
+  static Map<String, dynamic> toListJson(List<Category> categories) {
+    return {'data': categories.map((product) => product.toJson()).toList()};
   }
 
-  static List<Category> fromJsonList(List<Map<String, dynamic>> jsonList) {
+  static List<Category> fromListJson(Map<String, dynamic> jsonData) {
+    List<dynamic> jsonList = jsonData['data'];
     return jsonList.map((json) => Category.fromJson(json)).toList();
   }
 
