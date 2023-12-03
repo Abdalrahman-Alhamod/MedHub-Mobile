@@ -47,7 +47,7 @@ class CustomeCard extends StatelessWidget {
                   maxLines: 2,
                 ),
               ),
-              4.verticalSpace,
+              2.verticalSpace,
               SizedBox(
                   width: 100,
                   child: AutoSizeText(

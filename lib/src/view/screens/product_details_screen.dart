@@ -6,9 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_vectors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CartCubit/cart_cubit.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/FavourateCubit/favourite_cubit.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/routes/app_routes.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Cart/cart_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Favourite/favourite_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_loading_dialog.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_button.dart';
@@ -31,11 +30,11 @@ class ProductDetailsScreen extends StatelessWidget {
               showLoadingDialog();
             } else if (state is CartAddSuccess) {
               Get.until((route) => !Get.isDialogOpen!);
-              showSnackBar("addedSuccessfully".tr, SnackBarMessageType.success);
+              showSnackBar("addedToCartSuccessfully".tr, SnackBarMessageType.success);
             } else if (state is CartAddFailure) {
               Get.until((route) => !Get.isDialogOpen!);
               showSnackBar(
-                  "Failed to add to the cart !", SnackBarMessageType.error);
+                  "failedToAddToTheCart".tr, SnackBarMessageType.error);
             }
           },
           child: ListView(
@@ -116,7 +115,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                     CustomeCard(
                       title: product.inStock == 0
-                          ? "Unavailable"
+                          ? "unavailable".tr
                           : product.inStock.toString(),
                       subtitle: "inStock".tr,
                       icon: const Icon(Icons.warehouse,

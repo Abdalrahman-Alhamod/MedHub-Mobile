@@ -41,6 +41,7 @@ class AppLocale implements Translations {
           "favourite": "المفضلة",
 
           // product type
+          "All": "الكل",
           "PainAndRelief": "مزيل الألم",
           "ColdAndFlu": "البرد و الأنفلونزا",
           "AllergyMedications": "أدوية الحساسية",
@@ -62,9 +63,10 @@ class AppLocale implements Translations {
           "quantity": "الكمية :",
           "enterQuantity": "أدخل الكمية :",
           "add": "أضف",
-          "cancel": "ألغِ",
-          "confirm": "أكّد",
+          "cancel": "إلغاء",
+          "confirm": "تأكيد",
           "addedSuccessfully": "تمت الإضافة بنجاح !",
+          "unavailable": "غير متوفر",
 
           // Product List View
           "searchFor": "ابحث عن",
@@ -77,6 +79,15 @@ class AppLocale implements Translations {
           "connectionTimeOut": "انتهت مهلة الاتصال !",
           "somthingWrongHappend": "حدث خطأ ما! ",
           "loading": "جارِ التحميل...",
+
+          // Cart
+          "purchase": "شراء",
+          "purchaseSuccessful": "تم الشراء بنجاح !",
+          "totalPrice": "السعر الإجمالي : ",
+          "confirmPurchase": "تأكيد الشراء",
+          "youOrderTotalPriceIs": "السعر الإجمالي لطلبك هو ",
+          "addedToCartSuccessfully": "تمت الإضافة إلى السلة بنجاح !",
+          "failedToAddToTheCart": "فشل في الإضافة إلى السلة !",
 
           // test products
           "Amoxil": "اموكسيل",
@@ -123,6 +134,7 @@ class AppLocale implements Translations {
           "favourite": "Favourite",
 
           // product type
+          "All": "All",
           "PainAndRelief": "Pain And Relief",
           "ColdAndFlu": "Cold And Flu",
           "AllergyMedications": "Allergy Medications",
@@ -147,6 +159,7 @@ class AppLocale implements Translations {
           "cancel": "Cancel",
           "confirm": "Confirm",
           "addedSuccessfully": "Added Successfully !",
+          "unavailable": "Unavailable",
 
           // Product List View
           "searchFor": "Search for",
@@ -159,6 +172,15 @@ class AppLocale implements Translations {
           "connectionTimeOut": "Connection time out!",
           "somthingWrongHappend": "Something wrong happend!",
           "loading": "Loading...",
+
+          // Cart
+          "purchase": "Purchase",
+          "purchaseSuccessful": "Purchased Successfully !",
+          "totalPrice": "Total Price : ",
+          "confirmPurchase": "Confirm Purchase",
+          "youOrderTotalPriceIs": "Your order total price is ",
+          "addedToCartSuccessfully": "Added to cart successfully !",
+          "failedToAddToTheCart": "Failed to add to the cart !",
 
           // test products
           "Amoxil": "Amoxil",

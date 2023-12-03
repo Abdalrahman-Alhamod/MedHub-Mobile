@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/CartCubit/cart_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Cart/cart_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_custome_dialog.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_loading_dialog.dart';
@@ -23,7 +23,7 @@ class CartScreen extends StatelessWidget {
           showLoadingDialog();
         } else if (state is CartPurchaseSuccess) {
           Get.until((route) => !Get.isDialogOpen!);
-          showSnackBar("Purchase successful", SnackBarMessageType.success);
+          showSnackBar("purchaseSuccessful".tr, SnackBarMessageType.success);
         } else if (state is CartPurchaseFailure) {
           Get.until((route) => !Get.isDialogOpen!);
           showSnackBar(state.errorMessage, SnackBarMessageType.error);
@@ -119,11 +119,11 @@ class _BottomPriceAndPurchaseBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        "Total Price : ",
+                        "totalPrice".tr,
                         style: theme.textTheme.titleLarge,
                       ),
                       Text(
-                        "$totalPrice SP",
+                        "$totalPrice ${"SP".tr}",
                         style: theme.textTheme.titleLarge!
                             .copyWith(color: Colors.green),
                       ),
@@ -131,11 +131,12 @@ class _BottomPriceAndPurchaseBar extends StatelessWidget {
                   ),
                 ),
                 CustomeButton(
-                  title: "Purchase",
+                  title: "purchase".tr,
                   onTap: () async {
                     showCustomeDialog(
-                      title: "Confirm Purchase",
-                      content: "Your total price is $totalPrice SP",
+                      title: "confirmPurchase".tr,
+                      content:
+                          "${"youOrderTotalPriceIs".tr} $totalPrice ${"SP".tr}",
                       onConfirm: () async {
                         await BlocProvider.of<CartCubit>(context)
                             .purchaseCart();

@@ -52,9 +52,9 @@ void showCustomeDialog(
                   onPressed: () {
                     Get.back(); // Close the dialog
                   },
-                  child: const Text(
-                    'CANCEL',
-                    style: TextStyle(
+                  child: Text(
+                    'cancel'.tr,
+                    style: const TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
@@ -65,9 +65,9 @@ void showCustomeDialog(
                     onConfirm(); // Call the provided onConfirm function
                     Get.back(); // Close the dialog
                   },
-                  child: const Text(
-                    'CONFIRM',
-                    style: TextStyle(
+                  child: Text(
+                    'confirm'.tr,
+                    style: const TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,
                     ),
