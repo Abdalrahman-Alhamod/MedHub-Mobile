@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
+import 'package:pharmacy_warehouse_store_mobile/main.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/model/user.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/services/api.dart';
 part 'home_state.dart';
 
 class HomeProductsType {
@@ -16,13 +19,35 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getHomeProducts() async {
     try {
       emit(HomeProductsFetchLoading());
+
+      // Fetch Most Popular Products from API
+      // Map<String, dynamic> mostPopularJsonData = await Api.request(
+      //     url: '/medicines/top10',
+      //     body: {},
+      //     token: User.token,
+      //     methodType: MethodType.get) as Map<String, dynamic>;
+      // List<Product> mostPopularProducts =
+      //     Product.fromListJson(mostPopularJsonData);
+
+      // // Fetch Recently Added Products from API
+      // Map<String, dynamic> recentlyAddedJsonData = await Api.request(
+      //     url: '/medicines/recent10',
+      //     body: {},
+      //     token: User.token,
+      //     methodType: MethodType.get) as Map<String, dynamic>;
+      // List<Product> recentlyAddedProducts =
+      //     Product.fromListJson(recentlyAddedJsonData);
       await Future.delayed(const Duration(seconds: 2));
-      List<Product> products = AppData.products;
+      List<Product> mostPopularProducts = AppData.products;
+      List<Product> recentlyAddedProducts = AppData.products;
       emit(HomeProductsFetchSucess(
-          mostPopular: products, recentlyAdded: products));
+          mostPopular: mostPopularProducts,
+          recentlyAdded: recentlyAddedProducts));
     } on DioException catch (exception) {
+      logger.e("Home Cubit Fetch Products : \nNetwork Failure");
       emit(HomeNetworkFailure(errorMessage: exception.message.toString()));
     } catch (e) {
+      logger.e("Home Cubit Fetch Products : \nFetch Failure");
       emit(HomeProductsFetchFailure(errorMessage: e.toString()));
     }
   }

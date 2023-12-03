@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharmacy_warehouse_store_mobile/main.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 
 part 'favourite_state.dart';
@@ -21,8 +22,10 @@ class FavouriteCubit extends Cubit<FavouriteState> {
       // add to favourate
       emit(FavourateToggleSuccess());
     } on DioException catch (exception) {
+      logger.e("Favourite Cubit Toggle Favourite : \nNetwork Failure");
       emit(FavourateNetworkFailure(errorMessage: exception.message.toString()));
     } catch (e) {
+      logger.e("Favourite Cubit Toggle Favourite : \nToggle Failure");
       emit(FavoureteToggleFailure(errorMessage: e.toString()));
     }
   }

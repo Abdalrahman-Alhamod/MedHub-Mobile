@@ -37,6 +37,7 @@ class CartCubit extends Cubit<CartState> {
         throw Exception();
       }
     } catch (e) {
+      logger.e("Cart Cubit Add to Cart : \nAdd Failure ");
       emit(CartAddFailure());
     }
   }
@@ -85,8 +86,10 @@ class CartCubit extends Cubit<CartState> {
       emit(CartPurchaseSuccess());
       cartProducts.clear();
     } on DioException catch (e) {
+      logger.e("Cart Cubit Purchase : \nNetwork Failure ");
       emit(CartNetworkFailure(errorMessage: e.message.toString()));
     } catch (e) {
+      logger.e("Cart Cubit Purchase : \nPurchase Failure ");
       logger.e(e.toString());
       emit(CartPurchaseFailure(errorMessage: e.toString()));
     }
