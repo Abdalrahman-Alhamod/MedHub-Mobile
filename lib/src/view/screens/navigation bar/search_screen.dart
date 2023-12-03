@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
+import 'package:pharmacy_warehouse_store_mobile/main.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Category/category_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Products/products_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
@@ -168,18 +169,10 @@ class _CategoriesCardsView extends StatefulWidget {
 
 class _CategoriesCardsViewState extends State<_CategoriesCardsView> {
   int selectedIndex = 0;
-  List<Category> categories = [Category(id: 0, name: "all".tr)];
   @override
   void initState() {
-    if (BlocProvider.of<ProductsCubit>(context).choosenCategory == null) {
-      // Make the choosen category the first one if there is none
-      BlocProvider.of<ProductsCubit>(context).choosenCategory = categories[0];
-    } else {
-      // if choosen category is set, make it selected to paint it
-      selectedIndex =
-          BlocProvider.of<ProductsCubit>(context).choosenCategory!.id;
-    }
-    BlocProvider.of<ProductsCubit>(context).search();
+    // if choosen category is set, make it selected to paint it
+    selectedIndex = BlocProvider.of<ProductsCubit>(context).choosenCategory.id;
     super.initState();
   }
 
@@ -199,7 +192,7 @@ class _CategoriesCardsViewState extends State<_CategoriesCardsView> {
         },
         builder: (context, state) {
           if (state is CategoryFetchSuccess) {
-            categories = state.categories;
+            var categories = state.categories;
             return ListView.builder(
               itemCount: categories.length,
               scrollDirection: Axis.horizontal,
