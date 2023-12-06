@@ -8,7 +8,7 @@ class Products {
   static final _format = DateFormat('yyyy/MM/dd', Intl.getCurrentLocale());
   static final _date = _format.format(DateTime.now()).toString();
   // ignore: non_constant_identifier_names
-  static final Product Amoxil = Product(
+  static Product Amoxil = Product(
     id: 0,
     category: AppData.categories[1],
     name: "Amoxil".tr,
@@ -22,7 +22,7 @@ class Products {
     isFavourate: false,
   );
   // ignore: non_constant_identifier_names
-  static final Product Excedrin = Product(
+  static Product Excedrin = Product(
     id: 1,
     category: AppData.categories[8],
     name: "Excedrin",
@@ -37,7 +37,7 @@ class Products {
     isFavourate: false,
   );
   // ignore: non_constant_identifier_names
-  static final Product Benadryl = Product(
+  static Product Benadryl = Product(
     id: 3,
     category: AppData.categories[2],
     name: "Benadryl",
@@ -52,7 +52,7 @@ class Products {
     isFavourate: false,
   );
   // ignore: non_constant_identifier_names
-  static final Product PeptoBismol = Product(
+  static Product PeptoBismol = Product(
     id: 4,
     category: AppData.categories[7],
     name: "Pepto-Bismol",
@@ -67,7 +67,7 @@ class Products {
     isFavourate: false,
   );
   // ignore: non_constant_identifier_names
-  static final Product Robitussin = Product(
+  static Product Robitussin = Product(
     id: 2,
     category: AppData.categories[4],
     name: "Robitussin",
@@ -82,7 +82,7 @@ class Products {
     isFavourate: false,
   );
   // ignore: non_constant_identifier_names
-  static final Product Lipitor = Product(
+  static Product Lipitor = Product(
     id: 5,
     category: AppData.categories[3],
     name: "Lipitor",
@@ -97,7 +97,7 @@ class Products {
     isFavourate: false,
   );
   // ignore: non_constant_identifier_names
-  static final Product Lantus = Product(
+  static Product Lantus = Product(
     id: 6,
     category: AppData.categories[6],
     name: "Lantus",
@@ -112,7 +112,7 @@ class Products {
     isFavourate: false,
   );
   // ignore: non_constant_identifier_names
-  static final Product Cortizone = Product(
+  static Product Cortizone = Product(
     id: 7,
     category: AppData.categories[5],
     name: "Cortizone",
@@ -127,7 +127,7 @@ class Products {
     isFavourate: false,
   );
   // ignore: non_constant_identifier_names
-  static final Product Centrum = Product(
+  static Product Centrum = Product(
     id: 8,
     category: AppData.categories[9],
     name: "Centrum",
@@ -142,7 +142,7 @@ class Products {
     isFavourate: false,
   );
   // ignore: non_constant_identifier_names
-  static final Product OrthoTriCyclen = Product(
+  static Product OrthoTriCyclen = Product(
     id: 9,
     category: AppData.categories[10],
     name: "Ortho Tri-Cyclen",
