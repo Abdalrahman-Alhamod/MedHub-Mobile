@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_animations.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_images.dart';
-import 'package:pharmacy_warehouse_store_mobile/core/assets/app_products_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/auth/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,17 +26,17 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   route() {
-    Get.off(() => const LoginScreen());
+    Get.off(() => LoginScreen());
   }
 
   @override
   void didChangeDependencies() {
-    precacheImage(const AssetImage(AppImages.startWallpaper), context);
-    precacheImage(const AssetImage(AppImages.categoryWallpaper), context);
     for (var image in AppImages.ads) {
       precacheImage(AssetImage(image), context);
     }
-    precacheImage(const AssetImage(AppProductsImages.amoxil), context);
+    for (var image in AppImages.allImages) {
+      precacheImage(AssetImage(image), context);
+    }
     super.didChangeDependencies();
   }
 
