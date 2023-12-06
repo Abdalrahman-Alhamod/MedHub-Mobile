@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 import 'package:pharmacy_warehouse_store_mobile/main.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/model/user.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/services/api.dart';
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
@@ -76,12 +78,14 @@ class CartCubit extends Cubit<CartState> {
   Future<void> purchaseCart() async {
     try {
       emit(CartPurchaseLoading());
-      await Future.delayed(const Duration(seconds: 2));
-      // Api.request(
-      //     url: '/cartPurchase',
-      //     body: Product.toListJson(cartProducts),
-      //     token: User.token,
-      //     methodType: MethodType.post);
+      //await Future.delayed(const Duration(seconds: 2));
+
+      Api.request(
+          url: 'api/carts',
+          body: Product.toJsonCart(cartProducts),
+          token: User.token,
+          methodType: MethodType.post);
+
       logger.i(Product.toJsonCart(cartProducts));
       emit(CartPurchaseSuccess());
       cartProducts.clear();
