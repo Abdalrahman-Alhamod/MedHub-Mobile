@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
+import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/main.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/user.dart';
@@ -15,15 +15,16 @@ class CategoryCubit extends Cubit<CategoryState> {
       emit(CategoryFetchLoading());
 
       // Fetch Categories from API
-      // Map<String, dynamic> categoriesJsonData = await Api.request(
-      //     url: '/categories/list',
-      //     body: {},
-      //     token: User.token,
-      //     methodType: MethodType.get) as Map<String, dynamic>;
-      // List<Category> categories = Category.fromListJson(categoriesJsonData);
+      Map<String, dynamic> categoriesJsonData = await Api.request(
+          url: 'api/categories',
+          body: {},
+          token: User.token,
+          methodType: MethodType.get) as Map<String, dynamic>;
+      List<Category> categories = Category.fromListJson(categoriesJsonData);
+      categories.insert(0, Category(id: 0, name: "All".tr));
 
-       await Future.delayed(const Duration(seconds: 2));
-       List<Category> categories = AppData.categories;
+      // await Future.delayed(const Duration(seconds: 2));
+      // List<Category> categories = AppData.categories;
       emit(CategoryFetchSuccess(categories: categories));
     } on DioException catch (exception) {
       logger.e("Category Cubit Fetch : \nNetwork Failure ");
