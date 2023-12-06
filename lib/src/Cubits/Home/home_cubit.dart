@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
 import 'package:pharmacy_warehouse_store_mobile/main.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/user.dart';
@@ -21,25 +20,26 @@ class HomeCubit extends Cubit<HomeState> {
       emit(HomeProductsFetchLoading());
 
       // Fetch Most Popular Products from API
-      // Map<String, dynamic> mostPopularJsonData = await Api.request(
-      //     url: '/medicines/top10',
-      //     body: {},
-      //     token: User.token,
-      //     methodType: MethodType.get) as Map<String, dynamic>;
-      // List<Product> mostPopularProducts =
-      //     Product.fromListJson(mostPopularJsonData);
+      dynamic mostPopularJsonData = await Api.request(
+          url: 'api/medicines/top10',
+          body: {},
+          token: User.token,
+          methodType: MethodType.get);
+      List<Product> mostPopularProducts =
+          Product.fromListJson(mostPopularJsonData);
 
-      // // Fetch Recently Added Products from API
-      // Map<String, dynamic> recentlyAddedJsonData = await Api.request(
-      //     url: '/medicines/recent10',
-      //     body: {},
-      //     token: User.token,
-      //     methodType: MethodType.get) as Map<String, dynamic>;
-      // List<Product> recentlyAddedProducts =
-      //     Product.fromListJson(recentlyAddedJsonData);
-      await Future.delayed(const Duration(seconds: 2));
-      List<Product> mostPopularProducts = AppData.products;
-      List<Product> recentlyAddedProducts = AppData.products;
+      // Fetch Recently Added Products from API
+      Map<String, dynamic> recentlyAddedJsonData = await Api.request(
+          url: 'api/medicines/recent10',
+          body: {},
+          token: User.token,
+          methodType: MethodType.get) as Map<String, dynamic>;
+      List<Product> recentlyAddedProducts =
+          Product.fromListJson(recentlyAddedJsonData);
+
+      // await Future.delayed(const Duration(seconds: 2));
+      // List<Product> mostPopularProducts = AppData.products;
+      // List<Product> recentlyAddedProducts = AppData.products;
       emit(HomeProductsFetchSucess(
           mostPopular: mostPopularProducts,
           recentlyAdded: recentlyAddedProducts));
@@ -47,7 +47,7 @@ class HomeCubit extends Cubit<HomeState> {
       logger.e("Home Cubit Fetch Products : \nNetwork Failure");
       emit(HomeNetworkFailure(errorMessage: exception.message.toString()));
     } catch (e) {
-      logger.e("Home Cubit Fetch Products : \nFetch Failure");
+      logger.e("Home Cubit Fetch Products : \nFetch Failure+${e.toString()}");
       emit(HomeProductsFetchFailure(errorMessage: e.toString()));
     }
   }
