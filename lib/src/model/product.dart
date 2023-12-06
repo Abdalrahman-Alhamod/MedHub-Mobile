@@ -82,7 +82,7 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: json['id'] as int,
-      category: Category.fromJson(json['category'][0]),
+      category: Category.fromJson(json['category']),
       name: json['name'] as String,
       scientificName: json['scientificName'] as String,
       brand: json['brand'] as String,
@@ -90,8 +90,8 @@ class Product {
       expirationDate: json['expirationDate'] as String,
       price: json['price'] as int,
       image: json['image'] as String,
-      inStock: json['inStock'] as int,
-      isFavourate: json['isFavourate'] as bool,
+      inStock: json['quantity'] as int,
+      isFavourate: json['isFavorite'] as bool,
     );
   }
 
@@ -99,7 +99,7 @@ class Product {
     return {'data': products.map((product) => product.toJson()).toList()};
   }
 
-  static List<Product> fromListJson(Map<String, dynamic> jsonData) {
+  static List<Product> fromListJson(dynamic jsonData) {
     List<dynamic> jsonList = jsonData['data'];
     return jsonList.map((json) => Product.fromJson(json)).toList();
   }
