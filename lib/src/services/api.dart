@@ -14,7 +14,7 @@ class MethodType {
 
 class Api {
   const Api._();
-  static const String baseUrl = 'https://8927-5-155-4-181.ngrok-free.app';
+  static const String baseUrl = 'http://0e54-5-155-149-77.ngrok-free.app/';
 
   static Future<dynamic> request(
       {required String url,
