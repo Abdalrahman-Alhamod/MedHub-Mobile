@@ -5,6 +5,9 @@ import 'package:get/get.dart' as get_lib;
 import 'package:logger/logger.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_general_constants.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_theme.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Auth/Login/login_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Auth/Logout/logout_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Auth/Register/register_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBar/bottom_nav_bar_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Cart/cart_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Category/category_cubit.dart';
@@ -48,6 +51,15 @@ void main() {
             BlocProvider(
               create: (context) => HomeCubit(),
             ),
+            BlocProvider(
+              create: (context) => LoginCubit(),
+            ),
+            BlocProvider(
+              create: (context) => RegisterCubit(),
+            ),
+            BlocProvider(
+              create: (context) => LogoutCubit(),
+            ),
           ],
           child: get_lib.GetMaterialApp(
             title: kAppTitle,
@@ -56,7 +68,7 @@ void main() {
             defaultTransition: get_lib.Transition.native,
             transitionDuration: const Duration(seconds: 1),
             translations: AppLocale(),
-            locale: const Locale('ar'),
+            locale: const Locale('en'),
             getPages: AppPages.routes,
             initialRoute: AppPages.INITIAL,
           ),
