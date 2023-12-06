@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy_warehouse_store_mobile/core/data/app_data.dart';
 import 'package:pharmacy_warehouse_store_mobile/main.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
@@ -20,7 +19,7 @@ class SearchConstraints {
 class ProductsCubit extends Cubit<ProductsState> {
   ProductsCubit() : super(ProductsInitial());
   String searchBarContent = "";
-  Category choosenCategory = Category(id: 0, name: "all".tr);
+  Category choosenCategory = Category(id: 0, name: "All".tr);
   String searchByConstraints = SearchConstraints.name;
 
   Future<void> search() async {
@@ -30,22 +29,37 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsFetchLoading());
 
       String endpoint = '';
-      if (searchBarContent == "" && choosenCategory.name == "all".tr) {
-        endpoint = '/medicines/list';
-      } else if (searchBarContent == "" && choosenCategory.name != "all".tr) {
-        endpoint = '/categories/${choosenCategory.id}';
+      Map<String, dynamic> body = {};
+      bool isAllChoosen = (choosenCategory.name.toString() == "All" ||
+          choosenCategory.name.toString() == "الكل");
+      if (searchBarContent == "" && isAllChoosen) {
+        endpoint = 'api/medicines';
+      } else if (searchBarContent == "" && isAllChoosen) {
+        endpoint = 'api/categories/${choosenCategory.id}';
+      } else if (searchBarContent != "" && isAllChoosen) {
+        endpoint = 'api/search';
+        body = {
+          "searched_text": searchBarContent,
+          "by": searchByConstraints,
+        };
+      } else if (searchBarContent != "" && isAllChoosen) {
+        endpoint = 'api/search/${choosenCategory.id}';
+        body = {
+          "searched_text": searchBarContent,
+          "by": searchByConstraints,
+        };
       }
 
       // Fetch Searched Products from API
-      // Map<String, dynamic> productsJsonData = await Api.request(
-      //     url: endpoint,
-      //     body: {},
-      //     token: User.token,
-      //     methodType: MethodType.get) as Map<String, dynamic>;
-      // List<Product> products = Product.fromListJson(productsJsonData);
+      Map<String, dynamic> productsJsonData = await Api.request(
+          url: endpoint,
+          body: body,
+          token: User.token,
+          methodType: MethodType.get) as Map<String, dynamic>;
+      List<Product> products = Product.fromListJson(productsJsonData);
 
-      await Future.delayed(const Duration(seconds: 2));
-      List<Product> products = AppData.filteredProducts[choosenCategory.id];
+      // await Future.delayed(const Duration(seconds: 2));
+      // List<Product> products = AppData.filteredProducts[choosenCategory.id];
       if (products.isEmpty) {
         emit(ProductsNotFound());
         logger.e("Product Cubit Search : \nProduct Not Found");
@@ -66,15 +80,15 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsFetchLoading());
 
       // Fetch Favourite Products from API
-      // Map<String, dynamic> favouriteJsonData = await Api.request(
-      //     url: '/medicines/user/favourites',
-      //     body: {},
-      //     token: User.token,
-      //     methodType: MethodType.get) as Map<String, dynamic>;
-      // List<Product> favouriteProducts = Product.fromListJson(favouriteJsonData);
+      Map<String, dynamic> favouriteJsonData = await Api.request(
+          url: 'api/user/favorites',
+          body: {},
+          token: User.token,
+          methodType: MethodType.get) as Map<String, dynamic>;
+      List<Product> favouriteProducts = Product.fromListJson(favouriteJsonData);
 
-      await Future.delayed(const Duration(seconds: 2));
-      List<Product> favouriteProducts = AppData.products;
+      // await Future.delayed(const Duration(seconds: 2));
+      // List<Product> favouriteProducts = AppData.products;
       if (favouriteProducts.isEmpty) {
         emit(ProductsNotFound());
         logger.e("Product Cubit Favourite : \nProduct Not Found");
