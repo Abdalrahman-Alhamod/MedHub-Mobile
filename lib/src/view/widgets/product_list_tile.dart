@@ -20,7 +20,7 @@ class ProductListTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (!isCartProduct) {
-          Get.to(() => ProductDetailsScreen(), arguments: product);
+           Get.off(() => ProductDetailsScreen(), arguments: product);
         }
       },
       child: Container(
@@ -41,7 +41,7 @@ class ProductListTile extends StatelessWidget {
                     height: 100,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(product.image),
+                        image: NetworkImage(product.image),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -98,17 +98,19 @@ class ProductListTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  isCartProduct? Column(
-                    children: [
-                      SizedBox(
-                        width: 130,
-                        child: CartQuantityCounter(product: product),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                    ],
-                  ):Container(),
+                  isCartProduct
+                      ? Column(
+                          children: [
+                            SizedBox(
+                              width: 130,
+                              child: CartQuantityCounter(product: product),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        )
+                      : Container(),
                   SizedBox(
                     width: 130,
                     child: AutoSizeText(

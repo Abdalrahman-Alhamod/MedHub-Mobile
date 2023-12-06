@@ -14,7 +14,7 @@ class ProductCard extends StatelessWidget {
     var theme = context.theme;
     return GestureDetector(
       onTap: () {
-        Get.to(() => ProductDetailsScreen(), arguments: product);
+        Get.off(() => ProductDetailsScreen(), arguments: product);
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -27,7 +27,7 @@ class ProductCard extends StatelessWidget {
                   topRight: Radius.circular(8), topLeft: Radius.circular(8)),
               color: Colors.grey.shade300,
               image: DecorationImage(
-                image: AssetImage(
+                image: NetworkImage(
                   product.image,
                 ),
                 fit: BoxFit.fill,
@@ -35,7 +35,7 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Container(
-            height: 50,
+            height: 70,
             width: 180,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
@@ -44,52 +44,46 @@ class ProductCard extends StatelessWidget {
               color: theme.primaryColor,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        width: 90,
-                        child: AutoSizeText(
-                          product.name,
-                          style: theme.textTheme.bodyLarge!.copyWith(
-                            color: Colors.white,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          maxLines: 1,
-                          minFontSize: 8,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 90,
+                      child: AutoSizeText(
+                        product.name,
+                        style: theme.textTheme.bodyLarge!.copyWith(
+                          color: Colors.white,
+                          overflow: TextOverflow.ellipsis,
                         ),
+                        maxLines: 1,
+                        minFontSize: 6,
                       ),
-                      SizedBox(
-                        width: 90,
-                        child: AutoSizeText(
-                          product.scientificName,
-                          style: theme.textTheme.bodyMedium!.copyWith(
-                            color: Colors.white,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          maxLines: 1,
-                          minFontSize: 8,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 4.0),
-                  child: SizedBox(
-                    width: 70,
-                    child: AutoSizeText(
-                      "${product.price.toString()} ${"SP".tr}",
-                      style: theme.textTheme.bodyMedium!.copyWith(
-                          color: const Color.fromARGB(255, 181, 255, 183)),
-                      minFontSize: 8,
-                      maxLines: 1,
                     ),
+                    SizedBox(
+                      width: 90,
+                      child: AutoSizeText(
+                        product.scientificName,
+                        style: theme.textTheme.bodyMedium!.copyWith(
+                          color: Colors.white,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        maxLines: 1,
+                        minFontSize: 6,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 70,
+                  child: AutoSizeText(
+                    "${product.price.toString()} ${"SP".tr}",
+                    style: theme.textTheme.bodyMedium!.copyWith(
+                        color: const Color.fromARGB(255, 181, 255, 183)),
+                    minFontSize: 8,
+                    maxLines: 1,
                   ),
                 ),
               ],

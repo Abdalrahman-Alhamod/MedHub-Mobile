@@ -10,6 +10,7 @@ import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Cart/cart_cubit.dart'
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Favourite/favourite_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_loading_dialog.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/home_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_button.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/custome_card.dart';
 
@@ -30,7 +31,8 @@ class ProductDetailsScreen extends StatelessWidget {
               showLoadingDialog();
             } else if (state is CartAddSuccess) {
               Get.until((route) => !Get.isDialogOpen!);
-              showSnackBar("addedToCartSuccessfully".tr, SnackBarMessageType.success);
+              showSnackBar(
+                  "addedToCartSuccessfully".tr, SnackBarMessageType.success);
             } else if (state is CartAddFailure) {
               Get.until((route) => !Get.isDialogOpen!);
               showSnackBar(
@@ -245,8 +247,7 @@ class _QuantityCounterState extends State<_QuantityCounter> {
 
     await Get.dialog<int>(
       AlertDialog(
-        backgroundColor: Get.theme
-            .scaffoldBackgroundColor, // Match with scaffold background color
+        backgroundColor: Colors.white, // Match with scaffold background color
         title: Text(
           "enterQuantity".tr,
           style: Get.theme.textTheme.titleLarge,
@@ -526,7 +527,7 @@ class _AppBar extends StatelessWidget {
       children: [
         CustomIconButton(
           onPressed: () {
-            Get.back();
+            Get.off(() => const HomeScreen());
           },
           icon: SvgPicture.asset(
             AppVector.backArrowIcon,
