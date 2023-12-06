@@ -70,6 +70,9 @@ class ProductsListScreen extends StatelessWidget {
               ),
               const _ProductsCardsView(
                   homeProductsType: HomeProductsType.recentlyAdded),
+              const SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
@@ -112,7 +115,7 @@ class _ProductsCardsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 230,
+      height: 250,
       width: double.infinity,
       child: BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) {

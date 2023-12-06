@@ -85,7 +85,7 @@ class _ProductsSuccessView extends StatelessWidget {
         clipBehavior: Clip.none,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // 1
-          childAspectRatio: 0.8, // 4
+          childAspectRatio: 0.6, // 4
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
         ),
