@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_warehouse_store_mobile/main.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/model/user.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/services/api.dart';
 
 part 'favourite_state.dart';
 
@@ -11,14 +13,22 @@ class FavouriteCubit extends Cubit<FavouriteState> {
   Future<void> toggleFavourate({required Product product}) async {
     try {
       emit(FavourateToggleLoading());
-      // Api.request(
-      //     url: '/favourate/$product.id',
-      //     body: {},
-      //     token: User.token,
-      //     methodType: MethodType.post);
-      await Future.delayed(
-        const Duration(seconds: 2),
-      );
+      String endPoint = '';
+      logger.f(product.isFavourate);
+      if (product.isFavourate) {
+        endPoint = 'api/user/unFavor';
+      } else {
+        endPoint = 'api/user/favor';
+      }
+      Api.request(
+          url: '$endPoint/${product.id}',
+          body: {},
+          token: User.token,
+          methodType: MethodType.post);
+
+      // await Future.delayed(
+      //   const Duration(seconds: 2),
+      // );
       // add to favourate
       emit(FavourateToggleSuccess());
     } on DioException catch (exception) {
