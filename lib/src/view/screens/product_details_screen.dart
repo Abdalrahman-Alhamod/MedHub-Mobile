@@ -157,7 +157,7 @@ class _Buttons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = context.theme;
-    bool isFav = product.isFavourate;
+    bool isFav = product.isFavorite;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Row(
