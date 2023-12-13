@@ -48,8 +48,9 @@ class Product {
   int price;
   String image;
   int inStock;
-  bool isFavourate;
+  bool isFavorite;
   int quantity;
+
   Product({
     required this.id,
     required this.category,
@@ -61,8 +62,9 @@ class Product {
     required this.price,
     required this.image,
     required this.inStock,
-    required this.isFavourate,
+    required this.isFavorite,
   }) : quantity = 0;
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -74,8 +76,8 @@ class Product {
       'expirationDate': expirationDate,
       'price': price,
       'image': image,
-      'inStock': inStock,
-      'isFavourate': isFavourate,
+      'quantity': inStock,
+      'isFavorite': isFavorite,
     };
   }
 
@@ -91,7 +93,7 @@ class Product {
       price: json['price'] as int,
       image: json['image'] as String,
       inStock: json['quantity'] as int,
-      isFavourate: json['isFavorite'] as bool,
+      isFavorite: json['isFavorite'] as bool,
     );
   }
 
@@ -126,7 +128,7 @@ class Product {
       price: $price,
       image: $image,
       inStock: $inStock,
-      isFavourate: $isFavourate,
+      isFavorite: $isFavorite,
       quantity: $quantity
     }
   ''';

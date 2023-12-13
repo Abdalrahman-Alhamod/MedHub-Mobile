@@ -14,8 +14,8 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     try {
       emit(FavourateToggleLoading());
       String endPoint = '';
-      logger.f(product.isFavourate);
-      if (product.isFavourate) {
+      logger.f(product.isFavorite);
+      if (product.isFavorite) {
         endPoint = 'api/user/unFavor';
       } else {
         endPoint = 'api/user/favor';
