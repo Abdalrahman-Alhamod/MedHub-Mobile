@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_vectors.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
+import 'package:pharmacy_warehouse_store_mobile/main.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Cart/cart_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Favourite/favourite_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_loading_dialog.dart';
@@ -509,7 +510,8 @@ class _ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
+    logger.f(product.image);
+    return Image.network(
       product.image,
       width: 250.w,
       height: 250.h,
