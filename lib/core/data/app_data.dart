@@ -19,7 +19,7 @@ class Products {
     price: 17500,
     image: AppProductsImages.amoxil,
     inStock: 0,
-    isFavourate: false,
+    isFavorite: false,
   );
   // ignore: non_constant_identifier_names
   static Product Excedrin = Product(
@@ -34,7 +34,7 @@ class Products {
     price: 22300,
     image: AppProductsImages.excedrin,
     inStock: 3,
-    isFavourate: false,
+    isFavorite: false,
   );
   // ignore: non_constant_identifier_names
   static Product Benadryl = Product(
@@ -49,7 +49,7 @@ class Products {
     price: 26500,
     image: AppProductsImages.benadryl,
     inStock: 96,
-    isFavourate: false,
+    isFavorite: false,
   );
   // ignore: non_constant_identifier_names
   static Product PeptoBismol = Product(
@@ -64,7 +64,7 @@ class Products {
     price: 8500,
     image: AppProductsImages.peptoBismol,
     inStock: 123,
-    isFavourate: false,
+    isFavorite: false,
   );
   // ignore: non_constant_identifier_names
   static Product Robitussin = Product(
@@ -79,7 +79,7 @@ class Products {
     price: 13200,
     image: AppProductsImages.robitussin,
     inStock: 32,
-    isFavourate: false,
+    isFavorite: false,
   );
   // ignore: non_constant_identifier_names
   static Product Lipitor = Product(
@@ -94,7 +94,7 @@ class Products {
     price: 32500,
     image: AppProductsImages.lipitor,
     inStock: 21,
-    isFavourate: false,
+    isFavorite: false,
   );
   // ignore: non_constant_identifier_names
   static Product Lantus = Product(
@@ -109,7 +109,7 @@ class Products {
     price: 38500,
     image: AppProductsImages.lantus,
     inStock: 15,
-    isFavourate: false,
+    isFavorite: false,
   );
   // ignore: non_constant_identifier_names
   static Product Cortizone = Product(
@@ -124,7 +124,7 @@ class Products {
     price: 26500,
     image: AppProductsImages.cortizone,
     inStock: 86,
-    isFavourate: false,
+    isFavorite: false,
   );
   // ignore: non_constant_identifier_names
   static Product Centrum = Product(
@@ -139,7 +139,7 @@ class Products {
     price: 31500,
     image: AppProductsImages.centrum,
     inStock: 49,
-    isFavourate: false,
+    isFavorite: false,
   );
   // ignore: non_constant_identifier_names
   static Product OrthoTriCyclen = Product(
@@ -154,7 +154,7 @@ class Products {
     price: 52000,
     image: AppProductsImages.orthoTriCyclen,
     inStock: 26,
-    isFavourate: false,
+    isFavorite: false,
   );
 }
 
