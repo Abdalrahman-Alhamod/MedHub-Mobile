@@ -95,6 +95,16 @@ class AppLocale implements Translations {
           "GlaxoSmithKline": "جلاكسو سميث كلاين",
           "desc":
               "أموكسيل هو مضاد حيوي من البنسلين، يعطى لعلاج الالتهابات التي تسببها البكتيريا",
+
+          // Orders
+          "preparing": "قيد التحضير",
+          "delivering": "يتم التوصيل",
+          "recieved": "تم الاستلام",
+          "refused": "تم الرفض",
+          "orderID": "معرف الطلب :",
+          "totalBill": "المبلغ الإجمالي :",
+          "status": "الحالة :",
+          "date": "التاريخ :",
         },
         "en": {
           //start
@@ -188,6 +198,16 @@ class AppLocale implements Translations {
           "GlaxoSmithKline": "GlaxoSmithKline",
           "desc":
               "Amoxil is a penicillin antibiotic, which is given to treat the infections caused by bacteria",
+
+          // Orders
+          "preparing": "Preparing",
+          "delivering": "Delivering",
+          "recieved": "Recieved",
+          "refused": "Refused",
+          "orderID": "Order ID :",
+          "totalBill": "Total Bill :",
+          "status": "Status :",
+          "date": "Date :",
         },
       };
 }
