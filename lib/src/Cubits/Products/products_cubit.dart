@@ -32,9 +32,12 @@ class ProductsCubit extends Cubit<ProductsState> {
       Map<String, dynamic> body = {};
       bool isAllChoosen = (choosenCategory.name.toString() == "All" ||
           choosenCategory.name.toString() == "الكل");
+      logger.f(searchBarContent);
+      logger.f(choosenCategory);
+      logger.f(isAllChoosen);
       if (searchBarContent == "" && isAllChoosen) {
         endpoint = 'api/medicines';
-      } else if (searchBarContent == "" && isAllChoosen) {
+      } else if (searchBarContent == "" && !isAllChoosen) {
         endpoint = 'api/categories/${choosenCategory.id}';
       } else if (searchBarContent != "" && isAllChoosen) {
         endpoint = 'api/search';
@@ -42,7 +45,7 @@ class ProductsCubit extends Cubit<ProductsState> {
           "searched_text": searchBarContent,
           "by": searchByConstraints,
         };
-      } else if (searchBarContent != "" && isAllChoosen) {
+      } else if (searchBarContent != "" && !isAllChoosen) {
         endpoint = 'api/search/${choosenCategory.id}';
         body = {
           "searched_text": searchBarContent,
