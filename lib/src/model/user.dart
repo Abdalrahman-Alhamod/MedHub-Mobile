@@ -8,7 +8,7 @@ class User {
   bool isAdmin;
   String image;
   static String? token =
-      "XFIBLwGBVNNwJz903rQfoVKgvPk6Z5TzzmVNAUq4jjyxNIYP0Mus2wBV8KEq";
+      "5BBzrJ2GCfeBB3RIHYBL2mEO3epUXQ3NfRVGoyX1hnHvV5RzhUAwErrkzUl5";
   User({
     required this.id,
     required this.name,

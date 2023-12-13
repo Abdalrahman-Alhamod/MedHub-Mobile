@@ -14,7 +14,7 @@ class MethodType {
 
 class Api {
   const Api._();
-  static const String baseUrl = 'http://0e54-5-155-149-77.ngrok-free.app/';
+  static const String baseUrl = 'http://192.168.43.98:8000/';
 
   static Future<dynamic> request(
       {required String url,
@@ -29,7 +29,7 @@ class Api {
 
     final dio = Dio();
     try {
-      Response response = await dio.post(
+      Response response = await dio.request(
         baseUrl + url,
         data: body,
         options: Options(
