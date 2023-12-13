@@ -253,9 +253,12 @@ class _CategoriesCardsViewSuccess extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Center(
-                  child: Text(categories[index].name,
-                      style: theme.textTheme.titleMedium!.copyWith(
-                          color: const Color.fromARGB(255, 34, 77, 112)))),
+                child: Text(
+                  categories[index].name,
+                  style: theme.textTheme.titleMedium!
+                      .copyWith(color: const Color.fromARGB(255, 34, 77, 112)),
+                ),
+              ),
             ),
           ),
         );
