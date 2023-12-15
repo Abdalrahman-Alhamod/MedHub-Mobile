@@ -32,9 +32,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       Map<String, dynamic> body = {};
       bool isAllChoosen = (choosenCategory.name.toString() == "All" ||
           choosenCategory.name.toString() == "الكل");
-      logger.f(searchBarContent);
-      logger.f(choosenCategory);
-      logger.f(isAllChoosen);
+
       if (searchBarContent == "" && isAllChoosen) {
         endpoint = 'api/medicines';
       } else if (searchBarContent == "" && !isAllChoosen) {

@@ -19,7 +19,6 @@ class OrdersCubit extends Cubit<OrdersState> {
           token: User.token,
           methodType: MethodType.get) as Map<String, dynamic>;
       List<Order> orders = Order.fromListJson(ordersJsonData);
-      logger.f(orders.toString());
       if (orders.isEmpty) {
         emit(OrdersFetchEmpty());
       } else {
