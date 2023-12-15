@@ -108,7 +108,7 @@ class AppLocale implements Translations {
 
           // User
           "notifications": "الإشعارات",
-          "statitics": "الإحصائيات",
+          "statistics": "الإحصائيات",
           "logout": "تسجيل الخروج",
         },
         "en": {
@@ -216,7 +216,7 @@ class AppLocale implements Translations {
 
           // User
           "notifications": "Notifications",
-          "statitics": "Statitics",
+          "statistics": "Statistics",
           "logout": "Logout",
         },
       };

@@ -128,7 +128,7 @@ class _ProfileSuccessView extends StatelessWidget {
           height: 20,
         ),
         _ProfileOptionsListTile(
-          title: "statitics".tr,
+          title: "statistics".tr,
           icon: Icons.assessment,
           onTap: () {},
         ),
