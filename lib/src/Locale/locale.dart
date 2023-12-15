@@ -105,6 +105,11 @@ class AppLocale implements Translations {
           "totalBill": "المبلغ الإجمالي :",
           "status": "الحالة :",
           "date": "التاريخ :",
+
+          // User
+          "notifications": "الإشعارات",
+          "statitics": "الإحصائيات",
+          "logout": "تسجيل الخروج",
         },
         "en": {
           //start
@@ -208,6 +213,11 @@ class AppLocale implements Translations {
           "totalBill": "Total Bill :",
           "status": "Status :",
           "date": "Date :",
+
+          // User
+          "notifications": "Notifications",
+          "statitics": "Statitics",
+          "logout": "Logout",
         },
       };
 }
