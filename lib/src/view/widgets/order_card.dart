@@ -66,7 +66,7 @@ class OrderCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                "${order.id} #",
+                "#${order.id}",
                 style: theme.textTheme.titleLarge,
               ),
               const SizedBox(
