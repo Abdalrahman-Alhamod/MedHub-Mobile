@@ -15,6 +15,7 @@ import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Favourite/favourite_c
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Home/home_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Orders/orders_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Products/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/User/user_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/local_controller.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/locale.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/routes/app_pages.dart';
@@ -24,7 +25,6 @@ Logger logger = Logger(printer: PrettyPrinter(printEmojis: false));
 void main() {
   get_lib.Get.put(AppLocalController());
   Bloc.observer = SimpleBlocObserver();
-
 
   return runApp(
     ScreenUtilInit(
@@ -63,8 +63,11 @@ void main() {
             BlocProvider(
               create: (context) => LogoutCubit(),
             ),
-             BlocProvider(
+            BlocProvider(
               create: (context) => OrdersCubit(),
+            ),
+            BlocProvider(
+              create: (context) => UserCubit(),
             ),
           ],
           child: get_lib.GetMaterialApp(
