@@ -107,9 +107,12 @@ class AppLocale implements Translations {
           "date": "التاريخ :",
 
           // User
-          "notifications": "الإشعارات",
           "statistics": "الإحصائيات",
+          "language": "لغة التطبيق",
           "logout": "تسجيل الخروج",
+          "selectLangauge": "اختر لغة التطبيق",
+          "english":"الإنكليزية",
+          "arabic":"العربية",
         },
         "en": {
           //start
@@ -215,9 +218,12 @@ class AppLocale implements Translations {
           "date": "Date :",
 
           // User
-          "notifications": "Notifications",
           "statistics": "Statistics",
+          "language": "Language",
           "logout": "Logout",
+          "selectLangauge": "Select Langauge",
+          "english":"English",
+          "arabic":"Arabic",
         },
       };
 }
