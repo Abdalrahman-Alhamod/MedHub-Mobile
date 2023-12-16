@@ -21,12 +21,15 @@ import 'package:pharmacy_warehouse_store_mobile/src/Cubits/User/user_cubit.dart'
 import 'package:pharmacy_warehouse_store_mobile/src/locale/local_controller.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/locale.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/routes/app_pages.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/services/firebase_api.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/services/simple_bloc_observer.dart';
 
 Logger logger = Logger(printer: PrettyPrinter(printEmojis: false));
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseApi().initNotifications();
+
   get_lib.Get.put(AppLocalController());
   Bloc.observer = SimpleBlocObserver();
 
