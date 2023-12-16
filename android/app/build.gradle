@@ -35,6 +35,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    packagingOptions {
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
