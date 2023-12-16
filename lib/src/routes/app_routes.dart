@@ -16,4 +16,6 @@ abstract class Routes {
   static const String NOTIFICATIONS = '/notifications';
   // ignore: constant_identifier_names
   static const String PROFILE = '/profile';
+  // ignore: constant_identifier_names
+  static const String STATISTICS = '/statistics';
 }
