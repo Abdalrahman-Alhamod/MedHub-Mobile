@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBar/bottom_nav_bar_cubit.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Locale/local_controller.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/drawer/profile_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/cart_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/favourite_screen.dart';
@@ -13,7 +12,7 @@ import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation bar/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   static const List<Widget> screen = [
     FavouriteScreen(),
@@ -39,6 +38,7 @@ class HomeScreenState extends State<HomeScreen> {
                 .screen[BlocProvider.of<BottomNavBarCubit>(context).index],
           ),
           bottomNavigationBar: BottomNavyBar(
+            backgroundColor: Colors.white,
             selectedIndex: BlocProvider.of<BottomNavBarCubit>(context).index,
             containerHeight: 70,
             onItemSelected: (index) {
@@ -102,7 +102,7 @@ class HomeScreenState extends State<HomeScreen> {
 }
 
 class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _HomeAppBar({Key? key}) : super(key: key);
+  const _HomeAppBar();
 
   @override
   Size get preferredSize => const Size.fromHeight(56.0);
@@ -110,34 +110,24 @@ class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: Colors.white,
       title: const Text(
         'MedHub',
         style: TextStyle(
-          color: Colors.white,
+          color: AppColors.primaryColor,
           fontWeight: FontWeight.bold,
-        ),
-      ),
-      centerTitle: true,
-      leading: IconButton(
-        onPressed: () async {
-          Get.off(() => const ProfileScreen());
-        },
-        icon: const Icon(
-          Icons.account_circle,
-          size: 40,
-          color: Colors.white,
+          fontSize: 24,
         ),
       ),
       actions: [
         IconButton(
           onPressed: () async {
-            AppLocalController().toggleLang();
+            Get.off(() => const ProfileScreen());
           },
-          icon: Icon(
-            Icons.language,
+          icon: const Icon(
+            Icons.account_circle,
             size: 40,
-            color: Colors.grey.shade300,
+            color: AppColors.primaryColor,
           ),
         ),
       ],
