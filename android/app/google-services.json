@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "895894180005",
+    "project_id": "medhub-d9cfb",
+    "storage_bucket": "medhub-d9cfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895894180005:android:52e59f579a63b035cf7d4c",
+        "android_client_info": {
+          "package_name": "com.example.pharmacy_warehouse_store_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQzUbmMwzRKUyqzVHoQbHYc1vAg-Vrslk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

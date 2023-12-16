@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,7 @@ import 'package:get/get.dart' as get_lib;
 import 'package:logger/logger.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_general_constants.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_theme.dart';
+import 'package:pharmacy_warehouse_store_mobile/firebase_options.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Auth/Login/login_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Auth/Logout/logout_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Auth/Register/register_cubit.dart';
@@ -22,7 +24,9 @@ import 'package:pharmacy_warehouse_store_mobile/src/routes/app_pages.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/services/simple_bloc_observer.dart';
 
 Logger logger = Logger(printer: PrettyPrinter(printEmojis: false));
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   get_lib.Get.put(AppLocalController());
   Bloc.observer = SimpleBlocObserver();
 
