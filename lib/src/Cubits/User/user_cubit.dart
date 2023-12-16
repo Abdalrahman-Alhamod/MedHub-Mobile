@@ -18,7 +18,6 @@ class UserCubit extends Cubit<UserState> {
           token: User.token,
           methodType: MethodType.get) as Map<String, dynamic>;
       User user = User.fromJson(userJsonDate['data']);
-      logger.f(user);
       emit(UserFetchSuccess(user: user));
     } on DioException catch (exception) {
       logger.e("User Cubit : \nNetwork Failure \n${exception.message}");
