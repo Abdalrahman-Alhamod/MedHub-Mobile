@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-enum SnackBarMessageType { error, info, success }
+enum SnackBarMessageType { error, info, success, notification }
 
 void showSnackBar(
   String message,
-  SnackBarMessageType messageType,
-) {
+  SnackBarMessageType messageType, {
+  void Function(GetSnackBar)? onTap,
+}) {
   Color backgroundColor;
   IconData icon;
 
@@ -24,6 +25,10 @@ void showSnackBar(
     case SnackBarMessageType.success:
       backgroundColor = Colors.green;
       icon = Icons.check_circle_outline;
+      break;
+    case SnackBarMessageType.notification:
+      backgroundColor = AppColors.primaryColor;
+      icon = Icons.notifications_active;
       break;
   }
 
@@ -53,7 +58,7 @@ void showSnackBar(
                 fontWeight: FontWeight.bold,
                 overflow: TextOverflow.ellipsis,
               ),
-              maxLines: 1,
+              maxLines: 3,
             ),
           ),
         ],
@@ -79,8 +84,6 @@ void showSnackBar(
         style: const TextStyle(color: Colors.white),
       ),
     ),
-    onTap: (snack) {
-      // Your action on tap
-    },
+    onTap: onTap,
   );
 }
