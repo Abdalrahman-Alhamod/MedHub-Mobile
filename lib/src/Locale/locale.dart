@@ -111,8 +111,14 @@ class AppLocale implements Translations {
           "language": "لغة التطبيق",
           "logout": "تسجيل الخروج",
           "selectLangauge": "اختر لغة التطبيق",
-          "english":"الإنكليزية",
-          "arabic":"العربية",
+          "english": "الإنكليزية",
+          "arabic": "العربية",
+
+          // Search By
+          "searchBy": "البحث عن طريق : ",
+          "name": "الاسم التجاري",
+          "scientificName": "الاسم العلمي",
+          "description": "الوصف",
         },
         "en": {
           //start
@@ -222,8 +228,14 @@ class AppLocale implements Translations {
           "language": "Language",
           "logout": "Logout",
           "selectLangauge": "Select Langauge",
-          "english":"English",
-          "arabic":"Arabic",
+          "english": "English",
+          "arabic": "Arabic",
+
+          // Search By
+          "searchBy": "Search By : ",
+          "name": "Name",
+          "scientificName": "Scientific Name",
+          "description": "Description",
         },
       };
 }

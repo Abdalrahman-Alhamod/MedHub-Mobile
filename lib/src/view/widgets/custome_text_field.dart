@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_colors.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Products/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/search_by_dialog.dart';
 
 class CustomeTextField extends StatefulWidget {
   const CustomeTextField({
@@ -76,15 +77,40 @@ class _CustomeTextFieldState extends State<CustomeTextField> {
                 },
               )
             : widget.isSearchBar
-                ? IconButton(
-                    icon: const Icon(Icons.clear),
-                    onPressed: () {
-                      setState(() {
-                        _controller!.clear();
-                        BlocProvider.of<ProductsCubit>(context)
-                            .searchBarContent = "";
-                      });
-                    },
+                ? SizedBox(
+                    width: 110,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            setState(() {
+                              _controller!.clear();
+                              BlocProvider.of<ProductsCubit>(context)
+                                  .searchBarContent = "";
+                            });
+                          },
+                        ),
+                        Container(
+                          height: 30, // Adjust the height as needed
+                          width: 1, // Adjust the width as needed
+                          color: Colors.grey,
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.tune),
+                          onPressed: () {
+                            setState(() {
+                              showSearchByDialog();
+                              _controller!.clear();
+                              BlocProvider.of<ProductsCubit>(context)
+                                  .searchBarContent = "";
+                            });
+                          },
+                        ),
+                      ],
+                    ),
                   )
                 : null,
         enabledBorder: OutlineInputBorder(
