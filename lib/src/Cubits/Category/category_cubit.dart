@@ -10,6 +10,7 @@ part 'category_state.dart';
 
 class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit() : super(CategoryInitial());
+  List<Category>? currentCategories;
   Future<void> getCategories() async {
     try {
       emit(CategoryFetchLoading());
@@ -21,6 +22,7 @@ class CategoryCubit extends Cubit<CategoryState> {
           token: User.token,
           methodType: MethodType.get) as Map<String, dynamic>;
       List<Category> categories = Category.fromListJson(categoriesJsonData);
+      currentCategories = categories;
       categories.insert(0, Category(id: 0, name: "All".tr));
 
       // await Future.delayed(const Duration(seconds: 2));

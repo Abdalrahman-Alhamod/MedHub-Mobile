@@ -119,6 +119,15 @@ class AppLocale implements Translations {
           "name": "الاسم التجاري",
           "scientificName": "الاسم العلمي",
           "description": "الوصف",
+
+          // Statitics
+          "Data Highlights": "أبرز البيانات",
+          "Orders": "الطلبات",
+          "Total Paid": "مجموع المبالغ المدفوعة",
+          "Medicines": "الأدوية",
+          "Favorites": "المفضلة",
+          "Top Purchased Categories": "أهم الفئات التي تم شراؤها",
+          "Daily Expense": "المصروف اليومي",
         },
         "en": {
           //start
@@ -236,6 +245,14 @@ class AppLocale implements Translations {
           "name": "Name",
           "scientificName": "Scientific Name",
           "description": "Description",
+          // Statitics
+          "Data Highlights": "Data Highlights",
+          "Orders": "Orders",
+          "Total Paid": "Total Paid",
+          "Medicines": "Medicines",
+          "Favorites": "Favorites",
+          "Top Purchased Categories": "Top Purchased Categories",
+          "Daily Expense": "Daily Expense",
         },
       };
 }
