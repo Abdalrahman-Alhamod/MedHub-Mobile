@@ -21,7 +21,8 @@ class FirebaseApi {
   );
 
   Future<void> initNotifications() async {
-    await _firebaseMessaging.requestPermission();
+    // await _firebaseMessaging.requestPermission();
+    initPermissions();
 
     final fcmToken = await _firebaseMessaging.getToken();
 
@@ -64,5 +65,28 @@ class FirebaseApi {
         }
       },
     );
+  }
+
+  void initPermissions() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      logger.d('User granted permission');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      logger.d('User granted provisional permission');
+    } else {
+      logger.d('User declined or has not accepted permission');
+    }
   }
 }
