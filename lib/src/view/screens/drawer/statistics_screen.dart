@@ -250,7 +250,7 @@ class _LineChart extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 20.0),
           child: Text(
-            'Daily Expense'.tr,
+            'Weekly Expense'.tr,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -275,9 +275,9 @@ class _LineChart extends StatelessWidget {
         titlesData: _titlesData,
         borderData: _borderData,
         lineBarsData: _lineBarsData,
-        minX: 0,
-        maxX: 6, // Changed to represent 7 days
-        maxY: 2.5, // Adjusted to match the specified values
+        minX: 1,
+        maxX: 4,
+        maxY: 10,
         minY: 0,
       );
 
@@ -323,11 +323,11 @@ class _LineChart extends StatelessWidget {
     // Map the values to corresponding labels
     final Map<double, String> valueLabels = {
       0: '0',
-      0.5: '500k',
-      1: '1m',
-      1.5: '1.5m',
       2: '2m',
-      2.5: '2.5m',
+      4: '4m',
+      6: '6m',
+      8: '8m',
+      10: '10m',
     };
 
     final text = valueLabels[value] ?? '';
@@ -338,17 +338,17 @@ class _LineChart extends StatelessWidget {
   SideTitles _leftTitles() => SideTitles(
         getTitlesWidget: _leftTitleWidgets,
         showTitles: true,
-        interval: 0.5, // Adjusted interval for better representation
+        interval: 2,
         reservedSize: 40,
       );
 
   Widget _bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 12, // Adjusted font size for better representation
+      fontSize: 12,
     );
 
-    final text = '${value.toInt() + 1}'; // Days start from 1
+    final text = '${value.toInt()}';
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
@@ -364,7 +364,7 @@ class _LineChart extends StatelessWidget {
         getTitlesWidget: _bottomTitleWidgets,
       );
 
-  FlGridData get _gridData => const FlGridData(show: true);
+  FlGridData get _gridData => const FlGridData(show: true, verticalInterval: 1);
 
   FlBorderData get _borderData => FlBorderData(
         show: true,
@@ -387,13 +387,10 @@ class _LineChart extends StatelessWidget {
           color: Colors.pink.withOpacity(0.2),
         ),
         spots: const [
-          FlSpot(0, 250000 / 1000000),
-          FlSpot(1, 1200000 / 1000000),
-          FlSpot(2, 1400000 / 1000000),
-          FlSpot(3, 1000000 / 1000000),
-          FlSpot(4, 900000 / 1000000),
-          FlSpot(5, 1900000 / 1000000),
-          FlSpot(6, 700000 / 1000000),
+          FlSpot(1, 2500000 / 1000000),
+          FlSpot(2, 3200000 / 1000000),
+          FlSpot(3, 8400000 / 1000000),
+          FlSpot(4, 2300000 / 1000000),
         ],
       );
 }

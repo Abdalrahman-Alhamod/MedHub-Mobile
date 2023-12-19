@@ -127,7 +127,7 @@ class AppLocale implements Translations {
           "Medicines": "الأدوية",
           "Favorites": "المفضلة",
           "Top Purchased Categories": "أهم الفئات التي تم شراؤها",
-          "Daily Expense": "المصروف اليومي",
+          "Weekly Expense": "المصروف الأسبوعي",
         },
         "en": {
           //start
@@ -252,7 +252,7 @@ class AppLocale implements Translations {
           "Medicines": "Medicines",
           "Favorites": "Favorites",
           "Top Purchased Categories": "Top Purchased Categories",
-          "Daily Expense": "Daily Expense",
+          "Weekly Expense": "Weekly Expense",
         },
       };
 }
