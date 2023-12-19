@@ -323,11 +323,11 @@ class _LineChart extends StatelessWidget {
     // Map the values to corresponding labels
     final Map<double, String> valueLabels = {
       0: '0',
-      2: '2m',
-      4: '4m',
-      6: '6m',
-      8: '8m',
-      10: '10m',
+      2: '2M',
+      4: '4M',
+      6: '6M',
+      8: '8M',
+      10: '10M',
     };
 
     final text = valueLabels[value] ?? '';
