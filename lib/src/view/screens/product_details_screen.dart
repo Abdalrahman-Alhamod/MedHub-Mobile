@@ -200,6 +200,7 @@ class _Buttons extends StatelessWidget {
                 onPressed: () {
                   BlocProvider.of<FavouriteCubit>(context)
                       .toggleFavourate(product: product);
+                  product.isFavorite = !product.isFavorite;
                 },
                 icon: Icon(
                   Icons.favorite,
