@@ -103,9 +103,6 @@ class _CustomeTextFieldState extends State<CustomeTextField> {
                           onPressed: () {
                             setState(() {
                               showSearchByDialog();
-                              _controller!.clear();
-                              BlocProvider.of<ProductsCubit>(context)
-                                  .searchBarContent = "";
                             });
                           },
                         ),
