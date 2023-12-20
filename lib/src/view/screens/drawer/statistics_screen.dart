@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Category/category_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Statistics/statistics_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
 
 final List<Color> _colors = [
@@ -22,6 +23,7 @@ class StatisticsScreen extends StatelessWidget {
   const StatisticsScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<StatisticsCubit>(context).getStatistics();
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
