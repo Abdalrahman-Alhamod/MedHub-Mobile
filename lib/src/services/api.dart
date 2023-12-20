@@ -43,6 +43,7 @@ class Api {
       return jsonData;
     } on DioException catch (exception) {
       logger.e("API Dio Exception : $exception");
+      logger.e("${exception.response}");
       if (exception.toString().contains('SocketException')) {
         throw DioException(
             message: "networkError".tr, requestOptions: RequestOptions());
