@@ -17,6 +17,7 @@ import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Favourite/favourite_c
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Home/home_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Orders/orders_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Products/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Statistics/statistics_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/User/user_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/local_controller.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/locale.dart';
@@ -75,6 +76,9 @@ void main() async {
             ),
             BlocProvider(
               create: (context) => UserCubit(),
+            ),
+            BlocProvider(
+              create: (context) => StatisticsCubit(),
             ),
           ],
           child: get_lib.GetMaterialApp(
