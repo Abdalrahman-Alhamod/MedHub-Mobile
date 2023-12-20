@@ -4,6 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy_warehouse_store_mobile/main.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/BottomNavBar/bottom_nav_bar_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/model/user.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/helpers/show_snack_bar.dart';
 
 class FirebaseApi {
@@ -27,6 +28,7 @@ class FirebaseApi {
     final fcmToken = await _firebaseMessaging.getToken();
 
     logger.f("FCM Token : $fcmToken");
+    User.fCMToken = fcmToken;
 
     await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<

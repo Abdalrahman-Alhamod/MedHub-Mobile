@@ -9,6 +9,7 @@ class User {
   String image;
   static String? token =
       "5BBzrJ2GCfeBB3RIHYBL2mEO3epUXQ3NfRVGoyX1hnHvV5RzhUAwErrkzUl5";
+  static String? fCMToken;
   User({
     required this.id,
     required this.name,
