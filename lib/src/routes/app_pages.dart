@@ -6,6 +6,7 @@ import 'package:pharmacy_warehouse_store_mobile/src/view/screens/auth/register_s
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/drawer/profile_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/drawer/statistics_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/home_screen.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/order_details_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/product_details_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/start/splash_screen.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/view/screens/start/welcome_screen.dart';
@@ -27,5 +28,6 @@ class AppPages {
     GetPage(name: Routes.NOTIFICATIONS, page: () => const NotificationScreen()),
     GetPage(name: Routes.PROFILE, page: () => const ProfileScreen()),
     GetPage(name: Routes.STATISTICS, page: () => const StatisticsScreen()),
+    GetPage(name: Routes.ORDER_DETAILS, page: () => const OrderDetailsScreen()),
   ];
 }

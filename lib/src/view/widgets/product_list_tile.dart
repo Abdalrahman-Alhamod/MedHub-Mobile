@@ -7,20 +7,22 @@ import 'package:pharmacy_warehouse_store_mobile/src/view/screens/product_details
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/cart_quantity_counter.dart';
 
 class ProductListTile extends StatelessWidget {
-  const ProductListTile({
-    super.key,
-    required this.product,
-    this.isCartProduct = false,
-  });
+  const ProductListTile(
+      {super.key,
+      required this.product,
+      this.isCartProduct = false,
+      this.quantity = 0});
   final Product product;
   final bool isCartProduct;
+  final int quantity;
   @override
   Widget build(BuildContext context) {
     var theme = context.theme;
+
     return GestureDetector(
       onTap: () {
-        if (!isCartProduct) {
-           Get.off(() => ProductDetailsScreen(), arguments: product);
+        if (!isCartProduct && quantity == 0) {
+          Get.off(() => ProductDetailsScreen(), arguments: product);
         }
       },
       child: Container(
@@ -110,7 +112,33 @@ class ProductListTile extends StatelessWidget {
                             ),
                           ],
                         )
-                      : Container(),
+                      : quantity != 0
+                          ? Column(
+                              children: [
+                                SizedBox(
+                                  width: 130,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        '$quantity ${"pc".tr}',
+                                        style: theme.textTheme.titleLarge!
+                                            .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: theme.primaryColor,
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                              ],
+                            )
+                          : Container(),
                   SizedBox(
                     width: 130,
                     child: AutoSizeText(

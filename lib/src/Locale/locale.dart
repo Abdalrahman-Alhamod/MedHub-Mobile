@@ -105,6 +105,8 @@ class AppLocale implements Translations {
           "totalBill": "المبلغ الإجمالي :",
           "status": "الحالة :",
           "date": "التاريخ :",
+          "pc": "ق",
+          "orderDetails": "تفاصيل الطلب",
 
           // User
           "statistics": "الإحصائيات",
@@ -231,6 +233,8 @@ class AppLocale implements Translations {
           "totalBill": "Total Bill :",
           "status": "Status :",
           "date": "Date :",
+          "pc": "pc",
+          "orderDetails": "Order Details",
 
           // User
           "statistics": "Statistics",

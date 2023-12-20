@@ -22,3 +22,20 @@ final class OrdersNetworkFailure extends OrdersState {
 }
 
 final class OrdersFetchEmpty extends OrdersState {}
+
+final class OrderFetchLoading extends OrdersState {}
+
+final class OrderFetchSuccess extends OrdersState {
+  Order order;
+  OrderFetchSuccess({required this.order});
+}
+
+final class OrderFetchFailure extends OrdersState {
+  String errorMessage;
+  OrderFetchFailure({required this.errorMessage});
+}
+
+final class OrderNetworkFailure extends OrdersState {
+  String errorMessage;
+  OrderNetworkFailure({required this.errorMessage});
+}
