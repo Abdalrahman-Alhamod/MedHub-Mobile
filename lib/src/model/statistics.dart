@@ -3,10 +3,10 @@ class Statistics {
   int refusedOrders;
   int inPreparationOrders;
   int deliveredOrders;
-  String totalPayment;
+  int totalPayment;
   int gettingDeliveredOrders;
   int totalMedicines;
-  int favouriteMedicines;
+  int favoriteMedicines;
   Map<String, dynamic> categoriesPercentages;
   Statistics({
     required this.totalOrders,
@@ -16,7 +16,7 @@ class Statistics {
     required this.gettingDeliveredOrders,
     required this.totalPayment,
     required this.totalMedicines,
-    required this.favouriteMedicines,
+    required this.favoriteMedicines,
     required this.categoriesPercentages,
   });
   factory Statistics.fromJson(jsonData) {
@@ -28,7 +28,7 @@ class Statistics {
       gettingDeliveredOrders: jsonData['getting delivered orders'],
       totalPayment: jsonData['total payment'],
       totalMedicines: jsonData['total medicines'],
-      favouriteMedicines: jsonData['favourite medicines'],
+      favoriteMedicines: jsonData['favorite medicines'],
       categoriesPercentages: jsonData['categories percentages'],
     );
   }
@@ -43,7 +43,7 @@ class Statistics {
       gettingDeliveredOrders: $gettingDeliveredOrders,
       totalPayment: $totalPayment,
       totalMedicines: $totalMedicines,
-      favouriteMedicines: $favouriteMedicines,
+      favoriteMedicines: $favoriteMedicines,
       categoriesPercentages: $categoriesPercentages
     }
   ''';
