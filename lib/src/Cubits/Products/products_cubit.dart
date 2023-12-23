@@ -29,7 +29,6 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsFetchLoading());
 
       String endpoint = '';
-      Map<String, dynamic> body = {};
       bool isAllChoosen = (choosenCategory.name.toString() == "All" ||
           choosenCategory.name.toString() == "الكل");
 
@@ -38,23 +37,16 @@ class ProductsCubit extends Cubit<ProductsState> {
       } else if (searchBarContent == "" && !isAllChoosen) {
         endpoint = 'api/categories/${choosenCategory.id}';
       } else if (searchBarContent != "" && isAllChoosen) {
-        endpoint = 'api/search';
-        body = {
-          "searched_text": searchBarContent,
-          "by": searchByConstraints,
-        };
+        endpoint = 'api/search/$searchBarContent/$searchByConstraints';
       } else if (searchBarContent != "" && !isAllChoosen) {
-        endpoint = 'api/search/${choosenCategory.id}';
-        body = {
-          "searched_text": searchBarContent,
-          "by": searchByConstraints,
-        };
+        endpoint =
+            'api/search/${choosenCategory.id}/$searchBarContent/$searchByConstraints';
       }
 
       // Fetch Searched Products from API
       Map<String, dynamic> productsJsonData = await Api.request(
           url: endpoint,
-          body: body,
+          body: null,
           token: User.token,
           methodType: MethodType.get) as Map<String, dynamic>;
       List<Product> products = Product.fromListJson(productsJsonData);
