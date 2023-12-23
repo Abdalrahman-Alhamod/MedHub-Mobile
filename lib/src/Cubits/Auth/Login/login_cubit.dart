@@ -18,7 +18,9 @@ class LoginCubit extends Cubit<LoginState> {
         body: {
           'phoneNumber': phoneNumber,
           'password': password,
-          'fcmToken': User.fCMToken,
+        },
+        headers: {
+          'FCMToken4': User.fCMToken!,
         },
         token: User.token,
         methodType: MethodType.post,
