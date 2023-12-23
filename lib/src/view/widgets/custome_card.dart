@@ -10,12 +10,12 @@ class CustomeCard extends StatelessWidget {
   final Widget icon;
   final Color titleColor;
   const CustomeCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.icon,
     this.titleColor = AppColors.primaryColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

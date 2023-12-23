@@ -15,7 +15,7 @@ import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/product_card.da
 import 'package:pharmacy_warehouse_store_mobile/src/view/widgets/show_image.dart';
 
 class ProductsListScreen extends StatelessWidget {
-  const ProductsListScreen({Key? key}) : super(key: key);
+  const ProductsListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
