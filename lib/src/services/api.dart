@@ -20,12 +20,14 @@ class Api {
       {required String url,
       @required dynamic body,
       @required String? token,
-      required String methodType}) async {
-    Map<String, String> headers = {};
+      required String methodType,
+      Map<String, String> headers = const {}}) async {
+    Map<String, String> requestHeaders = {};
 
-    headers.addAll(
+    requestHeaders.addAll(
       {'token': token ?? "", 'lang': get_lib.Get.locale.toString()},
     );
+    requestHeaders.addAll(headers);
 
     final dio = Dio();
     try {
@@ -33,7 +35,7 @@ class Api {
         baseUrl + url,
         data: body,
         options: Options(
-          headers: headers,
+          headers: requestHeaders,
           method: methodType,
         ),
       );
