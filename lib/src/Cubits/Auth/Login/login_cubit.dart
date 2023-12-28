@@ -20,7 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
           'password': password,
         },
         headers: {
-          'FCMToken4': User.fCMToken!,
+          'FCMToken': User.fCMToken!,
         },
         token: User.token,
         methodType: MethodType.post,
