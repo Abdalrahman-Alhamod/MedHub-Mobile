@@ -2,9 +2,15 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Category/category_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Statistics/statistics_cubit.dart';
-import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
+import 'package:month_year_picker/month_year_picker.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/view/screens/navigation%20bar/report_view.dart';
+
+import '../../../../core/assets/app_images.dart';
+import '../../../../core/constants/app_colors.dart';
+import '../../../model/statistics_data.dart';
+import '../../helpers/show_snack_bar.dart';
+import '../../widgets/show_image.dart';
 
 final List<Color> _colors = [
   Colors.blue,
@@ -12,18 +18,24 @@ final List<Color> _colors = [
   Colors.purple,
   Colors.green,
   Colors.red,
-  Colors.orange,
   Colors.indigo,
   Colors.teal,
   Colors.pink,
+  Colors.orange,
   Colors.cyan,
 ];
+
+DateTime _monthChartsDate = DateTime.now();
+var _monthChartsDateText =
+    '${_monthChartsDate.year}-${_monthChartsDate.month}'.obs;
 
 class StatisticsScreen extends StatelessWidget {
   const StatisticsScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<StatisticsCubit>(context).getStatistics();
+    BlocProvider.of<StatisticsCubit>(context).getStatistics(
+      monthChartsDate: _monthChartsDate,
+    );
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
@@ -35,123 +47,45 @@ class StatisticsScreen extends StatelessWidget {
         backgroundColor: Colors.lightBlueAccent,
         centerTitle: true,
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: ListView(
-            children: [
-              const SizedBox(
-                height: 10,
+      body: BlocConsumer<StatisticsCubit, StatisticsState>(
+        listener: (context, state) {
+          if (state is StatisticsFetchFailure) {
+            showSnackBar(state.errorMessage, SnackBarMessageType.error);
+          } else if (state is StatisticsNetworkFailure) {
+            showSnackBar(state.errorMessage, SnackBarMessageType.error);
+          }
+        },
+        builder: (context, state) {
+          if (state is StatisticsFetchSuccess) {
+            StatisticsData statisticsData = state.statisticsData;
+            return _StatisticsSuccessView(statisticsData: statisticsData);
+          } else if (state is StatisticsFetchLoading) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primaryColor,
               ),
-              const _PieChartView(),
-              const SizedBox(
-                height: 80,
+            );
+          } else if (state is StatisticsFetchFailure) {
+            return const Center(
+              child: ShowImage(
+                imagePath: AppImages.error,
+                height: 500,
+                width: 500,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      flex: 1,
-                      child: _buildColoredBoxListView(0, _colors.length ~/ 2)),
-                  Flexible(
-                    flex: 1,
-                    child: _buildColoredBoxListView(
-                        _colors.length ~/ 2, _colors.length),
-                  ),
-                ],
+            );
+          } else if (state is StatisticsNetworkFailure) {
+            return const Center(
+              child: ShowImage(
+                imagePath: AppImages.error404,
+                height: 500,
+                width: 500,
               ),
-              const Divider(
-                height: 10,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const _LineChart(),
-              const SizedBox(
-                height: 20,
-              ),
-              const Divider(
-                height: 10,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: Text(
-                  'Data Highlights'.tr,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              StatisticCard(
-                title: 'Orders'.tr,
-                iconData: Icons.shopping_cart,
-                value: 256,
-                color: Colors.white,
-                backgroundColor: Colors.blue.shade700,
-              ),
-              StatisticCard(
-                title: 'Total Paid'.tr,
-                iconData: Icons.attach_money,
-                value: 12500000,
-                color: Colors.white,
-                backgroundColor: Colors.green.shade700,
-              ),
-              StatisticCard(
-                title: 'Medicines'.tr,
-                iconData: Icons.local_hospital,
-                value: 3567,
-                color: Colors.white,
-                backgroundColor: Colors.orange.shade700,
-              ),
-              StatisticCard(
-                title: 'Favorites'.tr,
-                iconData: Icons.favorite,
-                value: 42,
-                color: Colors.white,
-                backgroundColor: Colors.red.shade700,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildColoredBoxListView(int start, int end) {
-    List<Category>? categories =
-        BlocProvider.of<CategoryCubit>(Get.context!).currentCategories;
-    return SizedBox(
-      height: 300,
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        physics: const NeverScrollableScrollPhysics(), // Disable scrolling
-        itemCount: end - start,
-        itemBuilder: (context, index) {
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
-                width: 20,
-                height: 20,
-                color: _colors[start + index],
-              ),
-              SizedBox(
-                width: 140,
-                child: Text(
-                  categories![start + index + 1].name,
-                  maxLines: 2,
-                  textAlign: TextAlign.start,
-                  style: const TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primaryColor,
+            ),
           );
         },
       ),
@@ -159,8 +93,185 @@ class StatisticsScreen extends StatelessWidget {
   }
 }
 
+class _StatisticsSuccessView extends StatelessWidget {
+  const _StatisticsSuccessView({required this.statisticsData});
+  final StatisticsData statisticsData;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      child: ListView(
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          _PieChartView(
+            data: statisticsData.categoriesPercentages,
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          _buildChartsColoredBoxes(data: statisticsData.categoriesPercentages),
+          const Divider(
+            height: 10,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          _LineChart(
+            data: statisticsData.monthChartsData!,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Divider(
+            height: 10,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          _DataCardsView(statisticsData: statisticsData),
+          const SizedBox(
+            height: 20,
+          ),
+          const SizedBox(
+            width: double.infinity,
+            height: 250,
+            child: ReportView(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DataCardsView extends StatelessWidget {
+  const _DataCardsView({
+    required this.statisticsData,
+  });
+
+  final StatisticsData statisticsData;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0),
+            child: Text(
+              'Data Highlights'.tr,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          StatisticCard(
+            title: 'Total Paid'.tr,
+            iconData: Icons.attach_money,
+            value: statisticsData.totalPayment,
+            color: Colors.white,
+            backgroundColor: Colors.green.shade700,
+          ),
+          StatisticCard(
+            title: 'Medicines'.tr,
+            iconData: Icons.local_hospital,
+            value: statisticsData.totalMedicines,
+            color: Colors.white,
+            backgroundColor: Colors.blueGrey.shade700,
+          ),
+          StatisticCard(
+            title: 'Favorites'.tr,
+            iconData: Icons.favorite,
+            value: statisticsData.favoriteMedicines,
+            color: Colors.white,
+            backgroundColor: Colors.redAccent.shade700,
+          ),
+          StatisticCard(
+            title: 'Orders'.tr,
+            iconData: Icons.shopping_cart,
+            value: statisticsData.totalOrders,
+            color: Colors.white,
+            backgroundColor: Colors.blue.shade700,
+          ),
+          StatisticCard(
+            title: 'In Preparation Orders'.tr,
+            iconData: Icons.access_time,
+            value: statisticsData.inPreparationOrders,
+            color: Colors.white,
+            backgroundColor: Colors.yellow.shade700,
+          ),
+          StatisticCard(
+            title: 'Getting Delivered Orders'.tr,
+            iconData: Icons.local_shipping,
+            value: statisticsData.gettingDeliveredOrders,
+            color: Colors.white,
+            backgroundColor: Colors.orange.shade700,
+          ),
+          StatisticCard(
+            title: 'Delivered Orders'.tr,
+            iconData: Icons.done,
+            value: statisticsData.deliveredOrders,
+            color: Colors.white,
+            backgroundColor: Colors.greenAccent.shade700,
+          ),
+          StatisticCard(
+            title: 'Refused Orders'.tr,
+            iconData: Icons.cancel,
+            value: statisticsData.refusedOrders,
+            color: Colors.white,
+            backgroundColor: Colors.red.shade700,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Widget _buildChartsColoredBoxes({required Map<String, dynamic> data}) {
+  return SizedBox(
+    height: 350,
+    child: GridView.builder(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 300,
+          mainAxisExtent: 70,
+          mainAxisSpacing: 16,
+          crossAxisSpacing: 16,
+          childAspectRatio: 5),
+      itemCount: data.length,
+      itemBuilder: (context, index) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
+              width: 20,
+              height: 20,
+              color: _colors[index],
+            ),
+            SizedBox(
+              width: 130,
+              child: Text(
+                data.keys.elementAt(index),
+                maxLines: 2,
+                textAlign: TextAlign.start,
+                style: const TextStyle(color: Colors.black),
+              ),
+            ),
+          ],
+        );
+      },
+    ),
+  );
+}
+
 class _PieChartView extends StatefulWidget {
-  const _PieChartView();
+  const _PieChartView({required this.data});
+  final Map<String, dynamic> data;
 
   @override
   State<_PieChartView> createState() => __PieChartViewState();
@@ -206,7 +317,7 @@ class __PieChartViewState extends State<_PieChartView> {
               ),
               sectionsSpace: 5,
               centerSpaceRadius: 120,
-              sections: showingSections(),
+              sections: showingSections(data: widget.data),
             ),
           ),
         ),
@@ -214,14 +325,15 @@ class __PieChartViewState extends State<_PieChartView> {
     );
   }
 
-  List<PieChartSectionData> showingSections() {
-    final List<double> percentages = [20, 15, 10, 10, 8, 7, 6, 5, 5, 4];
+  List<PieChartSectionData> showingSections(
+      {required Map<String, dynamic> data}) {
+    final List<double> percentages = data.values.toList().cast<double>();
 
     return List.generate(
-      10,
+      percentages.length,
       (i) {
         final isTouched = i == touchedIndex;
-        final fontSize = isTouched ? 20.0 : 16.0;
+        final fontSize = isTouched ? 16.0 : 12.0;
         final radius = i % 2 == 0 ? 60.0 : 50.0;
         const shadows = [Shadow(color: Colors.grey, blurRadius: 10)];
 
@@ -233,7 +345,7 @@ class __PieChartViewState extends State<_PieChartView> {
           titleStyle: TextStyle(
             fontSize: fontSize,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: Colors.black,
             shadows: shadows,
           ),
         );
@@ -243,8 +355,8 @@ class __PieChartViewState extends State<_PieChartView> {
 }
 
 class _LineChart extends StatelessWidget {
-  const _LineChart();
-
+  const _LineChart({required this.data});
+  final Map<String, dynamic> data;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -265,6 +377,60 @@ class _LineChart extends StatelessWidget {
           child: LineChart(
             _sampleData,
             duration: const Duration(milliseconds: 250),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Selecte Date'.tr,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              IconButton(
+                onPressed: () async {
+                  final DateTime? picked = await showMonthYearPicker(
+                    context: context,
+                    initialDate: _monthChartsDate,
+                    firstDate: DateTime(2023),
+                    lastDate: DateTime.now(),
+                  );
+                  if (picked != null && picked != _monthChartsDate) {
+                    _monthChartsDate = picked;
+                    _monthChartsDateText.value =
+                        '${_monthChartsDate.year}-${_monthChartsDate.month}';
+                    // ignore: use_build_context_synchronously
+                    BlocProvider.of<StatisticsCubit>(context).getStatistics(
+                      monthChartsDate: _monthChartsDate,
+                    );
+                  }
+                },
+                icon: const Icon(
+                  Icons.date_range,
+                  size: 40,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Obx(
+                () => Text(
+                  _monthChartsDateText.string,
+                  style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey),
+                ),
+              )
+            ],
           ),
         ),
       ],
@@ -388,12 +554,12 @@ class _LineChart extends StatelessWidget {
           show: true,
           color: Colors.pink.withOpacity(0.2),
         ),
-        spots: const [
-          FlSpot(1, 2500000 / 1000000),
-          FlSpot(2, 3200000 / 1000000),
-          FlSpot(3, 8400000 / 1000000),
-          FlSpot(4, 2300000 / 1000000),
-        ],
+        spots: data.entries.map((entry) {
+          final double x = double.parse(entry.key);
+          double y = entry.value / 2;
+          if (y > 10) y = 10;
+          return FlSpot(x, y);
+        }).toList(),
       );
 }
 
@@ -415,7 +581,6 @@ class StatisticCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
       height: 120,
       margin: const EdgeInsets.all(4),
       decoration: BoxDecoration(
