@@ -14,18 +14,19 @@ class MethodType {
 
 class Api {
   const Api._();
-  static const String baseUrl = 'http://192.168.43.98:8000/';
+  static const String baseUrl = 'http://192.168.1.102:8000/';
 
   static Future<dynamic> request(
       {required String url,
       @required dynamic body,
       @required String? token,
       required String methodType,
+      String? lang,
       Map<String, String> headers = const {}}) async {
     Map<String, String> requestHeaders = {};
 
     requestHeaders.addAll(
-      {'token': token ?? "", 'lang': get_lib.Get.locale.toString()},
+      {'token': token ?? "", 'lang': lang ?? get_lib.Get.locale.toString()},
     );
     requestHeaders.addAll(headers);
 
