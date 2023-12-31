@@ -7,8 +7,8 @@ final class StatisticsInitial extends StatisticsState {}
 final class StatisticsFetchLoading extends StatisticsState {}
 
 final class StatisticsFetchSuccess extends StatisticsState {
-  Statistics statistics;
-  StatisticsFetchSuccess({required this.statistics});
+  StatisticsData statisticsData;
+  StatisticsFetchSuccess({required this.statisticsData});
 }
 
 final class StatisticsFetchFailure extends StatisticsState {
