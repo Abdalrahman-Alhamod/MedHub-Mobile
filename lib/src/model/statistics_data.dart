@@ -1,14 +1,15 @@
-class Statistics {
+class StatisticsData {
   int totalOrders;
-  int refusedOrders;
   int inPreparationOrders;
   int deliveredOrders;
-  int totalPayment;
   int gettingDeliveredOrders;
+  int refusedOrders;
+  int totalPayment;
   int totalMedicines;
   int favoriteMedicines;
   Map<String, dynamic> categoriesPercentages;
-  Statistics({
+  Map<String, dynamic>? monthChartsData;
+  StatisticsData({
     required this.totalOrders,
     required this.refusedOrders,
     required this.inPreparationOrders,
@@ -19,8 +20,8 @@ class Statistics {
     required this.favoriteMedicines,
     required this.categoriesPercentages,
   });
-  factory Statistics.fromJson(jsonData) {
-    return Statistics(
+  factory StatisticsData.fromJson(jsonData) {
+    return StatisticsData(
       totalOrders: jsonData['total orders'],
       refusedOrders: jsonData['refused orders'],
       inPreparationOrders: jsonData['in preparation orders'],
