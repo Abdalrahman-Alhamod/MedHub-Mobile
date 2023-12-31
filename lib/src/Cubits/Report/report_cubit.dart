@@ -10,13 +10,7 @@ part 'report_state.dart';
 
 class ReportCubit extends Cubit<ReportState> {
   ReportCubit() : super(ReportInitial());
-  Future<void> _downloadFile(String fileUrl) async {
-    if (await canLaunchUrl(Uri.parse(fileUrl))) {
-      await launchUrl(Uri.parse(fileUrl));
-    } else {
-      throw 'Could not launch $fileUrl';
-    }
-  }
+
 
   void getReport(
       {required DateTime startDate, required DateTime endDate}) async {

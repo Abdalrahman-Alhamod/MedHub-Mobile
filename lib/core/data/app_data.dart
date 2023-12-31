@@ -1,12 +1,10 @@
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/assets/app_products_images.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/category.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/model/product.dart';
 
 class Products {
-  static final _format = DateFormat('yyyy/MM/dd', Intl.getCurrentLocale());
-  static final _date = _format.format(DateTime.now()).toString();
+  static final _date = DateTime.now().toString();
   // ignore: non_constant_identifier_names
   static Product Amoxil = Product(
     id: 0,

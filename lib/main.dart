@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart' as get_lib;
 import 'package:logger/logger.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_general_constants.dart';
 import 'package:pharmacy_warehouse_store_mobile/core/constants/app_theme.dart';
 import 'package:pharmacy_warehouse_store_mobile/firebase_options.dart';
@@ -17,6 +19,7 @@ import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Favourite/favourite_c
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Home/home_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Orders/orders_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Products/products_cubit.dart';
+import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Report/report_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/Statistics/statistics_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/Cubits/User/user_cubit.dart';
 import 'package:pharmacy_warehouse_store_mobile/src/locale/local_controller.dart';
@@ -27,9 +30,9 @@ import 'package:pharmacy_warehouse_store_mobile/src/services/simple_bloc_observe
 
 Logger logger = Logger(printer: PrettyPrinter(printEmojis: false));
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseApi().initNotifications();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await FirebaseApi().initNotifications();
 
   get_lib.Get.put(AppLocalController());
   Bloc.observer = SimpleBlocObserver();
@@ -80,6 +83,9 @@ void main() async {
             BlocProvider(
               create: (context) => StatisticsCubit(),
             ),
+            BlocProvider(
+              create: (context) => ReportCubit(),
+            ),
           ],
           child: get_lib.GetMaterialApp(
             title: kAppTitle,
@@ -89,6 +95,17 @@ void main() async {
             transitionDuration: const Duration(seconds: 1),
             translations: AppLocale(),
             locale: const Locale('en'),
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations
+                  .delegate, // Standard material localizations
+              MonthYearPickerLocalizations
+                  .delegate, // Custom month-year picker localizations
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'),
+              Locale('ar'),
+            ],
             getPages: AppPages.routes,
             initialRoute: AppPages.INITIAL,
           ),
