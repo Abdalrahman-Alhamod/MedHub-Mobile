@@ -124,12 +124,24 @@ class AppLocale implements Translations {
 
           // Statitics
           "Data Highlights": "أبرز البيانات",
-          "Orders": "الطلبات",
+          "Orders": "إجمالي الطلبات",
           "Total Paid": "مجموع المبالغ المدفوعة",
-          "Medicines": "الأدوية",
-          "Favorites": "المفضلة",
+          "Medicines": "إجمالي الأدوية المشتراة",
+          "Favorites": "إجمالي المفضلة",
           "Top Purchased Categories": "أهم الفئات التي تم شراؤها",
           "Weekly Expense": "المصروف الأسبوعي",
+          "In Preparation Orders": "الطلبات قيد التحضير",
+          "Getting Delivered Orders": "الطلبات قيد االتوصيل",
+          "Delivered Orders": "الطلبات المستلمة",
+          "Refused Orders": "الطلبات المرفوضة",
+          "Selecte Date": "اختر تاريخاً : ",
+
+          // Report
+          "Report exported Successfully": "تم تصدير التقرير بنجاح !",
+          "Export Report as PDF": "تصدير التقرير كملف PDF : ",
+          "Start Date": "تاريخ البداية : ",
+          "End Date": "تاريخ النهاية : ",
+          "Export": "تصدير",
         },
         "en": {
           //start
@@ -251,12 +263,24 @@ class AppLocale implements Translations {
           "description": "Description",
           // Statitics
           "Data Highlights": "Data Highlights",
-          "Orders": "Orders",
+          "Orders": "Total Orders",
           "Total Paid": "Total Paid",
-          "Medicines": "Medicines",
-          "Favorites": "Favorites",
+          "Medicines": "Total Medicines",
+          "Favorites": "Total Favorites",
           "Top Purchased Categories": "Top Purchased Categories",
           "Weekly Expense": "Weekly Expense",
+          "In Preparation Orders": "Preparing Order",
+          "Getting Delivered Orders": "Delivering Orders",
+          "Delivered Orders": "Recieved Orders",
+          "Refused Orders": "Refused Orders",
+          "Selecte Date": "Selecte Date : ",
+
+          // Report
+          "Report exported Successfully": "Report exported Successfully !",
+          "Export Report as PDF": "Export Report as PDF : ",
+          "Start Date": "Start Date : ",
+          "End Date": "End Date : ",
+          "Export": "Export",
         },
       };
 }
