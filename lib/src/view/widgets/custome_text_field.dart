@@ -64,7 +64,10 @@ class _CustomeTextFieldState extends State<CustomeTextField> {
                 onPressed: widget.onTap,
                 icon: Icon(widget.prefixIcon),
               )
-            : Icon(widget.prefixIcon),
+            : Icon(
+                widget.prefixIcon,
+                color: AppColors.primaryColor,
+              ),
         suffixIcon: widget.obscureText
             ? IconButton(
                 icon: _enableObscureText
