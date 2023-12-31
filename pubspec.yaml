@@ -28,6 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  flutter_localizations:
+    sdk: flutter
   animations: ^2.0.10
   auto_size_text: ^3.0.0
   bottom_navy_bar: ^6.0.0
@@ -43,9 +45,11 @@ dependencies:
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
   get: ^4.6.6
-  intl: ^0.19.0
   logger: ^2.0.2+1
   lottie: ^2.7.0
+  month_year_picker: ^0.3.0+1
+  url_launcher:
+
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
