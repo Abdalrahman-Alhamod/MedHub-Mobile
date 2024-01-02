@@ -24,6 +24,9 @@ class RegisterCubit extends Cubit<RegisterState> {
           'phoneNumber': phoneNumber,
           'password': password,
         },
+        headers: {
+          'FCMToken': User.fCMToken ?? "",
+        },
         token: User.token,
         methodType: MethodType.post,
       );
