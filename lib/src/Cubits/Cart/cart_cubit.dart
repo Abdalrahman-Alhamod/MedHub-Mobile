@@ -87,6 +87,7 @@ class CartCubit extends Cubit<CartState> {
           methodType: MethodType.post);
 
       logger.i(Product.toJsonCart(cartProducts));
+      totalPrice = 0;
       emit(CartPurchaseSuccess());
       cartProducts.clear();
     } on DioException catch (e) {
