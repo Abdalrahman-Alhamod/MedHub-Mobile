@@ -14,7 +14,7 @@ class MethodType {
 
 class Api {
   const Api._();
-  static const String baseUrl = 'http://192.168.1.102:8000/';
+  static const String baseUrl = 'http://192.168.42.2:8000/';
 
   static Future<dynamic> request(
       {required String url,
