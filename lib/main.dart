@@ -114,21 +114,3 @@ void main() async {
     ),
   );
 }
-
-// class PhrarmacyWarehouseStoreMobile extends StatelessWidget {
-//   const PhrarmacyWarehouseStoreMobile({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     Get.put(AppLocalController());
-//     return GetMaterialApp(
-//       title: kAppTitle,
-//       debugShowCheckedModeBanner: false,
-//       theme: appTheme,
-//       defaultTransition: Transition.fadeIn,
-//       translations: AppLocale(),
-//       locale: Get.deviceLocale,
-//       home: const SplashScreen(),
-//     );
-//   }
-// }
